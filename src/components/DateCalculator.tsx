@@ -52,7 +52,7 @@ const DateCalculator = () => {
   };
 
   return (
-    <section id="calculadora" className="py-10">
+    <section id="calculadora" className="py-4">
       <div className="container mx-auto">
         <Card>
           <CardHeader>
@@ -78,7 +78,7 @@ const DateCalculator = () => {
               />
               <Button onClick={handleCalculate}>Calcular</Button>
               {results && (
-                <div className="mt-4">
+                <div className="mt-2">
                   <p>Total de Dias: {results.totalDays}</p>
                   <p>Total de Dias Úteis: {results.totalBusinessDays}</p>
                   <p>Total de Finais de Semana: {results.totalWeekends}</p>
