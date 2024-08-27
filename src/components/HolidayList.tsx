@@ -18,7 +18,7 @@ interface Holiday {
 
 const HolidayList: React.FC = () => {
   const [holidays, setHolidays] = useState<Holiday[]>([]);
-  const [longHolidays, setLongHolidays] = useState<Holiday[]>([]);
+  const [_, setLongHolidays] = useState<Holiday[]>([]);
 
   // Função para buscar os feriados da API
   useEffect(() => {
