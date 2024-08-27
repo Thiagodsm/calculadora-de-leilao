@@ -1,6 +1,6 @@
 // src/components/DateCalculator.tsx
 import { useState } from "react";
-import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
+import { Card, CardHeader, CardContent, CardFooter, CardDescription } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -59,6 +59,9 @@ const DateCalculator = () => {
             <h2 className="text-xl font-bold">Calculadora de Datas</h2>
           </CardHeader>
           <CardContent>
+            <CardDescription className="py-2 ">
+              Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira a data de início e fim e veja mágia acontecer!
+            </CardDescription>
             <div className="flex flex-col gap-4">
               <Input
                 type="date"

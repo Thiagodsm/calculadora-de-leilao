@@ -18,12 +18,13 @@ interface Holiday {
 
 const HolidayList: React.FC = () => {
   const [holidays, setHolidays] = useState<Holiday[]>([]);
+  const [longHolidays, setLongHolidays] = useState<Holiday[]>([]);
 
   // Função para buscar os feriados da API
   useEffect(() => {
     const fetchHolidays = async () => {
       try {
-        const response = await fetch("https://date.nager.at/api/v3/PublicHolidays/2024/BR");
+        const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${(new Date()).getFullYear()}/BR`);
         const data: Holiday[] = await response.json();
         setHolidays(data);
       } catch (error) {
@@ -34,20 +35,34 @@ const HolidayList: React.FC = () => {
     fetchHolidays();
   }, []);
 
+  // Função para buscar os feriados prolongados da API
+  useEffect(() => {
+    const fetchLongHolidays = async () => {
+      try {
+        const response = await fetch(`https://date.nager.at/api/v3/LongWeekend/${(new Date()).getFullYear()}/BR`);
+        const data: Holiday[] = await response.json();
+        setLongHolidays(data);
+      } catch (error) {
+        console.error("Erro ao buscar os feriados prolongados:", error);
+      }
+    };
+
+    fetchLongHolidays();
+  }, []);
+
   return (
     <section id="holidays" className="py-10">
       <div className="container mx-auto">
-        <h2 className="text-xl font-bold mb-4">Feriados de 2024 no Brasil</h2>
+        <h2 className="text-xl font-bold mb-4">Feriados de {(new Date()).getFullYear()} no Brasil</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {holidays.map((holiday) => (
             <Card key={holiday.date}>
               <CardHeader>              
                 <CardTitle>{holiday.localName}</CardTitle>
-                <CardDescription>{holiday.date}</CardDescription>
+                <CardDescription>{holiday.date.split('-').reverse().join('/')}</CardDescription>
               </CardHeader>
               <CardContent>
                 
-              {/*<p>Tipo: {(holiday.type as string[]).length > 0 ? (holiday.type as string[]).slice(0, -1).join(', ') + ' e ' + (holiday.type as string[])[(holiday.type as string[]).length - 1] : 'Não definido'}</p>*/}
                 <p>Nome: {holiday.localName}</p>
                 <p>Nome Internacional: {holiday.name}</p>
               </CardContent>

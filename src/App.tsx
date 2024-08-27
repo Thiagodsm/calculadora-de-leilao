@@ -2,6 +2,7 @@ import { ThemeProvider } from "./components/ui/theme-provider";
 import { ModeToggle } from "./components/ui/mode-toggle";
 import DateCalculator from "./components/DateCalculator";
 import HolidayList from "./components/HolidayList";
+import InfoSection from "./components/InfoSection";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <main className="flex-grow mt-4">
           <DateCalculator />
           <HolidayList />
+          <InfoSection />
         </main>
       </div>
     </ThemeProvider>
