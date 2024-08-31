@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainLayout from "./components/MainLayout";
 import Home from "./pages/Home";
 import CalculoDatas from "./pages/CalculaDatas";
 import CalculaFerias from "./pages/CalculaFerias";
@@ -13,7 +12,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<Home />}>
           <Route index element={<Home />} />
           <Route path="/calculo-datas" element={<CalculoDatas />} />
           <Route path="/calcula-ferias" element={<CalculaFerias />} />

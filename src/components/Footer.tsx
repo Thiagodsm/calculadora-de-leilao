@@ -1,19 +1,11 @@
-// src/components/Footer.tsx
-import { Card, CardContent } from "../components/ui/card"
-
-const Footer = () => {
+export function Footer() {
   return (
-    <footer id="contato" className="bg-gray-100 mt-auto py-6">
-      <div className="container mx-auto">
-        <Card>
-          <CardContent className="text-center">
-            <p>Desenvolvido por [Seu Nome].</p>
-            <p>Contato: seuemail@example.com</p>
-          </CardContent>
-        </Card>
+    <div className="z-20 w-full bg-background/95 shadow backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-4 md:mx-8 flex h-14 items-center">
+        <p className="text-xs md:text-sm leading-loose text-muted-foreground text-left">
+          Built on top of{" "}
+        </p>
       </div>
-    </footer>
+    </div>
   );
-};
-
-export default Footer;
+}
