@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { cn } from "../lib/utils";
-import { Home, Menu, User, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign } from "lucide-react";
+import { Home, Menu, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign, Receipt } from "lucide-react";
 import * as React from "react";
 
 type Menu = {
@@ -62,7 +62,7 @@ export default function SidebarMenu() {
     {
         label: "Financeiras",
         name: "Simulador de imposto de renda",
-        icon: <User size={15} className="mr-2" />,
+        icon: <Receipt size={15} className="mr-2" />,
         href: "/",
     },
     {
