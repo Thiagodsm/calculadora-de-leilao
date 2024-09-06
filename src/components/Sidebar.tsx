@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { cn } from "../lib/utils";
-import { ChevronDownIcon, Home, ListVideo, Menu, Mic2, Music, Play, RadioIcon, SquareStack, User, Axe, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign } from "lucide-react";
+import { Home, Menu, User, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign } from "lucide-react";
 import * as React from "react";
 
 type Menu = {
@@ -150,7 +150,6 @@ export default function SidebarMenu() {
                                                             <div className="h-4 w-6 shrink-0 text-muted-foreground transition-transform duration-200">{menu.icon}</div>
                                                             {menu.name}
                                                         </div>
-                                                        {/*<ChevronDownIcon className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />*/}
                                                     </div>
                                                 </a>
                                             </AccordionTrigger>

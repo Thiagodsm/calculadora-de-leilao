@@ -1,7 +1,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../components/ui/sheet';
 import { Menu } from 'lucide-react';
-import { Context, useContext } from "react";
+import { useContext } from "react";
 import * as Icon from 'react-feather'
 import { DarkModeSwitch} from 'react-toggle-dark-mode';
 import { ThemeContext } from "./Provider";
