@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 import { Card, CardContent } from "../components/ui/card"
 
 const Footer = () => {

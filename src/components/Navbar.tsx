@@ -1,127 +1,66 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Button } from "../components/ui/button";
-//import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "../components/ui/navigation-menu";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "../components/ui/dropdown-menu";
-import { ModeToggle } from "./ui/mode-toggle";
-import { Menu } from "lucide-react";
-import { Input } from "../components/ui/input"
-import { Label } from "../components/ui/label"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../components/ui/sheet";
-import { Menu as MenuIcon } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../components/ui/sheet';
+import { Menu } from 'lucide-react';
+import { Context, useContext } from "react";
+import * as Icon from 'react-feather'
+import { DarkModeSwitch} from 'react-toggle-dark-mode';
+import { ThemeContext } from "./Provider";
+import SidebarMenu from "./Sidebar";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log({isMenuOpen});
+export default function Navbar() {
+
+    const navigate =  useNavigate();
+    const theme = useContext(ThemeContext);
+
+    const onDarkModeToggle = (e: boolean) => {
+        theme?.setTheme(e ? 'dark' : 'light');
+    }
+
+    const logout = () => {
+        localStorage.removeItem('user');
+        navigate('/'); // Agora usando navigate em vez de useRouter
+    }
 
   return (
-    <nav className="p-4 flex items-center justify-between">
-      <div className="text-xl font-bold">Calculajá</div>
-
-      {/*<div className="hidden md:flex space-x-4">*/}
-      <div className="mr-4 hidden gap-2 md:flex">
-        <NavLink to="/" className="hover:underline">
-          <Button variant="ghost">Home</Button>
-        </NavLink>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost">Cálculos Financeiros</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <NavLink to="/calculo-datas">Cálculo de Datas</NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-poupanca">Cálculo de Poupança</NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-porcentagem">Cálculo de Porcentagem</NavLink>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost">Cálculos Trabalhistas</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-ferias">Cálculo de Férias</NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-fgts">Cálculo de FGTS</NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-recisao">Cálculo de Rescisão</NavLink>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost">Cálculos Diversos</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <NavLink to="/calcula-juros">Cálculo de Juros</NavLink>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-
-      <ModeToggle />
-
-      <div className="md:hidden">
-        <Button variant="ghost" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <Menu className="w-6 h-6" />
-        </Button>
-      </div>
-      
-      {isMenuOpen && (
-        <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <MenuIcon />
-          </Button>
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>
-              Make changes to your profile here. Click save when you're done.
-            </SheetDescription>
-          </SheetHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
-            </div>
-          </div>
-          <SheetFooter>
-            <SheetClose asChild>
-              <Button type="submit">Save changes</Button>
-            </SheetClose>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-      )}
-    </nav>
-  );
-};
-
-export default Navbar;
+        <header className="sticky top-0 z-50 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-primary dark:bg-background dark:text-white text-sm py-4 dark:border-gray-600 border-b border-gray-600">
+            <nav className="max-w-full w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+                <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                        <div className="sm:hidden">
+                            <Sheet>
+                                <SheetTrigger className='text-white mt-2'><Menu /></SheetTrigger>
+                                <SheetContent side={"left"} className="w-[300px] sm:w-[340px]">
+                                    <SheetHeader>
+                                        <SheetTitle className='text-left text-xl font-bold ml-3'>Calculajá</SheetTitle>
+                                        <SheetDescription>
+                                            <SidebarMenu />
+                                        </SheetDescription>
+                                    </SheetHeader>
+                                </SheetContent>
+                            </Sheet>
+                        </div>
+                        <a className="flex-none text-xl ml-4 font-semibold text-white" href="/">Calculajá</a>
+                    </div>
+                    <div className="flex items-center">
+                        <DarkModeSwitch
+                            className='mr-2 text-white sm:block'
+                            checked={theme?.theme === 'dark'}
+                            onChange={onDarkModeToggle}
+                            size={20} />
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <a className="font-medium text-white" href="#" aria-current="page">Username</a>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="start">
+                                <DropdownMenuItem onClick={() => logout()} className="text-red-400 py-2">
+                                    <span><Icon.LogOut size={15} className="mr-2" /></span> Logout
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    );
+}
