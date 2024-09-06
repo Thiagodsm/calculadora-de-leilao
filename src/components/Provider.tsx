@@ -11,7 +11,7 @@ export type ThemeProps = {
 export const ThemeContext = createContext<ThemeProps | null>(null);
 
 const Providers = ({ children }: {children : React.ReactNode}) => {
-    const[theme, setTheme] = useState('light');
+    const[theme, setTheme] = useState('dark');
 
     const toggleTheme = () => {
         localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
@@ -26,7 +26,7 @@ const Providers = ({ children }: {children : React.ReactNode}) => {
 
     return (
         <ThemeContext.Provider value={{theme, setTheme, toggleTheme}}>
-            <ThemeProvider defaultTheme={'light'}>
+            <ThemeProvider defaultTheme={'dark'}>
                 {children}
             </ThemeProvider>
         </ThemeContext.Provider>
