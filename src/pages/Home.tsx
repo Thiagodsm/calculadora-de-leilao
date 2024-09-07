@@ -15,8 +15,8 @@ export default function Home() {
             <center>
               <img
                 className="m-10"
-                width={500}
-                height={200}
+                width={300}
+                height={300}
                 src={theme?.theme === 'dark' ? "/team_engineering_white.svg" : "/team_engineering.svg"}
               >
               </img>
