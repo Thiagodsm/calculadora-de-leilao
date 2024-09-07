@@ -10,13 +10,11 @@ export default function Home() {
   return (
     <>
       <TitlePage title="Início" description="Calculajá - calculos diversos agrupados em um único lugar" />
-        <Card className="mt-10 border-dashed">
+        <Card className="mt-5 border-dashed">
           <CardContent>
             <center>
               <img
-                className="m-10"
-                width={300}
-                height={300}
+                className="mt-5 sm:w-[260px] sm:h-[300px] md:w-[500px] md:h-[400px] lg:w-[600px] lg:h-[600px]"
                 src={theme?.theme === 'dark' ? "/team_engineering_white.svg" : "/team_engineering.svg"}
               >
               </img>
