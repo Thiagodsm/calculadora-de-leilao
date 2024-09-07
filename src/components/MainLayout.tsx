@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Providers from "./Provider";
 import Navbar from "./Navbar";
 import SidebarMenu from "./Sidebar";
+import { Suspense } from "react";
 
 export default function MainLayout(){
   return (
@@ -9,9 +10,13 @@ export default function MainLayout(){
       <div>
         <Navbar />
         <div className="flex">
-          <SidebarMenu />
-          <main className="flex-grow p-4">
-            <Outlet />
+          <div className="hidden md:block">
+            <SidebarMenu />
+          </div>                   
+          <main className="w-full p-4">
+            <Suspense>
+              <Outlet />
+            </Suspense>
           </main>
         </div>
       </div>

@@ -30,52 +30,52 @@ export default function SidebarMenu() {
         href: "/",
     },
     {
-        label: "Tratabalhistas",
+        label: "Trabalhistas",
         name: "Calculadora de 13°",
         icon: <BadgeDollarSign size={15} className="mr-2" />,
         href: "/calculo-datas",
     },
     {
-        label: "Tratabalhistas",
+        label: "Trabalhistas",
         name: "Calculadora de Férias",
         icon: <PartyPopper size={15} className="mr-2" />,
         href: "/",
     },
     {
-      label: "Tratabalhistas",
+      label: "Trabalhistas",
       name: "Calculadora de FGTS",
       icon: <CalendarClock size={15} className="mr-2" />,
       href: "/",
   },
   {
-    label: "Tratabalhistas",
+    label: "Trabalhistas",
     name: "Calculadora de recisão CLT",
     icon: <Handshake size={15} className="mr-2" />,
     href: "/",
 },
-    {
-        label: "Financeiras",
-        name: "Juros Compostos",
-        icon: <ChartLine size={15} className="mr-2" />,
-        href: "/",
-    },
-    {
-        label: "Financeiras",
-        name: "Simulador de imposto de renda",
-        icon: <Receipt size={15} className="mr-2" />,
-        href: "/",
-    },
-    {
-        label: "Financeiras",
-        name: "Simulador juros PRICE",
-        icon: <ChartNoAxesColumnIcon size={15} className="mr-2" />,
-        href: "/",
-    },
-    {
-      label: "Financeiras",
-      name: "Simulador juros SAC",
-      icon: <ChartLine size={15} className="mr-2" />,
-      href: "/",
+{
+    label: "Financeiras",
+    name: "Juros Compostos",
+    icon: <ChartLine size={15} className="mr-2" />,
+    href: "/",
+},
+{
+    label: "Financeiras",
+    name: "Simulador de imposto de renda",
+    icon: <Receipt size={15} className="mr-2" />,
+    href: "/",
+},
+{
+    label: "Financeiras",
+    name: "Simulador juros PRICE",
+    icon: <ChartNoAxesColumnIcon size={15} className="mr-2" />,
+    href: "/",
+},
+{
+    label: "Financeiras",
+    name: "Simulador juros SAC",
+    icon: <ChartLine size={15} className="mr-2" />,
+    href: "/",
   },
   {
     label: "Datas",
@@ -123,11 +123,11 @@ export default function SidebarMenu() {
 
   return (
     <ScrollArea className="h-screen sm:w-64 fixed rounded-md">
-        <div className="md:px-4 sm:p-0 mt-5 ">
+        <div className="md:px-2 sm:p-0 mt-4">
             {uniqueLabels.map((label, index) => (
                 <React.Fragment key={label}>
                     {label && (
-                        <p className={`mx-4 mb-3 text-xs text-left tracking-wider font-bold text-slate-300 ${index > 0 ? 'mt-10' : ''}`}>
+                        <p className={`mx-4 mb-3 text-xs text-left tracking-wider font-bold text-slate-900 dark:text-slate-100 ${index > 0 ? 'mt-10' : ''}`}>
                             {label}
                         </p>
                     )}
@@ -165,7 +165,7 @@ export default function SidebarMenu() {
                                     </Accordion>
                                 ) : (
                                     <div key={menu.name}>
-                                        <Link to={menu.href} className="flex text-xs h-10 bg-white dark:bg-background my-2 items-center p-4 hover:bg-primary dark:hover:bg-primary dark:hover:text-background hover:text-white rounded-md">
+                                        <Link to={menu.href} className="flex text-xs h-10 bg-white dark:bg-background dark:text-slate-300 my-2 items-center p-4 hover:bg-primary dark:hover:bg-primary dark:hover:text-background hover:text-white rounded-md">
                                             <div className="w-6">{menu.icon}</div>
                                             {menu.name}
                                         </Link>

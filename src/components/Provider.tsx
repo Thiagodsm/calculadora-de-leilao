@@ -14,7 +14,10 @@ const Providers = ({ children }: {children : React.ReactNode}) => {
     const[theme, setTheme] = useState('dark');
 
     const toggleTheme = () => {
-        localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        
     }
 
     useEffect(() => {
@@ -23,6 +26,8 @@ const Providers = ({ children }: {children : React.ReactNode}) => {
             setTheme(themeLocalStorage);
         }
     }, []);
+
+    console.log(theme);
 
     return (
         <ThemeContext.Provider value={{theme, setTheme, toggleTheme}}>
