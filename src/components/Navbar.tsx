@@ -49,7 +49,7 @@ export default function Navbar() {
                             size={20} />
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <a className="font-medium text-white" href="#" aria-current="page">Username</a>
+                                <a className="font-medium text-white" href="#" aria-current="page">TSM</a>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="start">
                                 <DropdownMenuItem onClick={() => logout()} className="text-red-400 py-2">
