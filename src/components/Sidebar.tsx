@@ -122,7 +122,7 @@ export default function SidebarMenu() {
   const uniqueLabels = Array.from(new Set(menus.map((menu) => menu.label)));
 
   return (
-    <ScrollArea className="h-screen sm:w-64 fixed rounded-md">
+    <ScrollArea className="max-h-screen sm:w-64 fixed rounded-md">
         <div className="md:px-2 sm:p-0 mt-4">
             {uniqueLabels.map((label, index) => (
                 <React.Fragment key={label}>

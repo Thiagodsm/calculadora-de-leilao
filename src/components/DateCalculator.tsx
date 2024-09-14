@@ -59,7 +59,7 @@ const DateCalculator = () => {
           </CardHeader>
           <CardContent>
             <CardDescription className="py-2 ">
-              Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira a data de início e fim e veja mágia acontecer!
+              Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira as datas de início e fim para fazer o cálculo.
             </CardDescription>
             <div className="flex flex-col gap-4">
               <Input
