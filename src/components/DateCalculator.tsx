@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardHeader, CardContent, CardFooter, CardDescription } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import {
   differenceInDays,
   differenceInBusinessDays,
@@ -24,7 +25,7 @@ const DateCalculator = () => {
       const start = new Date(startDate);
       const end = new Date(endDate);
 
-      // Cálculos utilizando date-fns
+      // Calculos utilizando date-fns
       const totalDays = differenceInDays(end, start);
       const totalBusinessDays = differenceInBusinessDays(end, start);
       const totalWeekends = eachWeekendOfInterval({ start, end }).length;
@@ -58,25 +59,31 @@ const DateCalculator = () => {
             <h2 className="text-xl font-bold">Calculadora de Datas</h2>
           </CardHeader>
           <CardContent>
-            <CardDescription className="py-2 ">
+            <CardDescription className="py-2 mb-4">
               Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira as datas de início e fim para fazer o cálculo.
             </CardDescription>
             <div className="flex flex-col gap-4">
+              <Label htmlFor="start-date">Data inicial</Label>
               <Input
                 type="date"
+                id="start-date"
+                className="dark:text-white dark:focus:ring-white"
                 value={startDate}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setStartDate(e.target.value)
                 }
-                placeholder="Data de Início"
+                placeholder="Data inicial"
               />
+              <Label htmlFor="end-date">Data final</Label>
               <Input
                 type="date"
+                id="end-date"
+                className="dark:text-white dark:focus:ring-white"
                 value={endDate}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setEndDate(e.target.value)
                 }
-                placeholder="Data de Fim"
+                placeholder="Data de final"
               />
               <Button onClick={handleCalculate}>Calcular</Button>
               {results && (
