@@ -87,16 +87,16 @@ const DateCalculator = () => {
               />
               <Button onClick={handleCalculate}>Calcular</Button>
               {results && (
-                <div className="mt-2">
-                  <p>Total de Dias: {results.totalDays}</p>
-                  <p>Total de Dias Úteis: {results.totalBusinessDays}</p>
-                  <p>Total de Finais de Semana: {results.totalWeekends}</p>
-                  <p>Total em Semanas: {results.totalWeeks}</p>
-                  <p>Total em Meses: {results.totalMonths}</p>
-                  <p>Total em Anos: {results.totalYears}</p>
-                  <p>Total em Horas: {results.totalHours}</p>
-                  <p>Total em Minutos: {results.totalMinutes}</p>
-                  <p>Total em Segundos: {results.totalSeconds}</p>
+                <div className="mt-2 space-y-1">
+                  <p>Total de dias: {results.totalDays}</p>
+                  <p>Total de dias úteis: {results.totalBusinessDays}</p>
+                  <p>Total de finais de semana: {results.totalWeekends}</p>
+                  <p>Total em semanas: {results.totalWeeks}</p>
+                  <p>Total em meses: {results.totalMonths}</p>
+                  <p>Total em anos: {results.totalYears}</p>
+                  <p>Total em horas: {results.totalHours}</p>
+                  <p>Total em minutos: {results.totalMinutes}</p>
+                  <p>Total em segundos: {results.totalSeconds}</p>
                 </div>
               )}
             </div>
