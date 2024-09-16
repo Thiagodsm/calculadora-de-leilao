@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { cn } from "../lib/utils";
-import { Home, Menu, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign, Receipt } from "lucide-react";
+import { Home, Menu, Handshake, PartyPopper, CalendarClock, CalendarPlus, Calendar, MoonStar, ChartLine, ChartNoAxesColumnIcon, CalendarDays, Earth, CalendarSearch, BadgeDollarSign, Receipt, Gavel, Utensils } from "lucide-react";
 import * as React from "react";
 
 type Menu = {
@@ -27,6 +27,18 @@ export default function SidebarMenu() {
         label: "Tipos de calculo",
         name: "Início",
         icon: <Home size={15} className="mr-2" />,
+        href: "/",
+    },
+    {
+        label: "Leilão Extrajudicial",
+        name: "Calculadora - compra a vista",
+        icon: <Gavel size={15} className="mr-2" />,
+        href: "/calcula-compra-imovel",
+    },
+    {
+        label: "Leilão Extrajudicial",
+        name: "Calculadora - compra financiada",
+        icon: <Gavel size={15} className="mr-2" />,
         href: "/",
     },
     {
@@ -117,6 +129,12 @@ export default function SidebarMenu() {
     icon: <MoonStar size={15} className="mr-2" />,
     href: "/",
   },
+  {
+    label: "Caloria dos alimentos",
+    name: "Quantidade de caloria",
+    icon: <Utensils size={15} className="mr-2" />,
+    href: "/",
+  },
 ];
 
   const uniqueLabels = Array.from(new Set(menus.map((menu) => menu.label)));
@@ -155,7 +173,7 @@ export default function SidebarMenu() {
                                             </AccordionTrigger>
                                             <AccordionContent>
                                                 {menu.submenu.map((submenu) => (
-                                                    <Link key={submenu.name} to={submenu.href} className="text-gray-400 mt-0 mb-0 flex text-xs h-10 bg-white dark:bg-background dark:hover:bg-primary dark:hover:text-background my-2 items-center p-4 hover:bg-primary hover:text-white rounded-md">
+                                                    <Link key={submenu.name} to={submenu.href} className="text-gray-500 mt-0 mb-0 flex text-xs h-10 bg-white dark:bg-background dark:hover:bg-primary dark:hover:text-background my-2 items-center p-4 hover:bg-primary hover:text-white rounded-md">
                                                         <div className="w-6">{submenu.icon}</div>
                                                         {submenu.name}
                                                     </Link>
