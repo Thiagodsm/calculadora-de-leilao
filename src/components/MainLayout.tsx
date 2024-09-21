@@ -10,7 +10,7 @@ export default function MainLayout(){
       <div>
         <Navbar />
         <div className="flex">
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SidebarMenu />
           </div>                   
           <main className="w-full p-4">

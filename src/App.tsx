@@ -8,8 +8,8 @@ import CalculaJuros from "./pages/CalculaJuros";
 import CalculaRecisao from "./pages/CalculaRecisao";
 import CalculaPoupanca from "./pages/CalculaPoupanca";
 import CalculaPorcentagem from "./pages/CalculaPorcentagem";
-import CalculaCompraImovel from "./pages/CalculaCompraImovel";
-import CalculaCompraImovelFinanc from "./pages/CalculaCompraImovelFinanc";
+import CalculaImovelVista from "./pages/CalculaImovelVista";
+import CalculaImovelFinanciado from "./pages/CalculaImovelFinanciado";
 
 function App() {
   return (
@@ -24,8 +24,8 @@ function App() {
           <Route path="/calcula-recisao" element={<CalculaRecisao />} />
           <Route path="/calcula-poupanca" element={<CalculaPoupanca />} />
           <Route path="/calcula-porcentagem" element={<CalculaPorcentagem />} />
-          <Route path="/calcula-compra-imovel" element={<CalculaCompraImovel />} />
-          <Route path="/calcula-compra-imovel-financiado" element={<CalculaCompraImovelFinanc />} />
+          <Route path="/calcula-compra-imovel-a-vista" element={<CalculaImovelVista />} />
+          <Route path="/calcula-compra-imovel-financiado" element={<CalculaImovelFinanciado />} />
         </Route>
       </Routes>
     </Router>

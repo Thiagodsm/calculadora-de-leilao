@@ -33,13 +33,13 @@ export default function SidebarMenu() {
         label: "Leilão Extrajudicial",
         name: "Calculadora - compra a vista",
         icon: <Gavel size={15} className="mr-2" />,
-        href: "/calcula-compra-imovel",
+        href: "/calcula-compra-imovel-a-vista",
     },
     {
         label: "Leilão Extrajudicial",
         name: "Calculadora - compra financiada",
         icon: <Gavel size={15} className="mr-2" />,
-        href: "/",
+        href: "/calcula-compra-imovel-financiado",
     },
     {
         label: "Trabalhistas",
@@ -51,7 +51,7 @@ export default function SidebarMenu() {
         label: "Trabalhistas",
         name: "Calculadora de Férias",
         icon: <PartyPopper size={15} className="mr-2" />,
-        href: "/",
+        href: "/calcula-ferias",
     },
     {
       label: "Trabalhistas",
@@ -69,7 +69,7 @@ export default function SidebarMenu() {
     label: "Financeiras",
     name: "Juros Compostos",
     icon: <ChartLine size={15} className="mr-2" />,
-    href: "/",
+    href: "/calcula-juros",
 },
 {
     label: "Financeiras",

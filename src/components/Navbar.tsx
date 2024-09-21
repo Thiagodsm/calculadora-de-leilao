@@ -26,7 +26,7 @@ export default function Navbar() {
             <nav className="max-w-full w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
                 <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
-                        <div className="md:hidden">
+                        <div className="lg:hidden">
                             <Sheet>
                                 <SheetTrigger className='text-white mt-2'><Menu /></SheetTrigger>
                                 <SheetContent side={"left"} className="w-[300px] sm:w-[340px]">
