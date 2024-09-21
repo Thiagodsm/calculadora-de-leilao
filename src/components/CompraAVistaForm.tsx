@@ -1,7 +1,6 @@
 // src/components/CompraAVistaForm.tsx
 
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form'; // Import SubmitHandler
+import { useForm } from 'react-hook-form'; // Import SubmitHandler
 import { z } from 'zod';
 
 import { Button } from './ui/button';
@@ -28,7 +27,7 @@ export default function CompraAVistaForm() {
     }) 
 
   return (
-    <Dialog open>
+    <Dialog>
       <DialogTrigger asChild>
         <Button size="sm">Dados da compra</Button>
       </DialogTrigger>
@@ -44,7 +43,7 @@ export default function CompraAVistaForm() {
                 <Card className="p-10">
                     <FormField 
                         control={form.control}
-                        name="user"
+                        name='tipo'
                         render={({field}) => (
                             <FormItem>
                                 <FormLabel>Username</FormLabel>
