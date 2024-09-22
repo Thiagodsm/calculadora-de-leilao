@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const leilaoImovelSchema = z.object({
+export const formSchema = z.object({
   valorArrematacao: z
     .number({ invalid_type_error: 'Valor de arrematação é obrigatório' })
     .min(1, 'Valor de arrematação deve ser pelo menos 1'),

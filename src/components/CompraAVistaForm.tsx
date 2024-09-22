@@ -1,6 +1,5 @@
-// src/components/CompraAVistaForm.tsx
-
-import { useForm } from 'react-hook-form'; // Import SubmitHandler
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { Button } from './ui/button';
@@ -9,22 +8,34 @@ import { Card } from './ui/card';
 import { FormField, FormLabel, FormMessage, FormItem, FormControl, Form, FormDescription } from './ui/form';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 
-// Definição do Schema com Zod
-export const formSchema = z.object({
-  valorArrematacao: z
-    .number({ invalid_type_error: 'Valor de arrematação é obrigatório' })
-    .min(1, 'Valor de arrematação deve ser pelo menos 1'),
-  valorVenda: z
-    .number({ invalid_type_error: 'Valor de venda é obrigatório' })
-    .min(1, 'Valor de venda deve ser pelo menos 1'),
-});
+import { formSchema } from '../schemas/formSchema';
+
+type CalculaImoveisFormValues = z.infer<typeof formSchema>;  
 
 export default function CompraAVistaForm() {
-    const form = useForm({
-        defaultValues:{
-            tipo: "",
-        }
-    }) 
+    const form = useForm<CalculaImoveisFormValues>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            valorArrematacao: 0,      
+            valorVenda: 0,            
+            comissaoLeiloeiro: 5,
+            itbi: 3,
+            registroImovel: 3471.96,
+            comissaoImobiliaria: 6,
+            ir: 15,
+            desocupacao: 0,
+            reforma: 3500,
+            outrosGastos: 0,
+            mesesVenda: 12,
+            iptuMensal: 0,
+            condominioMensal: 250,
+        },
+        mode: 'onChange'
+        });
+
+    function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+    }
 
   return (
     <Dialog>
@@ -37,24 +48,23 @@ export default function CompraAVistaForm() {
             Dados da compra
           </DialogTitle>
         </DialogHeader>
-
         <Form {...form}>
-            <form>
-                <Card className="p-10">
-                    <FormField 
-                        control={form.control}
-                        name='tipo'
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="shadcn" {...field} />
-                                </FormControl>
-                                <FormDescription>This is your public display name.</FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}      
-                    />
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-x-8">
+                <Card className="p-5 mb-4">
+                    <FormField
+                    control={form.control}
+                    name="valorArrematacao"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Valor de Arrematação</FormLabel>
+                        <FormControl>
+                            <Input {...field} type="number" placeholder="Valor de Arrematação" />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />                  
+                    <Button className="mt-5" type="submit">Calcular</Button>
                 </Card>
             </form>
         </Form>

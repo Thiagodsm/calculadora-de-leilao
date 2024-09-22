@@ -27,8 +27,6 @@ const Providers = ({ children }: {children : React.ReactNode}) => {
         }
     }, []);
 
-    console.log(theme);
-
     return (
         <ThemeContext.Provider value={{theme, setTheme, toggleTheme}}>
             <ThemeProvider defaultTheme={'dark'}>
