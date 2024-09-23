@@ -29,10 +29,10 @@ export default function CalculaImovelVista() {
       iptuMensal: 0,
       condominioMensal: 250,
     },
-    mode: 'onChange'
+    //mode: 'onChange',
   });
 
-  const {control, handleSubmit, watch, formState: {errors}} = form;
+  const {/*control,*/ handleSubmit, /*watch,*/ /*formState: {errors}*/} = form;
 
   const [results, setResults] = useState<{
     comissaoLeiloeiro: number;
@@ -46,7 +46,7 @@ export default function CalculaImovelVista() {
     lucroMensal: number;
   } | null>(null);
 
-  const watchAllFields = watch();
+  //const watchAllFields = watch();
 
   // Função para calcular os resultados no submit
   const onSubmit: SubmitHandler<CalculaImoveisFormValues> = (data) => {
@@ -113,149 +113,136 @@ export default function CalculaImovelVista() {
   };
 
   return (
-    <div className="p-0">
+    <div className="container">
       <h1 className="text-2xl font-bold mb-6">Cálculo de Compra de Imóveis em Leilão</h1>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="w-full">
         <Form {...form}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-x-4">
-            <Card className="p-6">
-              {/* Seção: Dados da Compra do Imóvel */}
-              <h2 className="text-lg font-semibold mb-4">Dados da Compra do Imóvel</h2>
-              <div className="space-y-4">
-                {/* Valor de Arrematação */}
-                <FormField
-                  control={form.control}
-                  name="valorArrematacao"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor de Arrematação</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Valor de Arrematação" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <Card className="p-6 mb-6">
+                {/* Seção: Dados da Compra do Imóvel */}
+                <h2 className="text-lg font-semibold mb-4">Dados da Compra do Imóvel</h2>
+                <div className="space-y-4">
+                  {/* Valor de Arrematação */}
+                  <FormField
+                    control={form.control}
+                    name="valorArrematacao"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Valor de Arrematação</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Valor de Arrematação" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Valor de Venda */}
-                <FormField
-                  control={form.control}
-                  name="valorVenda"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor de Venda</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Valor de Venda" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  {/* Valor de Venda */}
+                  <FormField
+                    control={form.control}
+                    name="valorVenda"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Valor de Venda</FormLabel>
+                        <FormControl >
+                          <Input {...field} type="number" placeholder="Valor de Venda" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Comissão do Leiloeiro */}
-                {/*<FormField
-                  control={form.control}
-                  name="comissaoLeiloeiro"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
-                        <Input {...field} type="number" placeholder="Comissão do Leiloeiro" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>
-                            Valor Calculado: R$ {((field.value / 100) * (watchAllFields.valorArrematacao || 0)).toFixed(2)}
-                          </p>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />*/}
+                  {/* Comissão do Leiloeiro */}
+                  <FormField
+                    control={form.control}
+                    name="comissaoLeiloeiro"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Comissão do Leiloeiro" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* ITBI */}
-                {/*<FormField
-                  control={form.control}
-                  name="itbi"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>ITBI (%)</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
-                        <Input {...field} type="number" placeholder="ITBI" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>
-                            Valor Calculado: R$ {((field.value / 100) * (watchAllFields.valorArrematacao || 0)).toFixed(2)}
-                          </p>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />*/}
+                  {/* ITBI */}
+                  <FormField
+                    control={form.control}
+                    name="itbi"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ITBI (%)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="ITBI" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Valor do Registro do Imóvel */}
-                <FormField
-                  control={form.control}
-                  name="registroImovel"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor do Registro do Imóvel</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Valor do Registro" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  {/* Valor do Registro do Imóvel */}
+                  <FormField
+                    control={form.control}
+                    name="registroImovel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Valor do Registro do Imóvel</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Valor do Registro" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Valor Gasto com Advogado (Desocupação) */}
-                <FormField
-                  control={form.control}
-                  name="desocupacao"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor Gasto com Advogado (Desocupação)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Desocupação" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  {/* Valor Gasto com Advogado (Desocupação) */}
+                  <FormField
+                    control={form.control}
+                    name="desocupacao"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Valor Gasto com Advogado (Desocupação)</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Desocupação" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Reformas */}
-                {/*<FormField
-                  control={form.control}
-                  name="reforma"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Reformas</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
-                        <Input {...field} type="number" placeholder="Reformas" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>Valor Calculado: R$ {((field.value || 0)).toFixed(2)}</p>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />*/}
+                  {/* Reformas */}
+                  <FormField
+                    control={form.control}
+                    name="reforma"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Reformas</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Reformas" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Outros Gastos */}
-                <FormField
-                  control={form.control}
-                  name="outrosGastos"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Outros Gastos</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Outros Gastos" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                  {/* Outros Gastos */}
+                  <FormField
+                    control={form.control}
+                    name="outrosGastos"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Outros Gastos</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" placeholder="Outros Gastos" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
               {/* Seção: Gastos Após Arrematação */}
               <h2 className="text-lg font-semibold mt-6 mb-4">Gastos Após Arrematação</h2>
@@ -276,80 +263,68 @@ export default function CalculaImovelVista() {
                 />
 
                 {/* IPTU Mensal */}
-                {/*<FormField
+                <FormField
                   control={form.control}
                   name="iptuMensal"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>IPTU Mensal</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
+                      <FormControl>
                         <Input {...field} type="number" placeholder="IPTU Mensal" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>Valor Calculado: R$ {((field.value || 0) * (watchAllFields.mesesVenda || 0)).toFixed(2)}</p>
-                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />*/}
+                />
 
                 {/* Condomínio Mensal */}
-                {/*<FormField
+                <FormField
                   control={form.control}
                   name="condominioMensal"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Condomínio Mensal</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
+                      <FormControl>
                         <Input {...field} type="number" placeholder="Condomínio Mensal" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>Valor Calculado: R$ {((field.value || 0) * (watchAllFields.mesesVenda || 0)).toFixed(2)}</p>
-                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />*/}
+                />
               </div>
 
               {/* Seção: Custos de Venda */}
               <h2 className="text-lg font-semibold mt-6 mb-4">Custos de Venda</h2>
               <div className="space-y-4">
                 {/* Comissão da Imobiliária */}
-                {/*<FormField
+                <FormField
                   control={form.control}
                   name="comissaoImobiliaria"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Comissão da Imobiliária (%)</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
+                      <FormControl>
                         <Input {...field} type="number" placeholder="Comissão da Imobiliária" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>Valor Calculado: R$ {((field.value / 100) * (watchAllFields.valorVenda || 0)).toFixed(2)}</p>
-                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />*/}
+                />
 
                 {/* IR */}
-                {/*<FormField
+                <FormField
                   control={form.control}
                   name="ir"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>IR (%)</FormLabel>
-                      <FormControl className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
+                      <FormControl>
                         <Input {...field} type="number" placeholder="IR" />
-                        <div className="mt-2 lg:mt-0">
-                          <p>Valor Calculado: R$ {((field.value / 100) * (watchAllFields.valorVenda || 0)).toFixed(2)}</p>
-                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />*/}
+                />
               </div>
 
               {/* Botão de Submit */}
@@ -357,12 +332,9 @@ export default function CalculaImovelVista() {
               </Card>
             </form>
         </Form>
-          
-        
-        
 
         {/* Coluna de Resultados */}
-        {/*<Card className="p-6">
+        <Card className="p-6">
           <h2 className="text-lg font-semibold mb-4">Resultados</h2>
           {results ? (
             <div className="space-y-4">
@@ -379,7 +351,7 @@ export default function CalculaImovelVista() {
           ) : (
             <p>Preencha os dados e clique em Calcular para ver os resultados.</p>
           )}
-        </Card>*/}
+        </Card>
       </div>
     </div>
   );

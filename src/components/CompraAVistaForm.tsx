@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card } from './ui/card';
-import { FormField, FormLabel, FormMessage, FormItem, FormControl, Form, FormDescription } from './ui/form';
+import { FormField, FormLabel, FormMessage, FormItem, FormControl, Form } from './ui/form';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 
 import { formSchema } from '../schemas/formSchema';

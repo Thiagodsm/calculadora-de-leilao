@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 
 export default function CalculaImovelFinanciado() {
   return (
-    <Card>
+    <Card className="container">
       <CardHeader>
         <CardTitle>Calcula compra de imovel financiado </CardTitle>
         <div className="flex justify-between">
