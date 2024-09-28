@@ -17,28 +17,34 @@ type Menu = {
 export default function SidebarMenu() {
   const menus: Menu[] = [
     {
-        label: "Leilão Extrajudicial",
+        label: "Cálculos de Leilão Extrajudicial",
         name: "Calculadora - compra a vista",
         icon: <Gavel size={15} className="mr-2" />,
         href: "/calcula-compra-imovel-a-vista",
     },
     {
-      label: "Trabalhistas",
+      label: "Cálculos Trabalhistas",
       name: "Calculadora de recisão CLT",
       icon: <Briefcase size={15} className="mr-2" />,
       href: "/",
     },
     {
-        label: "Financeiras",
+        label: "Cálculos Financeiros",
         name: "Juros Compostos",
         icon: <ChartLine size={15} className="mr-2" />,
         href: "/",
     },
     {
-      label: "Datas",
+      label: "Cálculos com Datas",
       name: "Calculadoras",
       icon: <CalendarPlus size={15} className="mr-2" />,
       href: "/calcula-datas",
+    },
+    {
+      label: "Cálculos de Calorias",
+      name: "Quantidade de caloria",
+      icon: <Utensils size={15} className="mr-2" />,
+      href: "/",
     },
     {
       label: "Relógio mundial",
@@ -50,12 +56,6 @@ export default function SidebarMenu() {
       label: "Fases da lua",
       name: "Lua hoje",
       icon: <MoonStar size={15} className="mr-2" />,
-      href: "/",
-    },
-    {
-      label: "Caloria dos alimentos",
-      name: "Quantidade de caloria",
-      icon: <Utensils size={15} className="mr-2" />,
       href: "/",
     },
 ];
@@ -71,13 +71,19 @@ export default function SidebarMenu() {
       {/* Sidebar for large screens */}
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
-        <Link
-            to="/"
-            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-          >
-            <Home className="h-4 w-4 transition-all group-hover:scale-110" />
-            <span className="sr-only">Calculajá</span>
-          </Link>
+          <Tooltip key="home">
+            <TooltipTrigger>
+            <Link
+              to="/"
+              className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+            >
+              <Home className="h-4 w-4 transition-all group-hover:scale-110" />
+              <span className="sr-only">Calculajá</span>
+            </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Início</TooltipContent>
+          </Tooltip>
+        
           {menus.map((menu) => (
             <Tooltip key={menu.name}>
               <TooltipTrigger asChild>
