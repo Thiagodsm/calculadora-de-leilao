@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
-import { Home, Gavel, PartyPopper, CalendarClock, PanelLeft, Search } from "lucide-react";
+import { Home, Gavel, PartyPopper, CalendarClock, Calendar, PanelLeft, Search, Hammer } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet"; 
 import { Input } from "./ui/input";
 import { Button } from "../components/ui/button"; 
@@ -15,9 +15,11 @@ import {
 
 export default function SidebarMenu() {
   const menus = [
+    { label: "Datas", name: "Datas", icon: <Calendar size={20} />, href: "/calcula-datas" },
     { label: "Compra a vista", name: "Compra a vista", icon: <Gavel size={20} />, href: "/calcula-compra-imovel-a-vista" },
-    { label: "Férias", name: "Férias", icon: <PartyPopper size={20} />, href: "/calcula-ferias" },
-    { label: "FGTS", name: "FGTS", icon: <CalendarClock size={20} />, href: "/calcula-fgts" },
+    { label: "Compra financiada", name: "Compra financiada", icon: <Hammer size={20} />, href: "/" },
+    { label: "Férias", name: "Férias", icon: <PartyPopper size={20} />, href: "/" },
+    { label: "FGTS", name: "FGTS", icon: <CalendarClock size={20} />, href: "/" },
   ];
 
   return (

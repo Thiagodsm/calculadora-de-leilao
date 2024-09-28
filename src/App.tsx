@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path="/calculo-datas" element={<CalculoDatas />} />
+          <Route path="/calcula-datas" element={<CalculoDatas />} />
           <Route path="/calcula-ferias" element={<CalculaFerias />} />
           <Route path="/calcula-fgts" element={<CalculaFgts />} />
           <Route path="/calcula-juros" element={<CalculaJuros />} />

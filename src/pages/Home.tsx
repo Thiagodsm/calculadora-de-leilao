@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <TitlePage title="Início" description="Calculajá - calculos diversos agrupados em um único lugar" />
+      <TitlePage title="Início" description="Calculajá - cálculos diversos agrupados em um só lugar." />
         <Card className="mt-5 border-dashed">
           <CardContent>
             <center>
