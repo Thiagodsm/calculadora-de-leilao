@@ -6,13 +6,12 @@ import { z } from 'zod';
 
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Card } from '../components/ui/card';
 import { FormField, FormLabel, FormMessage, FormItem, FormControl, Form } from '../components/ui/form';
 
-type CalculaImoveisFormValues = z.infer<typeof formSchema>;
+type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 export default function CalculaImovelVista() {
-  const form = useForm<CalculaImoveisFormValues>({
+  const form = useForm<CreateCalculaImoveisFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       valorArrematacao: 0,   
@@ -29,10 +28,12 @@ export default function CalculaImovelVista() {
       iptuMensal: 0,
       condominioMensal: 250,
     },
-    //mode: 'onChange',
+    mode: 'onChange',
   });
 
-  const {/*control,*/ handleSubmit, /*watch,*/ /*formState: {errors}*/} = form;
+  const {/*control,*/ handleSubmit, /*watch,*/ formState: {errors}} = form;
+
+  console.log({errors});
 
   const [results, setResults] = useState<{
     comissaoLeiloeiro: number;
@@ -49,7 +50,7 @@ export default function CalculaImovelVista() {
   //const watchAllFields = watch();
 
   // Função para calcular os resultados no submit
-  const onSubmit: SubmitHandler<CalculaImoveisFormValues> = (data) => {
+  const onSubmit: SubmitHandler<CreateCalculaImoveisFormData> = (data) => {
     const {
       valorArrematacao,
       valorVenda,
@@ -116,10 +117,9 @@ export default function CalculaImovelVista() {
     <div className="container">
       <h1 className="text-2xl font-bold mb-6">Cálculo de Compra de Imóveis em Leilão</h1>
       
-      <div className="w-full">
+      <div className="w-full space-y-2">
         <Form {...form}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-x-4">
-              <Card className="p-6 mb-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-x-1">
                 {/* Seção: Dados da Compra do Imóvel */}
                 <h2 className="text-lg font-semibold mb-4">Dados da Compra do Imóvel</h2>
                 <div className="space-y-4">
@@ -325,33 +325,32 @@ export default function CalculaImovelVista() {
                     </FormItem>
                   )}
                 />
-              </div>
 
-              {/* Botão de Submit */}
-              <Button type="submit" className="mt-6 w-full">Calcular</Button>
-              </Card>
-            </form>
-        </Form>
-
-        {/* Coluna de Resultados */}
-        <Card className="p-6">
-          <h2 className="text-lg font-semibold mb-4">Resultados</h2>
-          {results ? (
-            <div className="space-y-4">
-              <p><strong>Comissão do Leiloeiro:</strong> R$ {results.comissaoLeiloeiro.toFixed(2)}</p>
-              <p><strong>ITBI Total:</strong> R$ {results.itbiTotal.toFixed(2)}</p>
-              <p><strong>Custo Total da Compra:</strong> R$ {results.custoTotal.toFixed(2)}</p>
-              <p><strong>Comissão da Imobiliária:</strong> R$ {results.comissaoImobiliaria.toFixed(2)}</p>
-              <p><strong>IR:</strong> R$ {results.valorIr.toFixed(2)}</p>
-              <h2 className="text-lg font-semibold mt-6">Lucro da Venda</h2>
-              <p><strong>Lucro Líquido:</strong> R$ {results.lucroLiquido.toFixed(2)}</p>
-              <p><strong>Lucro Percentual:</strong> {results.lucroPercentual.toFixed(2)}%</p>
-              <p><strong>Lucro Mensal:</strong> R$ {results.lucroMensal.toFixed(2)}</p>
+                {/* Botão de Submit */}
+              <Button type="submit" className="w-full">Calcular</Button>
             </div>
-          ) : (
-            <p>Preencha os dados e clique em Calcular para ver os resultados.</p>
-          )}
-        </Card>
+          </form>
+        </Form>
+      </div>
+
+      <div className="w-full mt-5 mb-10">
+        {/* Coluna de Resultados */}
+        <h2 className="text-lg font-semibold mb-4">Resultados</h2>
+        {results ? (
+          <div className="space-y-4">
+            <p><strong>Comissão do Leiloeiro:</strong> R$ {results.comissaoLeiloeiro.toFixed(2)}</p>
+            <p><strong>ITBI Total:</strong> R$ {results.itbiTotal.toFixed(2)}</p>
+            <p><strong>Custo Total da Compra:</strong> R$ {results.custoTotal.toFixed(2)}</p>
+            <p><strong>Comissão da Imobiliária:</strong> R$ {results.comissaoImobiliaria.toFixed(2)}</p>
+            <p><strong>IR:</strong> R$ {results.valorIr.toFixed(2)}</p>
+            <h2 className="text-lg font-semibold mt-6">Lucro da Venda</h2>
+            <p><strong>Lucro Líquido:</strong> R$ {results.lucroLiquido.toFixed(2)}</p>
+            <p><strong>Lucro Percentual:</strong> {results.lucroPercentual.toFixed(2)}%</p>
+            <p><strong>Lucro Mensal:</strong> R$ {results.lucroMensal.toFixed(2)}</p>
+          </div>
+        ) : (
+          <p>Preencha os dados e clique em Calcular para ver os resultados.</p>
+        )}
       </div>
     </div>
   );

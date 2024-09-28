@@ -1,25 +1,26 @@
-import { Outlet } from "react-router-dom";
 import Providers from "./Provider";
-import Navbar from "./Navbar";
-import SidebarMenu from "./Sidebar";
+import { TooltipProvider } from "../components/ui/tooltip";
+import SidebarMenu from "./SidebarMenu";
 import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
 
-export default function MainLayout(){
+export default function MainLayout() {
+
   return (
     <Providers>
-      <div>
-        <Navbar />
-        <div className="flex">
-          <div className="hidden lg:block">
-            <SidebarMenu />
-          </div>                   
-          <main className="w-full p-4">
-            <Suspense>
-              <Outlet />
-            </Suspense>
-          </main>
+      <TooltipProvider>
+        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+          <SidebarMenu />
+          
+          <div className="flex flex-1 flex-col sm:gap-4 sm:py-4 sm:pl-14">
+            <main className="grid flex-1 items-start gap-4 p-4">
+              <Suspense fallback={<div>Loading...</div>}>
+                <Outlet />
+              </Suspense>
+            </main>
+          </div>
         </div>
-      </div>
+      </TooltipProvider>
     </Providers>
   );
 }

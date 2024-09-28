@@ -2,11 +2,12 @@ import { z } from 'zod';
 
 export const formSchema = z.object({
   valorArrematacao: z
+    .coerce
     .number({ invalid_type_error: 'Valor de arrematação é obrigatório' })
-    .min(1, 'Valor de arrematação deve ser pelo menos 1'),
+    .min(0, 'Valor de arrematação deve ser pelo menos 1'),
   valorVenda: z
     .number({ invalid_type_error: 'Valor de venda é obrigatório' })
-    .min(1, 'Valor de venda deve ser pelo menos 1'),
+    .min(0, 'Valor de venda deve ser pelo menos 1'),
   comissaoLeiloeiro: z
     .number({ invalid_type_error: 'Comissão do leiloeiro é obrigatória' })
     .min(0, 'Comissão do leiloeiro deve ser pelo menos 0%'),
@@ -27,7 +28,7 @@ export const formSchema = z.object({
     .min(0, 'Outros gastos devem ser pelo menos 0'),
   mesesVenda: z
     .number({ invalid_type_error: 'Prazo de venda é obrigatório' })
-    .min(1, 'Prazo de venda deve ser pelo menos 1 mês'),
+    .min(0, 'Prazo de venda deve ser pelo menos 1 mês'),
   iptuMensal: z
     .number({ invalid_type_error: 'IPTU mensal é obrigatório' })
     .min(0, 'IPTU mensal deve ser pelo menos 0'),
