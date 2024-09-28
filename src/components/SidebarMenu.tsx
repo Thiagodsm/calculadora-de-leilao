@@ -1,26 +1,70 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
-import { Home, Gavel, PartyPopper, CalendarClock, Calendar, PanelLeft, Search, Hammer } from "lucide-react";
+import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet"; 
 import { Input } from "./ui/input";
 import { Button } from "../components/ui/button"; 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu"
+import { DarkModeSwitch} from 'react-toggle-dark-mode';
+import { useTheme } from "./ui/theme-provider";
+
+type Menu = {
+  label: string
+  name: string
+  icon: React.ReactNode,
+  href: string
+}
 
 export default function SidebarMenu() {
-  const menus = [
-    { label: "Datas", name: "Datas", icon: <Calendar size={20} />, href: "/calcula-datas" },
-    { label: "Compra a vista", name: "Compra a vista", icon: <Gavel size={20} />, href: "/calcula-compra-imovel-a-vista" },
-    { label: "Compra financiada", name: "Compra financiada", icon: <Hammer size={20} />, href: "/" },
-    { label: "Férias", name: "Férias", icon: <PartyPopper size={20} />, href: "/" },
-    { label: "FGTS", name: "FGTS", icon: <CalendarClock size={20} />, href: "/" },
-  ];
+  const menus: Menu[] = [
+    {
+        label: "Leilão Extrajudicial",
+        name: "Calculadora - compra a vista",
+        icon: <Gavel size={15} className="mr-2" />,
+        href: "/calcula-compra-imovel-a-vista",
+    },
+    {
+      label: "Trabalhistas",
+      name: "Calculadora de recisão CLT",
+      icon: <Briefcase size={15} className="mr-2" />,
+      href: "/",
+    },
+    {
+        label: "Financeiras",
+        name: "Juros Compostos",
+        icon: <ChartLine size={15} className="mr-2" />,
+        href: "/",
+    },
+    {
+      label: "Datas",
+      name: "Calculadoras",
+      icon: <CalendarPlus size={15} className="mr-2" />,
+      href: "/calcula-datas",
+    },
+    {
+      label: "Relógio mundial",
+      name: "Horario no mundo",
+      icon: <Earth size={15} className="mr-2" />,
+      href: "/",
+    },
+    {
+      label: "Fases da lua",
+      name: "Lua hoje",
+      icon: <MoonStar size={15} className="mr-2" />,
+      href: "/",
+    },
+    {
+      label: "Caloria dos alimentos",
+      name: "Quantidade de caloria",
+      icon: <Utensils size={15} className="mr-2" />,
+      href: "/",
+    },
+];
+
+  const {theme, setTheme} = useTheme();
+
+  const onDarkModeToggle = (e: boolean) => {
+      setTheme(e ? 'dark' : 'light');
+  }
 
   return (
     <>
@@ -32,7 +76,7 @@ export default function SidebarMenu() {
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
             <Home className="h-4 w-4 transition-all group-hover:scale-110" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">Calculajá</span>
           </Link>
           {menus.map((menu) => (
             <Tooltip key={menu.name}>
@@ -85,33 +129,11 @@ export default function SidebarMenu() {
             className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
           />
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="overflow-hidden rounded-full"
-            >
-              <img
-                src="https://images.pexels.com/photos/989936/pexels-photo-989936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                width={36}
-                height={36}
-                alt="Avatar"
-                className="overflow-hidden rounded-full"
-              />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-
+        <DarkModeSwitch
+                  className='mr-2 w-7 h-7 sm:block'
+                  checked={theme === 'dark'}
+                  onChange={onDarkModeToggle}
+                  size={20} />
       </header>
       </div>
     </>
