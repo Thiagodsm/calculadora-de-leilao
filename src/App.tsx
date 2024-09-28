@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import Home from "./pages/Home";
-import CalculoDatas from "./pages/CalculaDatas";
-import CalculaFerias from "./pages/CalculaFerias";
-import CalculaFgts from "./pages/CalculaFgts";
-import CalculaJuros from "./pages/CalculaJuros";
-import CalculaRecisao from "./pages/CalculaRecisao";
-import CalculaPoupanca from "./pages/CalculaPoupanca";
-import CalculaPorcentagem from "./pages/CalculaPorcentagem";
-import CalculaImovelVista from "./pages/CalculaImovelVista";
-import CalculaImovelFinanciado from "./pages/CalculaImovelFinanciado";
+import CalculosLeilaoExtrajudicial from "./pages/CalculosLeilaoExtrajudicial";
+import CalculosTrabalhistas from "./pages/CalculosTrabalhistas";
+import CalculosFinanceiros from "./pages/CalculosFinanceiros";
+import CalculosDatas from "./pages/CalculosDatas";
+import CalculosCalorias from "./pages/CalculosCalorias";
+import RelogioMundial from "./pages/RelogioMundial";
+import FasesDaLua from "./pages/FasesDaLua";
+import ConversaoMoedas from "./pages/ConversaoMoedas";
 
 function App() {
   return (
@@ -17,15 +16,14 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path="/calcula-datas" element={<CalculoDatas />} />
-          <Route path="/calcula-ferias" element={<CalculaFerias />} />
-          <Route path="/calcula-fgts" element={<CalculaFgts />} />
-          <Route path="/calcula-juros" element={<CalculaJuros />} />
-          <Route path="/calcula-recisao" element={<CalculaRecisao />} />
-          <Route path="/calcula-poupanca" element={<CalculaPoupanca />} />
-          <Route path="/calcula-porcentagem" element={<CalculaPorcentagem />} />
-          <Route path="/calcula-compra-imovel-a-vista" element={<CalculaImovelVista />} />
-          <Route path="/calcula-compra-imovel-financiado" element={<CalculaImovelFinanciado />} />
+          <Route path="/calculos-leilao-extrajudicial" element={<CalculosLeilaoExtrajudicial />} />
+          <Route path="/calculos-trabalhistas" element={<CalculosTrabalhistas />} />
+          <Route path="/calculos-financeiros" element={<CalculosFinanceiros />} />
+          <Route path="/calculos-datas" element={<CalculosDatas />} />
+          <Route path="/calculos-calorias" element={<CalculosCalorias />} />
+          <Route path="/relogio-mundial" element={<RelogioMundial />} />
+          <Route path="/fases-da-lua" element={<FasesDaLua />} />
+          <Route path="/conversao-moedas" element={<ConversaoMoedas />} />
         </Route>
       </Routes>
     </Router>

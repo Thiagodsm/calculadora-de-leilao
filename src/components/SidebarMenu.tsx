@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
-import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus } from "lucide-react";
+import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus, Coins } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet"; 
 import { Input } from "./ui/input";
 import { Button } from "../components/ui/button"; 
@@ -18,31 +18,31 @@ export default function SidebarMenu() {
   const menus: Menu[] = [
     {
         label: "Cálculos de Leilão Extrajudicial",
-        name: "Calculadora - compra a vista",
+        name: "Calculadora para leilão extrajudicial",
         icon: <Gavel size={15} className="mr-2" />,
-        href: "/calcula-compra-imovel-a-vista",
+        href: "/calculos-leilao-extrajudicial",
     },
     {
       label: "Cálculos Trabalhistas",
-      name: "Calculadora de recisão CLT",
+      name: "Calculadora para processos trabalhistas",
       icon: <Briefcase size={15} className="mr-2" />,
       href: "/",
     },
     {
         label: "Cálculos Financeiros",
-        name: "Juros Compostos",
+        name: "Calculadora financeira",
         icon: <ChartLine size={15} className="mr-2" />,
         href: "/",
     },
     {
       label: "Cálculos com Datas",
-      name: "Calculadoras",
+      name: "Calculadora para datas",
       icon: <CalendarPlus size={15} className="mr-2" />,
-      href: "/calcula-datas",
+      href: "/calculos-datas",
     },
     {
       label: "Cálculos de Calorias",
-      name: "Quantidade de caloria",
+      name: "Calculadora para quantidade de calorias",
       icon: <Utensils size={15} className="mr-2" />,
       href: "/",
     },
@@ -56,6 +56,12 @@ export default function SidebarMenu() {
       label: "Fases da lua",
       name: "Lua hoje",
       icon: <MoonStar size={15} className="mr-2" />,
+      href: "/",
+    },
+    {
+      label: "Conversão de moedas",
+      name: "Converso de moedas",
+      icon: <Coins size={15} className="mr-2" />,
       href: "/",
     },
 ];
