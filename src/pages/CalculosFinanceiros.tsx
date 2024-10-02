@@ -1,4 +1,11 @@
-import { ListFilter, File, MoreVertical, ChevronRight, ChevronLeft, Copy, TrendingDown, Wallet } from "lucide-react";
+import { 
+  MoreVertical, 
+  ChevronRight, 
+  ChevronLeft, 
+  Copy, 
+  TrendingDown, 
+  Wallet 
+} from "lucide-react";
 import {
   Card,
   CardContent,
@@ -7,11 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Progress } from "../components/ui/progress";
-import {
-  Table,
-} from "../components/ui/table"
-import { Button } from "../components/ui/button";
 import {
   Tabs,
   TabsContent,
@@ -20,16 +22,16 @@ import {
 } from "../components/ui/tabs";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu"
-import { Pagination, PaginationContent, PaginationItem } from "../components/ui/pagination";
-import { Separator } from "../components/ui/separator";
-
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem 
+} from "../components/ui/pagination";
 import {
   Form,
   FormControl,
@@ -39,32 +41,52 @@ import {
   FormLabel,
   FormMessage,
 } from "../components/ui/form"
+import { Separator } from "../components/ui/separator";
 import { Input } from "../components/ui/input"
-
+import { Progress } from "../components/ui/progress";
+import { Button } from "../components/ui/button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { formSchema } from "../schemas/formSchema";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 export default function CalculosFinanceiros() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<CreateCalculaImoveisFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      valorArrematacao: 0,   
+      valorVenda: 0,         
+      comissaoLeiloeiro: 0,
+      itbi: 3,
+      registroImovel: 3471.96,
+      comissaoImobiliaria: 6,
+      ir: 15,
+      desocupacao: 0,
+      reforma: 0,
+      outrosGastos: 0,
+      mesesVenda: 0,
+      iptuMensal: 0,
+      condominioMensal: 0,
     },
-  })
+    //mode: 'onChange',
+  });
+
+  const {/*control,*/ /*handleSubmit,*/ /*watch,*/ formState: {errors}} = form;
+
+  if(errors){
+    console.log({errors});
+  } 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
   }
+
+
 
   return (
     <>
@@ -118,43 +140,6 @@ export default function CalculosFinanceiros() {
               <TabsTrigger value="avista">À Vista</TabsTrigger>
               <TabsTrigger value="financiado">Financiado</TabsTrigger>              
             </TabsList>
-            <div className="ml-auto flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-7 gap-1 text-sm"
-                    disabled={true}
-                  >
-                    <ListFilter className="h-3.5 w-3.5" />
-                    <span className="sr-only sm:not-sr-only">Filtrar</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuCheckboxItem checked>
-                    Fulfilled
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>
-                    Declined
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>
-                    Refunded
-                  </DropdownMenuCheckboxItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button
-                size="sm"
-                variant="outline"
-                className="h-7 gap-1 text-sm"
-                disabled={true}
-              >
-                <File className="h-3.5 w-3.5" />
-                <span className="sr-only sm:not-sr-only">Exportar</span>
-              </Button>
-            </div>
           </div>
           <TabsContent value="financiado">
             <Card x-chunk="dashboard-05-chunk-3">
@@ -166,24 +151,183 @@ export default function CalculosFinanceiros() {
               </CardHeader>
               <CardContent>
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                       <FormField
                         control={form.control}
-                        name="username"
+                        name="valorArrematacao"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Valor de Arrematação</FormLabel>
                             <FormControl>
-                              <Input placeholder="shadcn" {...field} />
+                              <Input {...field} type="number" placeholder="Valor de Arrematação" />
                             </FormControl>
                             <FormDescription>
-                              This is your public display name.
+                              Valor de arrematação do imóvel
                             </FormDescription>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                      <Button type="submit">Submit</Button>
+                      <FormField
+                        control={form.control}
+                        name="valorVenda"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Valor de Venda</FormLabel>
+                            <FormControl >
+                              <Input {...field} type="number" placeholder="Valor de Venda" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <h6 className="font-semibold mb-4">Custos para arrematar</h6>
+                      <FormField
+                        control={form.control}
+                        name="itbi"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>ITBI (%)</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="ITBI" />
+                            </FormControl>
+                            <FormDescription>
+                              Imposto sobre a Transmissão de Bens Imóveis - incide sobre a transferência de bens imóveis.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="registroImovel"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Valor do Registro do Imóvel</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Valor do Registro" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="desocupacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Desocupação</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Desocupação" />
+                            </FormControl>
+                            <FormDescription>
+                              Valores gastos com advogado ou atual morador para desocupar o imóvel
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="reforma"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Reformas</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Reformas" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="outrosGastos"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Outros Gastos</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Outros Gastos" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <h6 className="font-semibold mb-4">Custos até a venda</h6>
+                      <FormField
+                        control={form.control}
+                        name="mesesVenda"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Prazo de venda (meses)</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Prazo de Venda" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="iptuMensal"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>IPTU Mensal</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="IPTU Mensal" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="condominioMensal"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Condomínio Mensal</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Condomínio Mensal" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <h6 className="font-semibold mb-4">Custos de venda</h6>
+                      <FormField
+                        control={form.control}
+                        name="comissaoImobiliaria"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Comissão da Imobiliária (%)</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="Comissão da Imobiliária" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="ir"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>IR (%)</FormLabel>
+                            <FormControl>
+                              <Input {...field} type="number" placeholder="IR" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button type="submit">Calcular</Button>
                     </form>
                   </Form>
               </CardContent>
@@ -198,9 +342,7 @@ export default function CalculosFinanceiros() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
-                  
-                </Table>
+                
               </CardContent>
             </Card>
           </TabsContent>
