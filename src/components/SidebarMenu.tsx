@@ -62,7 +62,7 @@ export default function SidebarMenu() {
       label: "Conversão de moedas",
       name: "Converso de moedas",
       icon: <Coins size={15} className="mr-2" />,
-      href: "/",
+      href: "/conversao-moedas",
     },
 ];
 
