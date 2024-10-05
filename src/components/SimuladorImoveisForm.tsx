@@ -14,7 +14,7 @@ import {
   import { useForm } from "react-hook-form";
   import { z } from "zod";
   import { formSchema } from "../schemas/formSchema";
-  import { toast } from "sonner";
+  import CurrencyInput from "react-currency-input-field";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
@@ -28,7 +28,7 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
         defaultValues: {
             valorArrematacao: 0,   
             valorVenda: 0,         
-            comissaoLeiloeiro: 0,
+            comissaoLeiloeiro: 5,
             itbi: 3,
             registroImovel: 3471.96,
             comissaoImobiliaria: 6,
@@ -43,11 +43,12 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
         mode: 'onChange',
         });
 
-    const {/*control,*/ /*handleSubmit,*/ /*watch,*/ formState: {errors}} = form;      
+    /*const {control, handleSubmit, watch, formState: {errors}} = form;      
     
     if(errors){
         console.log({errors});
-      } 
+      }
+    */
 
 
     return (
@@ -60,7 +61,22 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>Valor de Arrematação</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Valor de Arrematação" />
+                    {/*<Input {...field} type="number" placeholder="Valor de Arrematação" />*/}
+                    <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="valorArrematacao"
+                        name="valorArrematacao"
+                        placeholder="Valor de arrematação"
+                        defaultValue={field.value}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        prefix="R$ "
+                        value={field.value}
+                        disableGroupSeparators={true}
+                        onValueChange={(value) => field.onChange(value)}
+                    >
+                    </CurrencyInput>
                 </FormControl>
                 <FormDescription>
                     Valor de arrematação do imóvel
@@ -76,13 +92,41 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>Valor de Venda</FormLabel>
                 <FormControl >
-                    <Input {...field} type="number" placeholder="Valor de Venda" />
+                <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="valorVenda"
+                        name="valorVenda"
+                        placeholder="Valor de venda"
+                        defaultValue={field.value}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        prefix="R$ "
+                        value={field.value}
+                        disableGroupSeparators={true}
+                        onValueChange={(value) => field.onChange(value)}
+                    >
+                    </CurrencyInput>
                 </FormControl>
                 <FormMessage />
                 </FormItem>
             )}
             />
             <h6 className="font-semibold mb-4">Custos para arrematar</h6>
+            <FormField
+            control={form.control}
+            name="comissaoLeiloeiro"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>Comissão do leiloeiro</FormLabel>
+                <FormControl>
+                    <Input {...field} type="number" placeholder="Valor do Registro" />
+                </FormControl>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
+
             <FormField
             control={form.control}
             name="itbi"
@@ -228,19 +272,7 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             )}
             />
 
-            <Button 
-            type="submit"
-            onClick={() => 
-                toast("Dados enviados para cálculo",{
-                description: "dados",
-                action: {
-                    label: "Fechar",
-                    onClick: () => console.log("Fechar"),
-                }
-                })
-            }
-            >Calcular
-            </Button>
+            <Button type="submit">Calcular</Button>
             </form>
         </Form>
     )

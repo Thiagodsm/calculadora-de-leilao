@@ -54,14 +54,14 @@ export default function CalculosLeilaoExtrajudicial() {
 
     // Realizando os cálculos necessários
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
-    const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100; // Exemplo de cálculo
-    const valorDesocupacao = data.desocupacao; // Exemplo: pode ser um valor fixo ou calculado
-    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + valorDesocupacao; // Exemplo de total parcial
-    const totalVenda = data.valorVenda; // Exemplo: pode ser outro cálculo
-    const valorComissaoCorretor = (totalVenda * data.comissaoImobiliaria) / 100; // Cálculo da comissão do corretor
-    const valorIR = (totalVenda * data.ir) / 100; // Cálculo do IR
-    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR; // Exemplo de total de custos de venda
-    const totalInvestido = data.valorArrematacao + totalCustosVenda; // Exemplo de total investido
+    const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
+    const valorDesocupacao = data.desocupacao;
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + valorDesocupacao;
+    const totalVenda = data.valorVenda;
+    const valorComissaoCorretor = (totalVenda * data.comissaoImobiliaria) / 100;
+    const valorIR = (totalVenda * data.ir) / 100;
+    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
+    const totalInvestido = data.valorArrematacao + totalCustosVenda;
 
     // Atualizando o estado com todos os resultados
     setResultados({
