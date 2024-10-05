@@ -32,7 +32,7 @@ export default function SidebarMenu() {
         label: "Cálculos Financeiros",
         name: "Calculadora financeira",
         icon: <ChartLine size={15} className="mr-2" />,
-        href: "/calculos-financeiros",
+        href: "/",
     },
     {
       label: "Cálculos com Datas",

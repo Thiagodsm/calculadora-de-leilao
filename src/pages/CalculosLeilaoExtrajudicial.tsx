@@ -1,358 +1,177 @@
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { formSchema } from '../schemas/formSchema';
-import { z } from 'zod';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import { Progress } from "../components/ui/progress";
+import { Button } from "../components/ui/button";
 
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { FormField, FormLabel, FormMessage, FormItem, FormControl, Form } from '../components/ui/form';
+import { SimuladorImoveisForm } from "../components/SimuladorImoveisForm";
+
+import { useState } from "react";
+import { formSchema } from "../schemas/formSchema";
+import { z } from "zod";
+import { SimuladorImoveisCard } from "../components/SimuladorImoveisCard";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 export default function CalculosLeilaoExtrajudicial() {
-  const form = useForm<CreateCalculaImoveisFormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      valorArrematacao: 0,   
-      valorVenda: 0,         
-      comissaoLeiloeiro: 5,
-      itbi: 3,
-      registroImovel: 3471.96,
-      comissaoImobiliaria: 6,
-      ir: 15,
-      desocupacao: 0,
-      reforma: 3500,
-      outrosGastos: 0,
-      mesesVenda: 12,
-      iptuMensal: 0,
-      condominioMensal: 250,
-    },
-    mode: 'onChange',
-  });
 
-  const {/*control,*/ handleSubmit, /*watch,*/ formState: {errors}} = form;
-
-  console.log({errors});
-
-  const [results, setResults] = useState<{
+  type ResultadosSimulacaoType = {
+    valorArrematacao: number;
+    valorVenda: number;
     comissaoLeiloeiro: number;
-    itbiTotal: number;
-    custoTotal: number;
-    comissaoImobiliaria: number;
-    valorIr: number;
-    valorVendaLiquido: number;
-    lucroLiquido: number;
-    lucroPercentual: number;
-    lucroMensal: number;
-  } | null>(null);
+    valorComissaoLeiloeiro: number;
+    itbi: number;
+    valorITBI: number;
+    registroImovel: number;
+    valorDesocupacao: number;
+    totalCustosParciais: number;
+    prazoVenda: number;
+    iptuMensal: number;
+    condominioMensal: number;
+    totalVenda: number;
+    comissaoCorretor: number;
+    valorComissaoCorretor: number;
+    valorIR: number;
+    totalCustosVenda: number;
+    totalInvestido: number;
+  }
 
-  //const watchAllFields = watch();
+  const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
 
-  // Função para calcular os resultados no submit
-  const onSubmit: SubmitHandler<CreateCalculaImoveisFormData> = (data) => {
-    const {
-      valorArrematacao,
-      valorVenda,
-      comissaoLeiloeiro,
-      itbi,
-      registroImovel,
-      desocupacao,
-      reforma,
-      outrosGastos,
-      mesesVenda,
-      iptuMensal,
-      condominioMensal,
-      comissaoImobiliaria,
-      ir,
-    } = data;
+  const handleFormSubmit = (data: CreateCalculaImoveisFormData) => {
+    console.log("Dados do formulário: ", data);
 
-    // Cálculos principais
-    const comissaoLeiloeiroTotal = (comissaoLeiloeiro / 100) * valorArrematacao;
-    const itbiTotal = (itbi / 100) * valorArrematacao;
-    const iptuTotal = iptuMensal * mesesVenda;
-    const condominioTotal = condominioMensal * mesesVenda;
+    // Realizando os cálculos necessários
+    const valorITBI = (data.valorArrematacao * data.itbi) / 100;
+    const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100; // Exemplo de cálculo
+    const valorDesocupacao = data.desocupacao; // Exemplo: pode ser um valor fixo ou calculado
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + valorDesocupacao; // Exemplo de total parcial
+    const totalVenda = data.valorVenda; // Exemplo: pode ser outro cálculo
+    const valorComissaoCorretor = (totalVenda * data.comissaoImobiliaria) / 100; // Cálculo da comissão do corretor
+    const valorIR = (totalVenda * data.ir) / 100; // Cálculo do IR
+    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR; // Exemplo de total de custos de venda
+    const totalInvestido = data.valorArrematacao + totalCustosVenda; // Exemplo de total investido
 
-    // Custo total da compra
-    const custoTotalCompra =
-      valorArrematacao +
-      comissaoLeiloeiroTotal +
-      itbiTotal +
-      registroImovel +
-      desocupacao +
-      reforma +
-      outrosGastos +
-      iptuTotal +
-      condominioTotal;
-
-    // Comissão da imobiliária e IR sobre o valor de venda
-    const comissaoImobiliariaTotal = (comissaoImobiliaria / 100) * valorVenda;
-    const valorIr = (ir / 100) * (valorVenda - comissaoImobiliariaTotal);
-
-    // Lucro líquido
-    const valorVendaLiquido = valorVenda - comissaoImobiliariaTotal - valorIr;
-    const lucroLiquido = valorVendaLiquido - custoTotalCompra;
-
-    // Lucro percentual e mensal
-    const lucroPercentual = (lucroLiquido / custoTotalCompra) * 100;
-    const lucroMensal = lucroLiquido / mesesVenda;
-
-    // Atualizar os resultados
-    setResults({
-      comissaoLeiloeiro: comissaoLeiloeiroTotal,
-      itbiTotal,
-      custoTotal: custoTotalCompra,
-      comissaoImobiliaria: comissaoImobiliariaTotal,
-      valorIr,
-      valorVendaLiquido,
-      lucroLiquido,
-      lucroPercentual,
-      lucroMensal,
+    // Atualizando o estado com todos os resultados
+    setResultados({
+      valorArrematacao: data.valorArrematacao,
+      valorVenda: data.valorVenda,
+      comissaoLeiloeiro: data.comissaoLeiloeiro,
+      valorComissaoLeiloeiro,
+      itbi: data.itbi,
+      valorITBI,
+      registroImovel: data.registroImovel,
+      valorDesocupacao,
+      totalCustosParciais,
+      prazoVenda: data.mesesVenda,
+      iptuMensal: data.iptuMensal,
+      condominioMensal: data.condominioMensal,
+      totalVenda,
+      comissaoCorretor: data.comissaoImobiliaria,
+      valorComissaoCorretor,
+      valorIR,
+      totalCustosVenda,
+      totalInvestido,
     });
-
-    console.log(data);
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl font-bold mb-6">Cálculo de Compra de Imóveis em Leilão</h1>
-      
-      <div className="w-full space-y-2">
-        <Form {...form}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-x-1">
-                {/* Seção: Dados da Compra do Imóvel */}
-                <h2 className="text-lg font-semibold mb-4">Dados da Compra do Imóvel</h2>
-                <div className="space-y-4">
-                  {/* Valor de Arrematação */}
-                  <FormField
-                    control={form.control}
-                    name="valorArrematacao"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Valor de Arrematação</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Valor de Arrematação" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+    <>
+      <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+          <Card className="sm:col-span-2">
+            <CardHeader className="pb-3">
+              <CardTitle>Cálculos de Leilão de Extrajudicial</CardTitle>
+              <CardDescription className="text-balance leading-relaxed">
+                O leilão extrajudicial é um processo que permite vender imóveis que foram dados como garantia em empréstimos que não foram pagos. O leilão é mais rápido e barato do que um processo judicial e pode oferecer imóveis a preços mais baixos do que o valor de mercado.
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
+              <Button>Faça sua simulação</Button>
+            </CardFooter>
+          </Card>
 
-                  {/* Valor de Venda */}
-                  <FormField
-                    control={form.control}
-                    name="valorVenda"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Valor de Venda</FormLabel>
-                        <FormControl >
-                          <Input {...field} type="number" placeholder="Valor de Venda" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Comissão do Leiloeiro */}
-                  <FormField
-                    control={form.control}
-                    name="comissaoLeiloeiro"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Comissão do Leiloeiro" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* ITBI */}
-                  <FormField
-                    control={form.control}
-                    name="itbi"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>ITBI (%)</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="ITBI" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Valor do Registro do Imóvel */}
-                  <FormField
-                    control={form.control}
-                    name="registroImovel"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Valor do Registro do Imóvel</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Valor do Registro" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Valor Gasto com Advogado (Desocupação) */}
-                  <FormField
-                    control={form.control}
-                    name="desocupacao"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Valor Gasto com Advogado (Desocupação)</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Desocupação" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Reformas */}
-                  <FormField
-                    control={form.control}
-                    name="reforma"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Reformas</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Reformas" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Outros Gastos */}
-                  <FormField
-                    control={form.control}
-                    name="outrosGastos"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Outros Gastos</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="number" placeholder="Outros Gastos" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-              {/* Seção: Gastos Após Arrematação */}
-              <h2 className="text-lg font-semibold mt-6 mb-4">Gastos Após Arrematação</h2>
-              <div className="space-y-4">
-                {/* Prazo de Venda */}
-                <FormField
-                  control={form.control}
-                  name="mesesVenda"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Prazo de Venda (meses)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Prazo de Venda" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* IPTU Mensal */}
-                <FormField
-                  control={form.control}
-                  name="iptuMensal"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>IPTU Mensal</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="IPTU Mensal" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Condomínio Mensal */}
-                <FormField
-                  control={form.control}
-                  name="condominioMensal"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Condomínio Mensal</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Condomínio Mensal" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Custos totais</CardDescription>
+              <CardTitle className="text-4xl">R$ 0,00</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xs text-muted-foreground">
+                0% custos totais para comprar o imóvel
               </div>
+            </CardContent>
+            <CardFooter>
+              <Progress value={0} aria-label="25% increase" />
+            </CardFooter>
+          </Card>
 
-              {/* Seção: Custos de Venda */}
-              <h2 className="text-lg font-semibold mt-6 mb-4">Custos de Venda</h2>
-              <div className="space-y-4">
-                {/* Comissão da Imobiliária */}
-                <FormField
-                  control={form.control}
-                  name="comissaoImobiliaria"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Comissão da Imobiliária (%)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="Comissão da Imobiliária" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* IR */}
-                <FormField
-                  control={form.control}
-                  name="ir"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>IR (%)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="IR" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Botão de Submit */}
-              <Button type="submit" className="w-full">Calcular</Button>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Lucro líquido</CardDescription>
+              <CardTitle className="text-4xl">R$ 0,00</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xs text-muted-foreground">
+                0% lucros com a venda do imóvel
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Progress value={0} aria-label="12% increase" />
+            </CardFooter>
+          </Card>
+        </div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2">
+          <Tabs defaultValue="financiado">
+            <div className="flex items-center">
+              <TabsList>
+                <TabsTrigger value="avista">À Vista</TabsTrigger>
+                <TabsTrigger value="financiado">Financiado</TabsTrigger>              
+              </TabsList>
             </div>
-          </form>
-        </Form>
-      </div>
-
-      <div className="w-full mt-5 mb-10">
-        {/* Coluna de Resultados */}
-        <h2 className="text-lg font-semibold mb-4">Resultados</h2>
-        {results ? (
-          <div className="space-y-4">
-            <p><strong>Comissão do Leiloeiro:</strong> R$ {results.comissaoLeiloeiro.toFixed(2)}</p>
-            <p><strong>ITBI Total:</strong> R$ {results.itbiTotal.toFixed(2)}</p>
-            <p><strong>Custo Total da Compra:</strong> R$ {results.custoTotal.toFixed(2)}</p>
-            <p><strong>Comissão da Imobiliária:</strong> R$ {results.comissaoImobiliaria.toFixed(2)}</p>
-            <p><strong>IR:</strong> R$ {results.valorIr.toFixed(2)}</p>
-            <h2 className="text-lg font-semibold mt-6">Lucro da Venda</h2>
-            <p><strong>Lucro Líquido:</strong> R$ {results.lucroLiquido.toFixed(2)}</p>
-            <p><strong>Lucro Percentual:</strong> {results.lucroPercentual.toFixed(2)}%</p>
-            <p><strong>Lucro Mensal:</strong> R$ {results.lucroMensal.toFixed(2)}</p>
+            <TabsContent value="financiado">
+              <Card>
+                <CardHeader className="px-7">
+                  <CardTitle>Fomulário de compra financiada</CardTitle>
+                  <CardDescription>
+                    Campos necessários para fazer os cálculos de custos e lucro na venda do imóvel.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <SimuladorImoveisForm onSubmit={handleFormSubmit} />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="avista">
+              <Card>
+                <CardHeader className="px-7">
+                  <CardTitle>Fomulário de compra a vista</CardTitle>
+                  <CardDescription>
+                    Campos necessários para fazer os cálculos de custos e lucro na venda do imóvel.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <SimuladorImoveisForm onSubmit={handleFormSubmit} />
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+          <div className="grid">
+            <SimuladorImoveisCard resultados={resultados} />
           </div>
-        ) : (
-          <p>Preencha os dados e clique em Calcular para ver os resultados.</p>
-        )}
+        </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }
-
