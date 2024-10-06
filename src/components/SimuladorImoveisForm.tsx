@@ -33,14 +33,14 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             registroImovel: 3471.96,
             comissaoImobiliaria: 6,
             ir: 15,
-            valorDesocupacao: 0,
-            reforma: 0,
-            outrosGastos: 0,
+            gastosDesocupacao: 0,
+            valorReformas: 0,
+            valorOutrosGastos: 0,
             prazoVendaMeses: 0,
             iptuMensal: 0,
             condominioMensal: 0,
         },
-        mode: 'onChange',
+        //mode: 'onChange',
     });
 
     return (
@@ -82,17 +82,122 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             )}
             />
             <FormField
+                control={form.control}
+                name="valorVenda"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Valor de Venda</FormLabel>
+                    <FormControl >
+                        <CurrencyInput
+                            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            id="valorVenda"
+                            name={field.name}
+                            placeholder="Valor de venda"
+                            prefix="R$ "
+                            value={field.value || ""}
+                            decimalsLimit={2}
+                            decimalSeparator=","
+                            groupSeparator="."
+                            disableGroupSeparators={false}
+                            allowNegativeValue={false}
+                            onValueChange={(value) => {
+                                if (value === undefined || value === "") {
+                                    field.onChange("");
+                                } else {
+                                    field.onChange(value);
+                                }
+                            }}
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+            />
+            <h6 className="font-semibold mb-4">Custos para arrematar</h6>
+            <FormField
             control={form.control}
-            name="valorVenda"
+            name="comissaoLeiloeiro"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Valor de Venda</FormLabel>
-                <FormControl >
+                <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
+                <FormControl>
+                    <Input 
+                        {...field} 
+                        value={field.value ?? ""}
+                        placeholder="Comissão do leiloeiro" 
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                </FormControl>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
+
+            <FormField
+            control={form.control}
+            name="itbi"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>ITBI (%)</FormLabel>
+                <FormControl>
+                    <Input 
+                        {...field} 
+                        value={field.value ?? ""}
+                        placeholder="ITBI" 
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                </FormControl>
+                <FormDescription>
+                    Imposto sobre a Transmissão de Bens Imóveis - incide sobre a transferência de bens imóveis.
+                </FormDescription>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
+            <FormField
+                control={form.control}
+                name="registroImovel"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Valor do Registro do Imóvel</FormLabel>
+                    <FormControl>
+                        <CurrencyInput
+                            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            id="registroImovel"
+                            name={field.name}
+                            placeholder="Registro do imóvel"
+                            prefix="R$ "
+                            value={field.value || ""}
+                            decimalsLimit={2}
+                            decimalSeparator=","
+                            groupSeparator="."
+                            disableGroupSeparators={false}
+                            allowNegativeValue={false}
+                            onValueChange={(value) => {
+                                if (value === undefined || value === "") {
+                                    field.onChange("");
+                                } else {
+                                    field.onChange(value);
+                                }
+                            }}
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+            />
+            <FormField
+            control={form.control}
+            name="gastosDesocupacao"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>Gastos com Desocupação</FormLabel>
+                <FormControl>
                     <CurrencyInput
                         className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="valorVenda"
+                        id="gastosDesocupacao"
                         name={field.name}
-                        placeholder="Valor de venda"
+                        placeholder="Gastos com a desocupação"
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
@@ -107,64 +212,7 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                                 field.onChange(value);
                             }
                         }}
-                        />
-                </FormControl>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-            <h6 className="font-semibold mb-4">Custos para arrematar</h6>
-            <FormField
-            control={form.control}
-            name="comissaoLeiloeiro"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Comissão do leiloeiro</FormLabel>
-                <FormControl>
-                    <Input {...field} type="number" placeholder="Valor do Registro" />
-                </FormControl>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-            <FormField
-            control={form.control}
-            name="itbi"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>ITBI (%)</FormLabel>
-                <FormControl>
-                    <Input {...field} type="number" placeholder="ITBI" />
-                </FormControl>
-                <FormDescription>
-                    Imposto sobre a Transmissão de Bens Imóveis - incide sobre a transferência de bens imóveis.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-            <FormField
-            control={form.control}
-            name="registroImovel"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Valor do Registro do Imóvel</FormLabel>
-                <FormControl>
-                    <Input {...field} type="number" placeholder="Valor do Registro" />
-                </FormControl>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-            <FormField
-            control={form.control}
-            name="valorDesocupacao"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Valor da desocupação</FormLabel>
-                <FormControl>
-                    <Input {...field} type="number" placeholder="Valor desocupação" />
+                    />
                 </FormControl>
                 <FormDescription>
                     Valores gastos com advogado ou atual morador para desocupar o imóvel
@@ -175,12 +223,31 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             />
             <FormField
             control={form.control}
-            name="reforma"
+            name="valorReformas"
             render={({ field }) => (
                 <FormItem>
                 <FormLabel>Reformas</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Reformas" />
+                <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="valorReformas"
+                        name={field.name}
+                        placeholder="Reformas"
+                        prefix="R$ "
+                        value={field.value || ""}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange("");
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                    />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -189,14 +256,36 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
 
             <FormField
             control={form.control}
-            name="outrosGastos"
+            name="valorOutrosGastos"
             render={({ field }) => (
                 <FormItem>
                 <FormLabel>Outros Gastos</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Outros Gastos" />
+                    <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="valorOutrosGastos"
+                        name={field.name}
+                        placeholder="Outros gastos"
+                        prefix="R$ "
+                        value={field.value || ""}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange("");
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                    />
                 </FormControl>
                 <FormMessage />
+                <FormDescription>
+                    Custos com dividas do imóvel, penhora, IPTU antigo entre outros.
+                </FormDescription>
                 </FormItem>
             )}
             />
@@ -223,7 +312,26 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>IPTU Mensal</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="IPTU Mensal" />
+                    <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="iptuMensal"
+                        name={field.name}
+                        placeholder="IPTU mensal"
+                        prefix="R$ "
+                        value={field.value || ""}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange("");
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                    />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -235,9 +343,28 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             name="condominioMensal"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Condomínio Mensal</FormLabel>
+                <FormLabel>Condomínio mensal</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Condomínio Mensal" />
+                    <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        id="iptuMensal"
+                        name={field.name}
+                        placeholder="Condomínio mensal"
+                        prefix="R$ "
+                        value={field.value || ""}
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange("");
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                    />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -252,7 +379,12 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>Comissão da Imobiliária (%)</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Comissão da Imobiliária" />
+                    <Input 
+                        {...field} 
+                        value={field.value ?? ""}
+                        placeholder="Comissão da Imobiliária" 
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -264,9 +396,14 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             name="ir"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>IR (%)</FormLabel>
+                <FormLabel>Imposto de Renda (%)</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="IR" />
+                    <Input 
+                        {...field} 
+                        value={field.value ?? ""}
+                        placeholder="Imposto de Renda" 
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                 </FormControl>
                 <FormMessage />
                 </FormItem>

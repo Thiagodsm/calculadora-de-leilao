@@ -35,13 +35,18 @@ export default function CalculosLeilaoExtrajudicial() {
     valorITBI: number;
     registroImovel: number;
     valorDesocupacao: number;
+    valorReformas: number;
+    valorOutrosGastos: number;
     totalCustosParciais: number;
     prazoVenda: number;
     iptuMensal: number;
+    totalIptu: number;
     condominioMensal: number;
+    totalCondominio: number;
     totalVenda: number;
     comissaoCorretor: number;
     valorComissaoCorretor: number;
+    ir: number;
     valorIR: number;
     totalCustosVenda: number;
     totalInvestido: number;
@@ -55,15 +60,15 @@ export default function CalculosLeilaoExtrajudicial() {
     // Realizando os cálculos necessários
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
-    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.valorDesocupacao;
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
 
-    const iptuMensal = data.prazoVendaMeses * data.iptuMensal;
-    const condominioMensal = data.prazoVendaMeses * data.condominioMensal;
-    const totalVenda = iptuMensal + condominioMensal;
+    const totalIptu = data.prazoVendaMeses * data.iptuMensal;
+    const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
+    const totalVenda = totalIptu + totalCondominio;
 
-    const valorComissaoCorretor = (totalVenda * data.comissaoImobiliaria) / 100;
+    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
     const valorIR = (totalVenda * data.ir) / 100;
-    
+
     const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
     const totalInvestido = data.valorArrematacao + totalCustosVenda;
     
@@ -78,14 +83,19 @@ export default function CalculosLeilaoExtrajudicial() {
       itbi: data.itbi,
       valorITBI,
       registroImovel: data.registroImovel,
-      valorDesocupacao: data.valorDesocupacao,
+      valorDesocupacao: data.gastosDesocupacao,
+      valorReformas: data.valorReformas,
+      valorOutrosGastos: data.valorOutrosGastos,
       totalCustosParciais,
       prazoVenda: data.prazoVendaMeses,
-      iptuMensal,
-      condominioMensal,
+      iptuMensal: data.iptuMensal,
+      totalIptu,
+      condominioMensal: data.condominioMensal,
+      totalCondominio,
       totalVenda,
       comissaoCorretor: data.comissaoImobiliaria,
       valorComissaoCorretor,
+      ir: data.ir,
       valorIR,
       totalCustosVenda,
       totalInvestido,

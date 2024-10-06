@@ -23,13 +23,18 @@ type ResultadosSimulacaoType = {
     valorITBI: number;
     registroImovel: number;
     valorDesocupacao: number;
+    valorReformas: number;
+    valorOutrosGastos: number;
     totalCustosParciais: number;
     prazoVenda: number;
     iptuMensal: number;
+    totalIptu: number;
     condominioMensal: number;
+    totalCondominio: number;
     totalVenda: number;
     comissaoCorretor: number;
     valorComissaoCorretor: number;
+    ir: number;
     valorIR: number;
     totalCustosVenda: number;
     totalInvestido: number;
@@ -50,13 +55,18 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
         valorITBI = 0,
         registroImovel = 0,
         valorDesocupacao = 0,
+        valorReformas = 0,
+        valorOutrosGastos = 0,
         totalCustosParciais = 0,
         prazoVenda = 0,
         iptuMensal = 0,
+        totalIptu = 0,
         condominioMensal = 0,
+        totalCondominio = 0,
         totalVenda = 0,
         comissaoCorretor = 0,
         valorComissaoCorretor = 0,
+        ir = 0,
         valorIR = 0,
         totalCustosVenda = 0,
         totalInvestido = 0,
@@ -129,8 +139,16 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span>R$ {registroImovel.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Valor da desocupação</span>
+                            <span className="text-muted-foreground">Valor da Desocupação</span>
                             <span>R$ {valorDesocupacao.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
+                            <span className="text-muted-foreground">Valor Reformas</span>
+                            <span>R$ {valorReformas.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
+                            <span className="text-muted-foreground">Outros gastos</span>
+                            <span>R$ {valorOutrosGastos.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
@@ -149,8 +167,16 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span>R$ {iptuMensal.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between">
+                            <span className="text-muted-foreground">Total IPTU</span>
+                            <span>R$ {totalIptu.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Condominio mensal</span>
                             <span>R$ {condominioMensal.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
+                            <span className="text-muted-foreground">Total condominio</span>
+                            <span>R$ {totalCondominio.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
@@ -175,11 +201,11 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span>R$ {valorComissaoCorretor.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between">
-                            <span className="text-muted-foreground">IR sobre o ganho de capital</span>
-                            <span>{valorIR} %</span>
+                            <span className="text-muted-foreground">Imposto de Renda (%)</span>
+                            <span>{ir} %</span>
                         </li>
                         <li className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Valor do IR sobre o ganho de capital</span>
+                            <span className="text-muted-foreground">Valor do IR</span>
                             <span>R$ {valorIR.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
