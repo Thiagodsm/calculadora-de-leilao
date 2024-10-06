@@ -33,23 +33,15 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             registroImovel: 3471.96,
             comissaoImobiliaria: 6,
             ir: 15,
-            desocupacao: 0,
+            valorDesocupacao: 0,
             reforma: 0,
             outrosGastos: 0,
-            mesesVenda: 0,
+            prazoVendaMeses: 0,
             iptuMensal: 0,
             condominioMensal: 0,
         },
         mode: 'onChange',
-        });
-
-    /*const {control, handleSubmit, watch, formState: {errors}} = form;      
-    
-    if(errors){
-        console.log({errors});
-      }
-    */
-
+    });
 
     return (
         <Form {...form}>
@@ -61,22 +53,26 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>Valor de Arrematação</FormLabel>
                 <FormControl>
-                    {/*<Input {...field} type="number" placeholder="Valor de Arrematação" />*/}
                     <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                         id="valorArrematacao"
-                        name="valorArrematacao"
+                        name={field.name}
                         placeholder="Valor de arrematação"
-                        defaultValue={field.value}
+                        prefix="R$ "
+                        value={field.value || ""}
                         decimalsLimit={2}
                         decimalSeparator=","
                         groupSeparator="."
-                        prefix="R$ "
-                        value={field.value}
-                        disableGroupSeparators={true}
-                        onValueChange={(value) => field.onChange(value)}
-                    >
-                    </CurrencyInput>
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange(""); 
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                        />
                 </FormControl>
                 <FormDescription>
                     Valor de arrematação do imóvel
@@ -92,21 +88,26 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                 <FormItem>
                 <FormLabel>Valor de Venda</FormLabel>
                 <FormControl >
-                <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                    <CurrencyInput
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                         id="valorVenda"
-                        name="valorVenda"
+                        name={field.name}
                         placeholder="Valor de venda"
-                        defaultValue={field.value}
+                        prefix="R$ "
+                        value={field.value || ""}
                         decimalsLimit={2}
                         decimalSeparator=","
                         groupSeparator="."
-                        prefix="R$ "
-                        value={field.value}
-                        disableGroupSeparators={true}
-                        onValueChange={(value) => field.onChange(value)}
-                    >
-                    </CurrencyInput>
+                        disableGroupSeparators={false}
+                        allowNegativeValue={false}
+                        onValueChange={(value) => {
+                            if (value === undefined || value === "") {
+                                field.onChange("");
+                            } else {
+                                field.onChange(value);
+                            }
+                        }}
+                        />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -158,12 +159,12 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             />
             <FormField
             control={form.control}
-            name="desocupacao"
+            name="valorDesocupacao"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Desocupação</FormLabel>
+                <FormLabel>Valor da desocupação</FormLabel>
                 <FormControl>
-                    <Input {...field} type="number" placeholder="Desocupação" />
+                    <Input {...field} type="number" placeholder="Valor desocupação" />
                 </FormControl>
                 <FormDescription>
                     Valores gastos com advogado ou atual morador para desocupar o imóvel
@@ -203,7 +204,7 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
             <h6 className="font-semibold mb-4">Custos até a venda</h6>
             <FormField
             control={form.control}
-            name="mesesVenda"
+            name="prazoVendaMeses"
             render={({ field }) => (
                 <FormItem>
                 <FormLabel>Prazo de venda (meses)</FormLabel>

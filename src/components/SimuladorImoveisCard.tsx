@@ -129,7 +129,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span>R$ {registroImovel.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Valor desocupação (custos com advogado)</span>
+                            <span className="text-muted-foreground">Valor da desocupação</span>
                             <span>R$ {valorDesocupacao.toFixed(2)}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">

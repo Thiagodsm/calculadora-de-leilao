@@ -18,16 +18,16 @@ export const formSchema = z.object({
   registroImovel: z
     .coerce
     .number({ invalid_type_error: 'Registro do imóvel é um campo numérico.' }),
-  desocupacao: z
+  valorDesocupacao: z
     .coerce
-    .number({ invalid_type_error: 'Desocupação é um campo numérico.' }),
+    .number(),
   reforma: z
     .coerce
     .number({ invalid_type_error: 'Reforma é um campo numérico.' }),
   outrosGastos: z
     .coerce
     .number({ invalid_type_error: 'Outros gastos é um campo numérico.' }),
-  mesesVenda: z
+  prazoVendaMeses: z
     .coerce
     .number({ invalid_type_error: 'Prazo de venda é um campo numérico.' }),
   iptuMensal: z

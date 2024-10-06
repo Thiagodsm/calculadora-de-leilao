@@ -53,30 +53,36 @@ export default function CalculosLeilaoExtrajudicial() {
     console.log("Dados do formulário: ", data);
 
     // Realizando os cálculos necessários
-    const valorITBI = (data.valorArrematacao * data.itbi) / 100;
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
-    const valorDesocupacao = data.desocupacao;
-    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + valorDesocupacao;
-    const totalVenda = data.valorVenda;
+    const valorITBI = (data.valorArrematacao * data.itbi) / 100;
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.valorDesocupacao;
+
+    const iptuMensal = data.prazoVendaMeses * data.iptuMensal;
+    const condominioMensal = data.prazoVendaMeses * data.condominioMensal;
+    const totalVenda = iptuMensal + condominioMensal;
+
     const valorComissaoCorretor = (totalVenda * data.comissaoImobiliaria) / 100;
     const valorIR = (totalVenda * data.ir) / 100;
+    
     const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
     const totalInvestido = data.valorArrematacao + totalCustosVenda;
+    
 
     // Atualizando o estado com todos os resultados
     setResultados({
       valorArrematacao: data.valorArrematacao,
       valorVenda: data.valorVenda,
+
       comissaoLeiloeiro: data.comissaoLeiloeiro,
       valorComissaoLeiloeiro,
       itbi: data.itbi,
       valorITBI,
       registroImovel: data.registroImovel,
-      valorDesocupacao,
+      valorDesocupacao: data.valorDesocupacao,
       totalCustosParciais,
-      prazoVenda: data.mesesVenda,
-      iptuMensal: data.iptuMensal,
-      condominioMensal: data.condominioMensal,
+      prazoVenda: data.prazoVendaMeses,
+      iptuMensal,
+      condominioMensal,
       totalVenda,
       comissaoCorretor: data.comissaoImobiliaria,
       valorComissaoCorretor,
