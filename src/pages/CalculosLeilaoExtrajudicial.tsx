@@ -57,21 +57,28 @@ export default function CalculosLeilaoExtrajudicial() {
   const handleFormSubmit = (data: CreateCalculaImoveisFormData) => {
     console.log("Dados do formulário: ", data);
 
-    // Realizando os cálculos necessários
+    // Cálculo das despesas de aquisição
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
     const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
 
-    const totalIptu = data.prazoVendaMeses * data.iptuMensal;
-    const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
-    const totalVenda = totalIptu + totalCondominio;
-
+    // Cálculo das despesas com a venda
     const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
-    const valorIR = (totalVenda * data.ir) / 100;
+    const valorRealVenda = data.valorVenda - valorComissaoCorretor;
 
+    // Cálculo do lucro líquido antes do imposto
+    const lucroLiquido = valorRealVenda - totalCustosParciais;
+
+    // Cálculo do imposto de renda (15% sobre o lucro líquido)
+    const valorIR = (lucroLiquido * 15) / 100;
+
+    // Cálculo do total investido
     const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
     const totalInvestido = data.valorArrematacao + totalCustosVenda;
-    
+
+    const totalIptu = data.prazoVendaMeses * data.iptuMensal;
+    const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
+    const totalVenda = totalIptu + totalCondominio;    
 
     // Atualizando o estado com todos os resultados
     setResultados({
@@ -101,6 +108,8 @@ export default function CalculosLeilaoExtrajudicial() {
       totalInvestido,
     });
   };
+
+  console.log({resultados});
 
   return (
     <>

@@ -175,9 +175,11 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                             allowNegativeValue={false}
                             onValueChange={(value) => {
                                 if (value === undefined || value === "") {
-                                    field.onChange("");
+                                    field.onChange(""); 
                                 } else {
-                                    field.onChange(value);
+                                    // Remove pontos e substitui a vírgula por ponto
+                                    const numericValue = value.replace(/\./g, "").replace(",", ".");
+                                    field.onChange(parseFloat(numericValue));
                                 }
                             }}
                         />

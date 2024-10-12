@@ -17,13 +17,14 @@ export const formSchema = z.object({
     .min(0, 'ITBI deve ser maior que zero.'),
   registroImovel: z
     .coerce
-    .number({ invalid_type_error: 'Registro do imóvel é um campo numérico.' }),
+    .number({ invalid_type_error: 'Valor do registro do imóvel é obrigatório.' })
+    .min(0, 'Registro do imóvel deve ser maior ou igual a zero.'),
   gastosDesocupacao: z
     .coerce
     .number(),
   valorReformas: z
     .coerce
-    .number({ invalid_type_error: 'Reforma é um campo numérico.' }),
+    .number(),
   valorOutrosGastos: z
     .coerce
     .number({ invalid_type_error: 'Outros gastos é um campo numérico.' }),
