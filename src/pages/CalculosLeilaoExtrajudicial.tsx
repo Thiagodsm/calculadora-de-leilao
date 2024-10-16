@@ -50,6 +50,7 @@ export default function CalculosLeilaoExtrajudicial() {
     valorIR: number;
     totalCustosVenda: number;
     totalInvestido: number;
+    lucroLiquido: number;
   }
 
   const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
@@ -57,28 +58,32 @@ export default function CalculosLeilaoExtrajudicial() {
   const handleFormSubmit = (data: CreateCalculaImoveisFormData) => {
     console.log("Dados do formulário: ", data);
 
-    // Cálculo das despesas de aquisição
+    // Calculo das despesas de aquisicao
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
     const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
 
-    // Cálculo das despesas com a venda
-    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
-    const valorRealVenda = data.valorVenda - valorComissaoCorretor;
-
-    // Cálculo do lucro líquido antes do imposto
-    const lucroLiquido = valorRealVenda - totalCustosParciais;
-
-    // Cálculo do imposto de renda (15% sobre o lucro líquido)
-    const valorIR = (lucroLiquido * 15) / 100;
-
-    // Cálculo do total investido
-    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
-    const totalInvestido = data.valorArrematacao + totalCustosVenda;
-
+    // Calculo custos ate a venda
     const totalIptu = data.prazoVendaMeses * data.iptuMensal;
     const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
     const totalVenda = totalIptu + totalCondominio;    
+
+    const totalInvestido = data.valorArrematacao + totalCustosParciais + totalVenda;
+
+    // Calculo das despesas com a venda
+    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
+    
+
+    // Calculo do imposto de renda (15% sobre o lucro liquido)
+    const valorIR = ((data.valorVenda - data.valorReformas) - totalInvestido) * (data.ir / 100);
+    const valorRealVenda = data.valorVenda - valorComissaoCorretor - valorIR;
+
+    // Calculo do total investido
+    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR; 
+
+    // Calculo do lucro liquido antes do imposto
+    const lucroLiquido = valorRealVenda - totalInvestido;
+
 
     // Atualizando o estado com todos os resultados
     setResultados({
@@ -106,6 +111,7 @@ export default function CalculosLeilaoExtrajudicial() {
       valorIR,
       totalCustosVenda,
       totalInvestido,
+      lucroLiquido,
     });
   };
 

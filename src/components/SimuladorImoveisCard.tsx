@@ -1,4 +1,5 @@
 import {
+    ChartNoAxesCombinedIcon,
     Copy,
     TrendingDown,
     Wallet
@@ -38,6 +39,7 @@ type ResultadosSimulacaoType = {
     valorIR: number;
     totalCustosVenda: number;
     totalInvestido: number;
+    lucroLiquido: number;
 }
 
 interface SimuladorImoveisCardProps {
@@ -70,6 +72,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
         valorIR = 0,
         totalCustosVenda = 0,
         totalInvestido = 0,
+        lucroLiquido = 0,
     } = resultados || {}; // Fallback para um objeto vazio se resultados for null
 
     return (
@@ -215,9 +218,9 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                     </ul>
                 </div>
                 <Separator className="my-4" />
-                <div className="grid gap-3">
-                    <div className="font-semibold">Custos totais</div>
-                    <dl className="grid grid-cols-2 gap-3">
+                <div className="mb-4 font-semibold">Resultados</div>
+                <div className="grid grid-cols-2">
+                    <dl className="grid gap-3">
                         <div className="flex flex-col">
                             <dt className="flex items-center gap-1">
                                 <Wallet className="h-4 w-4" />
@@ -225,6 +228,17 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             </dt>
                             <dd className="font-semibold">
                                 R$ {totalInvestido.toFixed(2)}
+                            </dd>
+                        </div>
+                    </dl>
+                    <dl className="grid grid-cols-2 gap-3">
+                        <div className="flex flex-col">
+                            <dt className="flex items-center gap-1">
+                                <ChartNoAxesCombinedIcon className="h-4 w-4" />
+                                <span>Lucro Líquido</span>
+                            </dt>
+                            <dd className="font-semibold">
+                                R$ {lucroLiquido.toFixed(2)}
                             </dd>
                         </div>
                     </dl>
