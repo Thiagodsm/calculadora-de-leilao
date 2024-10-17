@@ -1,6 +1,7 @@
 import {
     ChartNoAxesCombinedIcon,
     Copy,
+    PercentIcon,
     TrendingDown,
     Wallet
 } from "lucide-react";
@@ -109,13 +110,13 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span className="text-muted-foreground">
                                 Valor de arrematação 
                             </span>
-                            <span>R$ {valorArrematacao.toFixed(2)}</span>
+                            <span>{valorArrematacao.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">
                                 Valor de venda 
                             </span>
-                            <span>R$ {valorVenda.toFixed(2)}</span>
+                            <span>{valorVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
                     <Separator className="my-2" />
@@ -127,7 +128,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Valor da comissão</span>
-                            <span>R$ {valorComissaoLeiloeiro.toFixed(2)}</span>
+                            <span>{valorComissaoLeiloeiro.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">ITBI</span>
@@ -135,27 +136,27 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Valor do ITBI</span>
-                            <span>R$ {valorITBI.toFixed(2)}</span>
+                            <span>{valorITBI.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Registro do imóvel</span>
-                            <span>R$ {registroImovel.toFixed(2)}</span>
+                            <span>{registroImovel.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Valor da Desocupação</span>
-                            <span>R$ {valorDesocupacao.toFixed(2)}</span>
+                            <span>{valorDesocupacao.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Valor Reformas</span>
-                            <span>R$ {valorReformas.toFixed(2)}</span>
+                            <span>{valorReformas.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Outros gastos</span>
-                            <span>R$ {valorOutrosGastos.toFixed(2)}</span>
+                            <span>{valorOutrosGastos.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
-                            <span>R$ {totalCustosParciais.toFixed(2)}</span>
+                            <span>{totalCustosParciais.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
                     <Separator className="my-2" />
@@ -167,23 +168,23 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">IPTU mensal</span>
-                            <span>R$ {iptuMensal.toFixed(2)}</span>
+                            <span>{iptuMensal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Total IPTU</span>
-                            <span>R$ {totalIptu.toFixed(2)}</span>
+                            <span>{totalIptu.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Condominio mensal</span>
-                            <span>R$ {condominioMensal.toFixed(2)}</span>
+                            <span>{condominioMensal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Total condominio</span>
-                            <span>R$ {totalCondominio.toFixed(2)}</span>
+                            <span>{totalCondominio.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
-                            <span>R$ {totalVenda.toFixed(2)}</span>
+                            <span>{totalVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
                 </div>
@@ -201,46 +202,56 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span className="text-muted-foreground">
                                 Valor da comissão
                             </span>
-                            <span>R$ {valorComissaoCorretor.toFixed(2)}</span>
+                            <span>{valorComissaoCorretor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Imposto de Renda (%)</span>
-                            <span>{ir} %</span>
+                            <span>{ir}%</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Valor do IR</span>
-                            <span>R$ {valorIR.toFixed(2)}</span>
+                            <span>{valorIR.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
-                            <span>R$ {totalCustosVenda.toFixed(2)}</span>
+                            <span>{totalCustosVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
                 </div>
                 <Separator className="my-4" />
                 <div className="mb-4 font-semibold">Resultados</div>
-                <div className="grid grid-cols-2">
-                    <dl className="grid gap-3">
-                        <div className="flex flex-col">
-                            <dt className="flex items-center gap-1">
-                                <Wallet className="h-4 w-4" />
-                                <span>Total investido</span>
-                            </dt>
-                            <dd className="font-semibold">
-                                R$ {totalInvestido.toFixed(2)}
-                            </dd>
+                <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+                    {/* Custos */}
+                    <dl className="flex flex-col">
+                        <div className="flex items-center gap-1">
+                            <Wallet className="h-5 w-5" />
+                            <span>Custos</span>
                         </div>
+                        <dd className="font-semibold">
+                            {totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                        </dd>
                     </dl>
-                    <dl className="grid grid-cols-2 gap-3">
-                        <div className="flex flex-col">
-                            <dt className="flex items-center gap-1">
-                                <ChartNoAxesCombinedIcon className="h-4 w-4" />
-                                <span>Lucro Líquido</span>
-                            </dt>
-                            <dd className="font-semibold">
-                                R$ {lucroLiquido.toFixed(2)}
-                            </dd>
+
+                    {/* Lucro Líquido */}
+                    <dl className="flex flex-col">
+                        <div className="flex items-center gap-1">
+                            <ChartNoAxesCombinedIcon className="h-4 w-4" />
+                            <span>Lucro Líquido</span>
                         </div>
+                        <dd className="font-semibold">
+                            {lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                        </dd>
+                    </dl>
+
+                    {/* % Lucro */}
+                    <dl className="flex flex-col">
+                        <div className="flex items-center gap-1">
+                            <PercentIcon className="h-4 w-4" />
+                            <span>Lucro Líquido</span>
+                        </div>
+                        <dd className="font-semibold">
+                            {((lucroLiquido / totalInvestido) * 100).toFixed(2)}%
+                        </dd>
                     </dl>
                 </div>
             </CardContent>
