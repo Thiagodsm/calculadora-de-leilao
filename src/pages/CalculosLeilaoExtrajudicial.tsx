@@ -89,7 +89,6 @@ export default function CalculosLeilaoExtrajudicial() {
     setResultados({
       valorArrematacao: data.valorArrematacao,
       valorVenda: data.valorVenda,
-
       comissaoLeiloeiro: data.comissaoLeiloeiro,
       valorComissaoLeiloeiro,
       itbi: data.itbi,
@@ -136,30 +135,30 @@ export default function CalculosLeilaoExtrajudicial() {
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Custos totais</CardDescription>
-              <CardTitle className="text-4xl">R$ 0,00</CardTitle>
+              <CardTitle className="text-4xl">{resultados ? resultados.totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}): "R$ 0,00"}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">
-                0% custos totais para comprar o imóvel
+                Custos da arremtação até a venda, com lucro bruto de: {resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.totalInvestido / resultados.valorVenda)) * 100).toFixed(2) : 0) : "0"}%
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={0} aria-label="25% increase" />
+              <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.totalInvestido / resultados.valorVenda)) * 100) : 0) : 0} aria-label="custos totais" />
             </CardFooter>
           </Card>
 
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Lucro líquido</CardDescription>
-              <CardTitle className="text-4xl">R$ 0,00</CardTitle>
+              <CardTitle className="text-4xl">{resultados ? resultados.lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : "R$ 0,00"}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">
-                0% lucros com a venda do imóvel
+                {resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2) : 0) : "0"}% de lucro líquido com a venda do imóvel
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={0} aria-label="12% increase" />
+              <Progress value={resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100) : 0) : 0} aria-label="porcentagem do lucro líquido" />
             </CardFooter>
           </Card>
         </div>

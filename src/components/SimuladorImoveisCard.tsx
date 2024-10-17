@@ -250,7 +250,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                             <span>Lucro Líquido</span>
                         </div>
                         <dd className="font-semibold">
-                            {((lucroLiquido / totalInvestido) * 100).toFixed(2)}%
+                            {( totalInvestido !== 0 ? ((lucroLiquido / totalInvestido) * 100).toFixed(2) : 0)}%
                         </dd>
                     </dl>
                 </div>
