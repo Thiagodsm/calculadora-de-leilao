@@ -48,7 +48,6 @@ interface SimuladorImoveisCardProps {
 }
 
 export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) {
-    // Defina valores padrão se resultados for null
     const {
         valorArrematacao = 0,
         valorVenda = 0,

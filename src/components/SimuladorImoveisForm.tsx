@@ -1,3 +1,5 @@
+// PAREI TENTANDO PASSAR UM PARAMETRO A MAIS PARA O FORMULARIO PARA MOSTRAR OS CAMPOS PARA COMPRA FINANCIADA
+
 import {
     Form,
     FormControl,
@@ -20,9 +22,10 @@ type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 interface SimuladorImoveisFormProps{
     onSubmit: (data: CreateCalculaImoveisFormData) => void;
+    isFinanciado: boolean;
 }
 
-export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
+export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImoveisFormProps) {
     const form = useForm<CreateCalculaImoveisFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -113,24 +116,82 @@ export function SimuladorImoveisForm({ onSubmit }: SimuladorImoveisFormProps) {
                     </FormItem>
                 )}
             />
+            {isFinanciado && (
+                <>
+                    <h6 className="font-semibold mb-4">Valores do Financiamento</h6>
+                    <FormField
+                        control={form.control}
+                        name="porcentagemEntrada"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Porcentagem de Entrada (%)</FormLabel>
+                            <FormControl>
+                                <Input 
+                                    {...field} 
+                                    value={field.value ?? ""}
+                                    placeholder="Porcentagem de Entrada (%)" 
+                                    onChange={(e) => field.onChange(Number(e.target.value))}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="taxaJurosAnual"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Taxa de Juros Anual (%)</FormLabel>
+                            <FormControl>
+                                <Input 
+                                    {...field} 
+                                    value={field.value ?? ""}
+                                    placeholder="Taxa de Juros Anual (%)" 
+                                    onChange={(e) => field.onChange(Number(e.target.value))}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="prazoFinanciamento"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Prazo de Financiamento (meses)</FormLabel>
+                                <FormControl>
+                                    <Input {...field} type="number" placeholder="Prazo de Financiamento (meses)" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </>
+            )}
+
+
             <h6 className="font-semibold mb-4">Custos para arrematar</h6>
             <FormField
-            control={form.control}
-            name="comissaoLeiloeiro"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
-                <FormControl>
-                    <Input 
-                        {...field} 
-                        value={field.value ?? ""}
-                        placeholder="Comissão do leiloeiro" 
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                    />
-                </FormControl>
-                <FormMessage />
-                </FormItem>
-            )}
+                control={form.control}
+                name="comissaoLeiloeiro"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
+                    <FormControl>
+                        <Input 
+                            {...field} 
+                            value={field.value ?? ""}
+                            placeholder="Comissão do leiloeiro" 
+                            onChange={(e) => field.onChange(Number(e.target.value))}
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
             />
 
             <FormField

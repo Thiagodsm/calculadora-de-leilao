@@ -163,7 +163,7 @@ export default function CalculosLeilaoExtrajudicial() {
           </Card>
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2">
-          <Tabs defaultValue="financiado">
+          <Tabs defaultValue="avista">
             <div className="flex items-center">
               <TabsList>
                 <TabsTrigger value="avista">À Vista</TabsTrigger>
@@ -179,7 +179,7 @@ export default function CalculosLeilaoExtrajudicial() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <SimuladorImoveisForm onSubmit={handleFormSubmit} />
+                  <SimuladorImoveisForm onSubmit={handleFormSubmit} isFinanciado={true} />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -192,7 +192,7 @@ export default function CalculosLeilaoExtrajudicial() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <SimuladorImoveisForm onSubmit={handleFormSubmit} />
+                  <SimuladorImoveisForm onSubmit={handleFormSubmit} isFinanciado={false} />
                 </CardContent>
               </Card>
             </TabsContent>
