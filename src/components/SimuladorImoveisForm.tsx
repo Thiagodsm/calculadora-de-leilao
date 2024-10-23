@@ -1,5 +1,7 @@
 // PAREI TENTANDO PASSAR UM PARAMETRO A MAIS PARA O FORMULARIO PARA MOSTRAR OS CAMPOS PARA COMPRA FINANCIADA
 
+// e melhorando o codigo de modo geral. os metodos de calculos e separacao dos calculo a vista vs financiados
+
 import {
     Form,
     FormControl,
@@ -21,7 +23,7 @@ import {
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 interface SimuladorImoveisFormProps{
-    onSubmit: (data: CreateCalculaImoveisFormData) => void;
+    onSubmit: (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => void;
     isFinanciado: boolean;
 }
 
@@ -46,9 +48,14 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
         //mode: 'onChange',
     });
 
+    // Funcao para envolver o onSubmit e viabilizar o envio de isFinanciado
+    const handleSubmit = (data: CreateCalculaImoveisFormData) =>{
+        onSubmit(data, isFinanciado);
+    }
+
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
             <FormField
             control={form.control}
             name="valorArrematacao"

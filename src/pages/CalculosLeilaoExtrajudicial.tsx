@@ -53,11 +53,60 @@ export default function CalculosLeilaoExtrajudicial() {
     lucroLiquido: number;
   }
 
+  // Função para calcular custos de aquisição
+  const calcularCustosAquisicao = (data: CreateCalculaImoveisFormData) => {
+    const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
+    const valorITBI = (data.valorArrematacao * data.itbi) / 100;
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
+    return { valorComissaoLeiloeiro, valorITBI, totalCustosParciais };
+  };
+
+  // Função para calcular custos até a venda
+  const calcularCustosAteVenda = (data: CreateCalculaImoveisFormData) => {
+    const totalIptu = data.prazoVendaMeses * data.iptuMensal;
+    const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
+    const totalVenda = totalIptu + totalCondominio;
+    return { totalIptu, totalCondominio, totalVenda };
+  };
+
+  // Função para calcular despesas com a venda
+  const calcularDespesasVenda = (data: CreateCalculaImoveisFormData, totalInvestido: number) => {
+    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
+    const valorIR = ((data.valorVenda - data.valorReformas) - totalInvestido) * (data.ir / 100);
+    return { valorComissaoCorretor, valorIR };
+  };
+
+  // Função para calcular os valores finais e o lucro líquido
+  const calcularLucroLiquido = (data: CreateCalculaImoveisFormData, totalInvestido: number, totalCustosVenda: number) => {
+    const valorRealVenda = data.valorVenda - totalCustosVenda;
+    const lucroLiquido = valorRealVenda - totalInvestido;
+    return lucroLiquido;
+  };
+
   const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
 
-  const handleFormSubmit = (data: CreateCalculaImoveisFormData) => {
+  const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => {
     console.log("Dados do formulário: ", data);
 
+    // Cálculo dos custos de aquisição
+    const { valorComissaoLeiloeiro, valorITBI, totalCustosParciais } = calcularCustosAquisicao(data);
+    
+    // Cálculo dos custos até a venda
+    const { totalIptu, totalCondominio, totalVenda } = calcularCustosAteVenda(data);
+
+    // Total investido até a venda
+    const totalInvestido = data.valorArrematacao + totalCustosParciais + totalVenda;
+
+    // Cálculo das despesas de venda
+    const { valorComissaoCorretor, valorIR } = calcularDespesasVenda(data, totalInvestido);
+
+    // Cálculo do total de custos de venda
+    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;
+
+    // Cálculo do lucro líquido
+    const lucroLiquido = calcularLucroLiquido(data, totalInvestido, totalCustosVenda);
+
+/*
     // Calculo das despesas de aquisicao
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
@@ -83,7 +132,7 @@ export default function CalculosLeilaoExtrajudicial() {
 
     // Calculo do lucro liquido antes do imposto
     const lucroLiquido = valorRealVenda - totalInvestido;
-
+*/
 
     // Atualizando o estado com todos os resultados
     setResultados({
