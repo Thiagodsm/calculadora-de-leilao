@@ -44,7 +44,7 @@ export const formSchema = z.object({
     .coerce
     .number({ invalid_type_error: 'IR é obrigatório.' })
     .min(0, 'IR deve ser maior que zero.'),
-  porcentagemEntrada: z
+  porcEntradaFinanciamento: z
     .coerce
     .number(),
   taxaJurosAnual: z

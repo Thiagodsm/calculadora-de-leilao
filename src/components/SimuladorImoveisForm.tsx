@@ -32,7 +32,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
         resolver: zodResolver(formSchema),
         defaultValues: {
             valorArrematacao: 0,   
-            valorVenda: 0,         
+            valorVenda: 0,       
+            porcEntradaFinanciamento: 5,
+            prazoFinanciamento: 420,  
             comissaoLeiloeiro: 5,
             itbi: 3,
             registroImovel: 3471.96,
@@ -128,7 +130,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                     <h6 className="font-semibold mb-4">Valores do Financiamento</h6>
                     <FormField
                         control={form.control}
-                        name="porcentagemEntrada"
+                        name="porcEntradaFinanciamento"
                         render={({ field }) => (
                             <FormItem>
                             <FormLabel>Porcentagem de Entrada (%)</FormLabel>
