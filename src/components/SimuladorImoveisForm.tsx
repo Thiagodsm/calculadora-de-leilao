@@ -49,13 +49,13 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
     });
 
     // Funcao para envolver o onSubmit e viabilizar o envio de isFinanciado
-    const handleSubmit = (data: CreateCalculaImoveisFormData) =>{
+    const handleOnSubmit = (data: CreateCalculaImoveisFormData) =>{
         onSubmit(data, isFinanciado);
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-4">
             <FormField
             control={form.control}
             name="valorArrematacao"
