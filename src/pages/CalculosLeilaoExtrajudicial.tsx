@@ -1,3 +1,11 @@
+// FAZER CALCULOS SAC E PRICE E MOSTRAR OS VALORES COBRADOS ATE A VENDA DO IMOVEL
+
+// MANTER OS ESTADOS DOS COMPOENTES QUANDO TIVER ALTERAÇÃO DE ABAS A VISTA E FINANCIADA
+
+// DESENVOLVER METODO PARA EXPORTAR CALCULOS
+
+// FAZER CALCULOS PARA COMPRAS FINANCIADAS
+
 import {
   Card,
   CardContent,
@@ -37,6 +45,8 @@ export default function CalculosLeilaoExtrajudicial() {
     valorFinanciamento: number;
     taxaJurosAnual: number;
     prazoFinanciamento: number;
+    valorParcelasPrice: number;
+    valorParcelasSAC: number;
     /********************/
     comissaoLeiloeiro: number;
     valorComissaoLeiloeiro: number;
@@ -66,7 +76,7 @@ export default function CalculosLeilaoExtrajudicial() {
 
   const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => {
     console.log("Dados do formulário: ", data);
-    let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0;
+    let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorParcelasPrice = 0, valorParcelasSAC = 0;
 
     if(isFinanciado)
     {
@@ -112,6 +122,8 @@ export default function CalculosLeilaoExtrajudicial() {
       valorFinanciamento,
       taxaJurosAnual: data.taxaJurosAnual,
       prazoFinanciamento: data.prazoFinanciamento,
+      valorParcelasPrice,
+      valorParcelasSAC,
       /********************/
       comissaoLeiloeiro: data.comissaoLeiloeiro,
       valorComissaoLeiloeiro,
@@ -195,7 +207,7 @@ export default function CalculosLeilaoExtrajudicial() {
               </TabsList>
               <div className="ml-auto flex items-center gap-2">
                   <Button
-                    variant="outline"
+                    variant="destructive"
                     size="sm"
                     className="h-7 gap-1 text-sm"
                   >
