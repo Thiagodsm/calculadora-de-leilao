@@ -34,6 +34,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
             valorArrematacao: 0,   
             valorVenda: 0,       
             porcEntradaFinanciamento: 5,
+            taxaJurosAnual: 11,
             prazoFinanciamento: 420,  
             comissaoLeiloeiro: 5,
             itbi: 3,

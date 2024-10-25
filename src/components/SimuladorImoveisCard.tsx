@@ -2,7 +2,7 @@ import {
     ChartNoAxesCombinedIcon,
     Copy,
     PercentIcon,
-    TrendingDown,
+    ReceiptText,
     Wallet
 } from "lucide-react";
 import {
@@ -19,6 +19,16 @@ import { Button } from "../components/ui/button";
 type ResultadosSimulacaoType = {
     valorArrematacao: number;
     valorVenda: number;
+    /* compra financiada */
+    porcEntradaFinanciamento: number;
+    valorEntradaFinanciamento: number;
+    porcFinanciamento: number;
+    valorFinanciamento: number;
+    taxaJurosAnual: number;
+    prazoFinanciamento: number;
+    valorParcelasPrice: number;
+    valorParcelasSAC: number;
+    /********************/
     comissaoLeiloeiro: number;
     valorComissaoLeiloeiro: number;
     itbi: number;
@@ -33,7 +43,7 @@ type ResultadosSimulacaoType = {
     totalIptu: number;
     condominioMensal: number;
     totalCondominio: number;
-    totalVenda: number;
+    totalCustosAteVenda: number;
     comissaoCorretor: number;
     valorComissaoCorretor: number;
     ir: number;
@@ -45,12 +55,23 @@ type ResultadosSimulacaoType = {
 
 interface SimuladorImoveisCardProps {
     resultados: ResultadosSimulacaoType | null;
+    isFinanciado : boolean;
 }
 
-export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) {
+export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImoveisCardProps) {
     const {
         valorArrematacao = 0,
         valorVenda = 0,
+        /* compra financiada */
+        porcEntradaFinanciamento = 0,
+        valorEntradaFinanciamento = 0,
+        porcFinanciamento = 0,
+        valorFinanciamento = 0,
+        taxaJurosAnual = 0,
+        prazoFinanciamento = 0,
+        valorParcelasPrice = 0,
+        valorParcelasSAC = 0,
+        /********************/
         comissaoLeiloeiro = 0,
         valorComissaoLeiloeiro = 0,
         itbi = 0,
@@ -65,7 +86,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
         totalIptu = 0,
         condominioMensal = 0,
         totalCondominio = 0,
-        totalVenda = 0,
+        totalCustosAteVenda = 0,
         comissaoCorretor = 0,
         valorComissaoCorretor = 0,
         ir = 0,
@@ -75,6 +96,18 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
         lucroLiquido = 0,
     } = resultados || {}; // Fallback para um objeto vazio se resultados for null
 
+    // temporario so para gerar versao
+    if(isFinanciado){
+        console.log(porcEntradaFinanciamento,
+            valorEntradaFinanciamento,
+            porcFinanciamento,
+            valorFinanciamento,
+            taxaJurosAnual,
+            prazoFinanciamento,
+            valorParcelasPrice,
+            valorParcelasSAC);
+    }    
+    
     return (
         <Card className="overflow-hidden">
             <CardHeader className="flex flex-row items-start bg-muted/50">
@@ -94,7 +127,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                 </div>
                 <div className="ml-auto flex items-center gap-2">
                     <Button size="sm" variant="outline" className="h-8 gap-1">
-                        <TrendingDown className="h-3.5 w-3.5" />
+                        <ReceiptText className="h-3.5 w-3.5" />
                         <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
                             Custos
                         </span>
@@ -183,7 +216,7 @@ export function SimuladorImoveisCard({ resultados }: SimuladorImoveisCardProps) 
                         </li>
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
-                            <span>{totalVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            <span>{totalCustosAteVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
                 </div>

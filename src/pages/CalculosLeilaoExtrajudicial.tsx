@@ -62,7 +62,7 @@ export default function CalculosLeilaoExtrajudicial() {
     totalIptu: number;
     condominioMensal: number;
     totalCondominio: number;
-    totalVenda: number;
+    totalCustosAteVenda: number;
     comissaoCorretor: number;
     valorComissaoCorretor: number;
     ir: number;
@@ -93,13 +93,14 @@ export default function CalculosLeilaoExtrajudicial() {
     // Calculo custos ate a venda
     const totalIptu = data.prazoVendaMeses * data.iptuMensal;
     const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
-    const totalVenda = totalIptu + totalCondominio;    
+    const totalCustosAteVenda = totalIptu + totalCondominio;    
 
-    const totalInvestido = data.valorArrematacao + totalCustosParciais + totalVenda;
+    const totalInvestido = isFinanciado ?
+      totalCustosParciais + totalCustosAteVenda :
+      data.valorArrematacao + totalCustosParciais + totalCustosAteVenda;
 
     // Calculo das despesas com a venda
-    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
-    
+    const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;    
 
     // Calculo do imposto de renda (15% sobre o lucro liquido)
     const valorIR = ((data.valorVenda - data.valorReformas) - totalInvestido) * (data.ir / 100);
@@ -139,7 +140,7 @@ export default function CalculosLeilaoExtrajudicial() {
       totalIptu,
       condominioMensal: data.condominioMensal,
       totalCondominio,
-      totalVenda,
+      totalCustosAteVenda,
       comissaoCorretor: data.comissaoImobiliaria,
       valorComissaoCorretor,
       ir: data.ir,
@@ -151,6 +152,11 @@ export default function CalculosLeilaoExtrajudicial() {
   };
 
   console.log({resultados});
+
+  
+  const limparResultados = () =>{
+    setResultados(null)
+  }
 
   return (
     <>
@@ -175,11 +181,11 @@ export default function CalculosLeilaoExtrajudicial() {
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">
-                Custos da arremtação até a venda, com lucro bruto de: {resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.totalInvestido / resultados.valorVenda)) * 100).toFixed(2) : 0) : "0"}%
+                Custos da arrematação até a venda, com lucro bruto de: {resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.valorArrematacao / resultados.valorVenda)) * 100).toFixed(2) : 0) : "0"}%
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.totalInvestido / resultados.valorVenda)) * 100) : 0) : 0} aria-label="custos totais" />
+              <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.valorArrematacao / resultados.valorVenda)) * 100) : 0) : 0} aria-label="custos totais" />
             </CardFooter>
           </Card>
 
@@ -210,6 +216,7 @@ export default function CalculosLeilaoExtrajudicial() {
                     variant="destructive"
                     size="sm"
                     className="h-7 gap-1 text-sm"
+                    onClick={limparResultados}
                   >
                     <Eraser className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only">Limpar</span>
@@ -252,7 +259,7 @@ export default function CalculosLeilaoExtrajudicial() {
             </TabsContent>
           </Tabs>
           <div className="grid">
-            <SimuladorImoveisCard resultados={resultados} />
+            <SimuladorImoveisCard resultados={resultados} isFinanciado={true} />
           </div>
         </div>
       </div>
