@@ -25,6 +25,7 @@ type ResultadosSimulacaoType = {
     porcFinanciamento: number;
     valorFinanciamento: number;
     taxaJurosAnual: number;
+    taxaJurosMensal: number;
     prazoFinanciamento: number;
     valorParcelasPrice: number;
     valorParcelasSAC: number;
@@ -68,6 +69,7 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
         porcFinanciamento = 0,
         valorFinanciamento = 0,
         taxaJurosAnual = 0,
+        taxaJurosMensal = 0,
         prazoFinanciamento = 0,
         valorParcelasPrice = 0,
         valorParcelasSAC = 0,
@@ -98,14 +100,8 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
 
     // temporario so para gerar versao
     if(isFinanciado){
-        console.log(porcEntradaFinanciamento,
-            valorEntradaFinanciamento,
-            porcFinanciamento,
-            valorFinanciamento,
-            taxaJurosAnual,
-            prazoFinanciamento,
-            valorParcelasPrice,
-            valorParcelasSAC);
+        //console.log("Dados do card")
+        //console.log({resultados});
     }    
     
     return (
@@ -151,6 +147,50 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                             <span>{valorVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
                     </ul>
+                    {isFinanciado && (
+                        <>
+                            <Separator className="my-2" />
+                            <div className="font-semibold">Custos do financiamento</div>
+                            <ul className="grid gap-3">
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Porcentagem de entrada</span>
+                                <span>{porcEntradaFinanciamento} %</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Valor da entrada</span>
+                                <span>{valorEntradaFinanciamento.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Porcentagem financiada</span>
+                                <span>{porcFinanciamento} %</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Valor financiado</span>
+                                <span>{valorFinanciamento.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            </li>                            
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Prazo Financiamento</span>
+                                <span>{prazoFinanciamento} meses</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Taxa de Juros Anual</span>
+                                <span>{taxaJurosAnual} %</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Taxa de Juros Mensal</span>
+                                <span>{taxaJurosMensal.toFixed(2)} %</span>
+                            </li>
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Total Parcelas SAC</span>
+                                <span>{valorParcelasSAC.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            </li> 
+                            <li className="flex items-center justify-between">
+                                <span className="text-muted-foreground">Total Parcelas Price</span>
+                                <span>{valorParcelasPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            </li> 
+                         </ul>
+                        </>
+                    )}
                     <Separator className="my-2" />
                     <div className="font-semibold">Custos para arrematar</div>
                     <ul className="grid gap-3">
@@ -196,7 +236,7 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                     <ul className="grid gap-3">
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">Prazo de venda</span>
-                            <span>{prazoVenda} mese(s)</span>
+                            <span>{prazoVenda} meses</span>
                         </li>
                         <li className="flex items-center justify-between">
                             <span className="text-muted-foreground">IPTU mensal</span>

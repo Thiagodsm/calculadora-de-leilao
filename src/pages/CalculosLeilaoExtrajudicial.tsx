@@ -44,6 +44,7 @@ export default function CalculosLeilaoExtrajudicial() {
     porcFinanciamento: number;
     valorFinanciamento: number;
     taxaJurosAnual: number;
+    taxaJurosMensal: number;
     prazoFinanciamento: number;
     valorParcelasPrice: number;
     valorParcelasSAC: number;
@@ -75,14 +76,50 @@ export default function CalculosLeilaoExtrajudicial() {
   const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
 
   const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => {
-    console.log("Dados do formulário: ", data);
+    //console.log("Dados do formulário: ", data);
     let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorParcelasPrice = 0, valorParcelasSAC = 0;
+    let parcelasSAC: number[] = [], parcelasPrice: number[] = [];
 
     if(isFinanciado)
     {
-      valorEntradaFinanciamento = data.valorArrematacao * data.porcEntradaFinanciamento;
+      // Calcula o valor de entrada e valor financiado
+      valorEntradaFinanciamento = data.valorArrematacao * (data.porcEntradaFinanciamento / 100);
       porcFinanciamento = (1 - (data.porcEntradaFinanciamento / 100)) * 100;
-      valorFinanciamento = data.valorArrematacao * porcFinanciamento;
+      valorFinanciamento = data.valorArrematacao * (porcFinanciamento / 100);
+
+      // Calcula do financiamento com base da taxa de juros anual
+      const taxaJurosMensal = data.taxaJurosAnual / 12 / 100;
+
+      // Calculo SAC
+      const amortizacaoSAC = valorFinanciamento / data.prazoFinanciamento;
+      let saldoDevedor = valorFinanciamento;
+
+      for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
+        const jurosSAC = saldoDevedor * taxaJurosMensal;
+        const parcelaSAC = amortizacaoSAC + jurosSAC;
+        parcelasSAC.push(parcelaSAC); // Armazena todas as parcelas SAC
+        saldoDevedor -= amortizacaoSAC;
+
+        // Soma apenas os primeiros 12 meses para o valor total SAC
+        if (mes <= data.prazoVendaMeses) {
+          valorParcelasSAC += parcelaSAC;
+        }
+      }
+      console.log("Total SAC para 12 meses: " + valorParcelasSAC);
+
+      // Calculo Price
+      const parcelaFixaPrice = valorFinanciamento * 
+      (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));
+
+    for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
+      parcelasPrice.push(parcelaFixaPrice); // Armazena todas as parcelas Price
+      
+      // Soma apenas os primeiros 12 meses para o valor total Price
+      if (mes <= data.prazoVendaMeses) {
+        valorParcelasPrice += parcelaFixaPrice;
+      }
+    }
+    console.log("Total Price para 12 meses: " + valorParcelasPrice);
     }
 
     // Calculo das despesas de aquisicao
@@ -122,6 +159,7 @@ export default function CalculosLeilaoExtrajudicial() {
       porcFinanciamento,
       valorFinanciamento,
       taxaJurosAnual: data.taxaJurosAnual,
+      taxaJurosMensal: data.taxaJurosAnual / 12,
       prazoFinanciamento: data.prazoFinanciamento,
       valorParcelasPrice,
       valorParcelasSAC,

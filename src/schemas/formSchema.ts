@@ -53,4 +53,5 @@ export const formSchema = z.object({
   prazoFinanciamento: z
     .coerce  
     .number()
+    .min(1, 'O prazo de financiamento deve ser maior que zero')
 });
