@@ -19,7 +19,6 @@ import { Button } from "../components/ui/button";
 type ResultadosSimulacaoType = {
     valorArrematacao: number;
     valorVenda: number;
-    /* compra financiada */
     porcEntradaFinanciamento: number;
     valorEntradaFinanciamento: number;
     porcFinanciamento: number;
@@ -27,9 +26,8 @@ type ResultadosSimulacaoType = {
     taxaJurosAnual: number;
     taxaJurosMensal: number;
     prazoFinanciamento: number;
-    valorParcelasPrice: number;
-    valorParcelasSAC: number;
-    /********************/
+    valorTotalParcelasPrice: number;
+    valorTotalParcelasSAC: number;
     comissaoLeiloeiro: number;
     valorComissaoLeiloeiro: number;
     itbi: number;
@@ -63,7 +61,6 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
     const {
         valorArrematacao = 0,
         valorVenda = 0,
-        /* compra financiada */
         porcEntradaFinanciamento = 0,
         valorEntradaFinanciamento = 0,
         porcFinanciamento = 0,
@@ -71,9 +68,8 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
         taxaJurosAnual = 0,
         taxaJurosMensal = 0,
         prazoFinanciamento = 0,
-        valorParcelasPrice = 0,
-        valorParcelasSAC = 0,
-        /********************/
+        valorTotalParcelasPrice = 0,
+        valorTotalParcelasSAC = 0,
         comissaoLeiloeiro = 0,
         valorComissaoLeiloeiro = 0,
         itbi = 0,
@@ -96,13 +92,7 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
         totalCustosVenda = 0,
         totalInvestido = 0,
         lucroLiquido = 0,
-    } = resultados || {}; // Fallback para um objeto vazio se resultados for null
-
-    // temporario so para gerar versao
-    if(isFinanciado){
-        //console.log("Dados do card")
-        //console.log({resultados});
-    }    
+    } = resultados || {}; 
     
     return (
         <Card className="overflow-hidden">
@@ -179,15 +169,7 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                             <li className="flex items-center justify-between">
                                 <span className="text-muted-foreground">Taxa de Juros Mensal</span>
                                 <span>{taxaJurosMensal.toFixed(2)} %</span>
-                            </li>
-                            <li className="flex items-center justify-between">
-                                <span className="text-muted-foreground">Total Parcelas SAC</span>
-                                <span>{valorParcelasSAC.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
-                            </li> 
-                            <li className="flex items-center justify-between">
-                                <span className="text-muted-foreground">Total Parcelas Price</span>
-                                <span>{valorParcelasPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
-                            </li> 
+                            </li>                          
                          </ul>
                         </>
                     )}
@@ -254,10 +236,26 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                             <span className="text-muted-foreground">Total condominio</span>
                             <span>{totalCondominio.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                         </li>
+                        {valorTotalParcelasSAC > 0 &&
+                            <>
+                                <li className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">Total Parcelas SAC</span>
+                                    <span>{valorTotalParcelasSAC.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                                </li>
+                            </> 
+                        }
+                        {valorTotalParcelasPrice > 0 &&
+                            <>
+                                <li className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">Total Parcelas Price</span>
+                                    <span>{valorTotalParcelasPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                                </li> 
+                            </>
+                        } 
                         <li className="flex items-center justify-between font-semibold">
                             <span className="text-muted-foreground">Total</span>
                             <span>{totalCustosAteVenda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
                 <Separator className="my-4" />

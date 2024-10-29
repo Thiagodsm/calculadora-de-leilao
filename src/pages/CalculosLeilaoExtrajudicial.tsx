@@ -1,10 +1,6 @@
-// FAZER CALCULOS SAC E PRICE E MOSTRAR OS VALORES COBRADOS ATE A VENDA DO IMOVEL
-
-// MANTER OS ESTADOS DOS COMPOENTES QUANDO TIVER ALTERAÇÃO DE ABAS A VISTA E FINANCIADA
-
 // DESENVOLVER METODO PARA EXPORTAR CALCULOS
 
-// FAZER CALCULOS PARA COMPRAS FINANCIADAS
+// FAZER CALCULOS PARA COMPRAS FINANCIADAS - TERMINAR O CALCULO DOS TOTAIS
 
 import {
   Card,
@@ -38,7 +34,6 @@ export default function CalculosLeilaoExtrajudicial() {
   type ResultadosSimulacaoType = {
     valorArrematacao: number;
     valorVenda: number;
-    /* compra financiada */
     porcEntradaFinanciamento: number;
     valorEntradaFinanciamento: number;
     porcFinanciamento: number;
@@ -46,9 +41,8 @@ export default function CalculosLeilaoExtrajudicial() {
     taxaJurosAnual: number;
     taxaJurosMensal: number;
     prazoFinanciamento: number;
-    valorParcelasPrice: number;
-    valorParcelasSAC: number;
-    /********************/
+    valorTotalParcelasPrice: number;
+    valorTotalParcelasSAC: number;
     comissaoLeiloeiro: number;
     valorComissaoLeiloeiro: number;
     itbi: number;
@@ -74,10 +68,15 @@ export default function CalculosLeilaoExtrajudicial() {
   }
 
   const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
+  const [isFinanciado, setIsFinanciado] = useState(true); // true = financiado
 
-  const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => {
+  const handleTabChange = (value: string) =>{
+    setIsFinanciado(value === "financiado");
+  }
+
+  const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean, tipoFinanciamento: string) => {
     //console.log("Dados do formulário: ", data);
-    let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorParcelasPrice = 0, valorParcelasSAC = 0;
+    let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorTotalParcelasPrice = 0, valorTotalParcelasSAC = 0;
     let parcelasSAC: number[] = [], parcelasPrice: number[] = [];
 
     if(isFinanciado)
@@ -90,36 +89,43 @@ export default function CalculosLeilaoExtrajudicial() {
       // Calcula do financiamento com base da taxa de juros anual
       const taxaJurosMensal = data.taxaJurosAnual / 12 / 100;
 
-      // Calculo SAC
-      const amortizacaoSAC = valorFinanciamento / data.prazoFinanciamento;
-      let saldoDevedor = valorFinanciamento;
+      //console.log({tipoFinanciamento});
 
-      for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
-        const jurosSAC = saldoDevedor * taxaJurosMensal;
-        const parcelaSAC = amortizacaoSAC + jurosSAC;
-        parcelasSAC.push(parcelaSAC); // Armazena todas as parcelas SAC
-        saldoDevedor -= amortizacaoSAC;
+      if(tipoFinanciamento === "sac"){
+        // Calculo SAC
+        const amortizacaoSAC = valorFinanciamento / data.prazoFinanciamento;
+        let saldoDevedor = valorFinanciamento;
 
-        // Soma apenas os primeiros 12 meses para o valor total SAC
-        if (mes <= data.prazoVendaMeses) {
-          valorParcelasSAC += parcelaSAC;
+        for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
+          const jurosSAC = saldoDevedor * taxaJurosMensal;
+          const parcelaSAC = amortizacaoSAC + jurosSAC;
+          parcelasSAC.push(parcelaSAC); // Armazena todas as parcelas SAC
+          saldoDevedor -= amortizacaoSAC;
+
+          // Soma apenas os primeiros 12 meses para o valor total SAC
+          if (mes <= data.prazoVendaMeses) {
+            valorTotalParcelasSAC += parcelaSAC;
+          }
         }
+        //console.log("Valor total SAC: " + valorTotalParcelasSAC);
       }
-      console.log("Total SAC para 12 meses: " + valorParcelasSAC);
+      else{
+        // Calculo Price
+        const parcelaFixaPrice = valorFinanciamento * 
+        (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));
 
-      // Calculo Price
-      const parcelaFixaPrice = valorFinanciamento * 
-      (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));
+        //console.log({parcelaFixaPrice});
 
-    for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
-      parcelasPrice.push(parcelaFixaPrice); // Armazena todas as parcelas Price
-      
-      // Soma apenas os primeiros 12 meses para o valor total Price
-      if (mes <= data.prazoVendaMeses) {
-        valorParcelasPrice += parcelaFixaPrice;
+        for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
+          parcelasPrice.push(parcelaFixaPrice); // Armazena todas as parcelas Price
+          
+          // Soma apenas os primeiros 12 meses para o valor total Price
+          if (mes <= data.prazoVendaMeses) {
+            valorTotalParcelasPrice += parcelaFixaPrice;
+          }
+          //console.log("Valor total Price: " + valorTotalParcelasPrice);
+        }      
       }
-    }
-    console.log("Total Price para 12 meses: " + valorParcelasPrice);
     }
 
     // Calculo das despesas de aquisicao
@@ -128,9 +134,12 @@ export default function CalculosLeilaoExtrajudicial() {
     const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
 
     // Calculo custos ate a venda
+    const totalParcFinanciamento = isFinanciado && tipoFinanciamento === "price" ? valorTotalParcelasPrice : 
+    isFinanciado && tipoFinanciamento === "sac" ? valorTotalParcelasSAC : 0; 
+
     const totalIptu = data.prazoVendaMeses * data.iptuMensal;
     const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
-    const totalCustosAteVenda = totalIptu + totalCondominio;    
+    const totalCustosAteVenda = totalIptu + totalCondominio + totalParcFinanciamento;    
 
     const totalInvestido = isFinanciado ?
       totalCustosParciais + totalCustosAteVenda :
@@ -144,7 +153,7 @@ export default function CalculosLeilaoExtrajudicial() {
     const valorRealVenda = data.valorVenda - valorComissaoCorretor - valorIR;
 
     // Calculo do total investido
-    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR; 
+    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;  
 
     // Calculo do lucro liquido antes do imposto
     const lucroLiquido = valorRealVenda - totalInvestido;
@@ -153,7 +162,6 @@ export default function CalculosLeilaoExtrajudicial() {
     setResultados({
       valorArrematacao: data.valorArrematacao,
       valorVenda: data.valorVenda,
-      /* compra financiada */
       porcEntradaFinanciamento: data.porcEntradaFinanciamento,
       valorEntradaFinanciamento,
       porcFinanciamento,
@@ -161,9 +169,8 @@ export default function CalculosLeilaoExtrajudicial() {
       taxaJurosAnual: data.taxaJurosAnual,
       taxaJurosMensal: data.taxaJurosAnual / 12,
       prazoFinanciamento: data.prazoFinanciamento,
-      valorParcelasPrice,
-      valorParcelasSAC,
-      /********************/
+      valorTotalParcelasPrice,
+      valorTotalParcelasSAC,
       comissaoLeiloeiro: data.comissaoLeiloeiro,
       valorComissaoLeiloeiro,
       itbi: data.itbi,
@@ -188,12 +195,10 @@ export default function CalculosLeilaoExtrajudicial() {
       lucroLiquido,
     });
   };
+  //console.log({resultados});  
 
-  console.log({resultados});
-
-  
   const limparResultados = () =>{
-    setResultados(null)
+    setResultados(null);
   }
 
   return (
@@ -243,7 +248,7 @@ export default function CalculosLeilaoExtrajudicial() {
           </Card>
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2">
-          <Tabs defaultValue="avista">
+          <Tabs defaultValue="financiado" onValueChange={handleTabChange}>
             <div className="flex items-center">
               <TabsList>
                 <TabsTrigger value="avista">À Vista</TabsTrigger>
@@ -263,6 +268,7 @@ export default function CalculosLeilaoExtrajudicial() {
                     size="sm"
                     variant="outline"
                     className="h-7 gap-1 text-sm"
+                    disabled
                   >
                     <File className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only">Exportar</span>
@@ -297,7 +303,7 @@ export default function CalculosLeilaoExtrajudicial() {
             </TabsContent>
           </Tabs>
           <div className="grid">
-            <SimuladorImoveisCard resultados={resultados} isFinanciado={true} />
+            <SimuladorImoveisCard resultados={resultados} isFinanciado={isFinanciado} />
           </div>
         </div>
       </div>

@@ -19,15 +19,20 @@ import {
   import { z } from "zod";
   import { formSchema } from "../schemas/formSchema";
   import CurrencyInput from "react-currency-input-field";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Label } from "./ui/label";
+import { useState } from "react";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
 interface SimuladorImoveisFormProps{
-    onSubmit: (data: CreateCalculaImoveisFormData, isFinanciado: boolean) => void;
+    onSubmit: (data: CreateCalculaImoveisFormData, isFinanciado: boolean, tipoFinanciamento: string) => void;
     isFinanciado: boolean;
 }
 
 export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImoveisFormProps) {
+    const [tipoFinanciamento, setTipoFinanciamento] = useState("price");
+
     const form = useForm<CreateCalculaImoveisFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -53,9 +58,10 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
 
     // Funcao para envolver o onSubmit e viabilizar o envio de isFinanciado
     const handleOnSubmit = (data: CreateCalculaImoveisFormData) =>{
-        onSubmit(data, isFinanciado);
+        onSubmit(data, isFinanciado, tipoFinanciamento);
     }
 
+    //console.log({isFinanciado});
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-4">
@@ -180,6 +186,22 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             </FormItem>
                         )}
                     />
+                    <div>
+                        <Label>Forma de Financiamento</Label>
+                        <RadioGroup 
+                            className="mt-2" 
+                            value={tipoFinanciamento}
+                            onValueChange={setTipoFinanciamento}
+                        >
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="price" id="price">Price</RadioGroupItem>
+                                <Label htmlFor="r1">Price</Label>
+
+                                <RadioGroupItem value="sac" id="sac">SAC</RadioGroupItem>
+                                <Label htmlFor="r2">SAC</Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
                 </>
             )}
 
