@@ -28,6 +28,8 @@ type ResultadosSimulacaoType = {
     prazoFinanciamento: number;
     valorTotalParcelasPrice: number;
     valorTotalParcelasSAC: number;
+    saldoDevedorPrice: number;
+    saldoDevedorSAC: number;
     comissaoLeiloeiro: number;
     valorComissaoLeiloeiro: number;
     itbi: number;
@@ -70,6 +72,8 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
         prazoFinanciamento = 0,
         valorTotalParcelasPrice = 0,
         valorTotalParcelasSAC = 0,
+        saldoDevedorPrice = 0,
+        saldoDevedorSAC = 0,
         comissaoLeiloeiro = 0,
         valorComissaoLeiloeiro = 0,
         itbi = 0,
@@ -288,6 +292,20 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                         </li>
                     </ul>
                 </div>
+                {isFinanciado &&
+                    <>
+                    <Separator className="my-4" />
+                    <div className="grid gap-3">
+                        <div>Saldo Devedor do Financiamento</div>
+                        <ul className="grid gap-3">
+                            <li className="flex items-center justify-between font-semibold">
+                                <span className="text-muted-foreground">Total ({ saldoDevedorPrice !== 0 ? "Price" : "SAC" })</span>
+                                <span>{(saldoDevedorPrice !== 0 ? saldoDevedorPrice : saldoDevedorSAC).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    </>
+                }
                 <Separator className="my-4" />
                 <div className="mb-4 font-semibold">Resultados</div>
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">

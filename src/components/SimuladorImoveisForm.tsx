@@ -31,7 +31,7 @@ interface SimuladorImoveisFormProps{
 }
 
 export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImoveisFormProps) {
-    const [tipoFinanciamento, setTipoFinanciamento] = useState("price");
+    const [tipoFinanciamento, setTipoFinanciamento] = useState("sac");
 
     const form = useForm<CreateCalculaImoveisFormData>({
         resolver: zodResolver(formSchema),
