@@ -97,10 +97,9 @@ export default function CalculosLeilaoExtrajudicial() {
         for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
           const jurosSAC = saldoDevedor * taxaJurosMensal;
           const parcelaSAC = amortizacaoSAC + jurosSAC;
-          parcelasSAC.push(parcelaSAC); // Armazena todas as parcelas SAC
+          parcelasSAC.push(parcelaSAC);
           saldoDevedor -= amortizacaoSAC;
 
-          // Soma apenas os primeiros 12 meses para o valor total SAC
           if (mes <= data.prazoVendaMeses) {
             valorTotalParcelasSAC += parcelaSAC;
           }
@@ -113,9 +112,8 @@ export default function CalculosLeilaoExtrajudicial() {
         (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));
 
         for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
-          parcelasPrice.push(parcelaFixaPrice); // Armazena todas as parcelas Price
+          parcelasPrice.push(parcelaFixaPrice); 
           
-          // Soma apenas os primeiros 12 meses para o valor total Price
           if (mes <= data.prazoVendaMeses) {
             valorTotalParcelasPrice += parcelaFixaPrice;
           }
@@ -150,12 +148,9 @@ export default function CalculosLeilaoExtrajudicial() {
     // Calculo do total investido
     const totalCustosVenda = valorComissaoCorretor + valorIR;
     
-    console.log({totalInvestido});
-    console.log({totalCustosVenda});
     // Calculo do lucro liquido antes do imposto
     const lucroLiquido = data.valorVenda - totalInvestido - totalCustosVenda 
     - (isFinanciado && tipoFinanciamento === "price" ? saldoDevedorPrice : isFinanciado && tipoFinanciamento === "sac" ? saldoDevedorSAC : 0);
-    console.log({lucroLiquido});
 
     function calcularSaldoDevedorPrice(valorFinanciado: number, prazoTotalMeses: number, taxaJurosMensal: number, parcelasPagas: number ): number
     {
@@ -172,7 +167,6 @@ export default function CalculosLeilaoExtrajudicial() {
       // Amortização constante no sistema SAC
       const amortizacao = parseFloat((valorFinanciado / prazoTotalMeses).toFixed(2));
   
-      // Saldo devedor inicial
       let saldoDevedor = valorFinanciado - amortizacao;
   
       // Itera por cada parcela paga
@@ -181,9 +175,8 @@ export default function CalculosLeilaoExtrajudicial() {
       }
   
       return saldoDevedor;  
-  }
+    }
 
-    // Atualizando o estado com todos os resultados
     setResultados({
       valorArrematacao: data.valorArrematacao,
       valorVenda: data.valorVenda,
