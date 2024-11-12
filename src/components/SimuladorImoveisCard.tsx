@@ -299,7 +299,7 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                         <div>Saldo Devedor do Financiamento</div>
                         <ul className="grid gap-3">
                             <li className="flex items-center justify-between font-semibold">
-                                <span className="text-muted-foreground">Total ({ saldoDevedorPrice !== 0 ? "Price" : "SAC" })</span>
+                                <span className="text-muted-foreground">Total ({ saldoDevedorPrice !== 0 ? "Price" : "SAC" }) - pago com a venda</span>
                                 <span>{(saldoDevedorPrice !== 0 ? saldoDevedorPrice : saldoDevedorSAC).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                             </li>
                         </ul>

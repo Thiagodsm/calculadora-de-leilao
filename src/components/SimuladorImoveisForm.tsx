@@ -41,7 +41,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
             porcEntradaFinanciamento: 5,
             taxaJurosAnual: 11,
             prazoFinanciamento: 420,  
-            comissaoLeiloeiro: 5,
+            comissaoLeiloeiro: 0,
             itbi: 3,
             registroImovel: 3350 /*3471.96*/,
             comissaoImobiliaria: 6,
@@ -60,8 +60,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
     const handleOnSubmit = (data: CreateCalculaImoveisFormData) =>{
         onSubmit(data, isFinanciado, tipoFinanciamento);
     }
-
-    //console.log({isFinanciado});
+    
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-4">

@@ -1,7 +1,3 @@
-// DESENVOLVER METODO PARA EXPORTAR CALCULOS
-
-// FAZER CALCULOS PARA COMPRAS FINANCIADAS - TERMINAR O CALCULO DOS TOTAIS
-
 import {
   Card,
   CardContent,
@@ -77,7 +73,6 @@ export default function CalculosLeilaoExtrajudicial() {
   }
 
   const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean, tipoFinanciamento: string) => {
-    //console.log("Dados do formulário: ", data);
     let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorTotalParcelasPrice = 0, valorTotalParcelasSAC = 0;
     let saldoDevedorPrice = 0, saldoDevedorSAC = 0;
     let parcelasSAC: number[] = [], parcelasPrice: number[] = [];
@@ -97,6 +92,8 @@ export default function CalculosLeilaoExtrajudicial() {
         const amortizacaoSAC = valorFinanciamento / data.prazoFinanciamento;
         let saldoDevedor = valorFinanciamento;
 
+        saldoDevedor -= amortizacaoSAC;
+
         for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
           const jurosSAC = saldoDevedor * taxaJurosMensal;
           const parcelaSAC = amortizacaoSAC + jurosSAC;
@@ -108,22 +105,12 @@ export default function CalculosLeilaoExtrajudicial() {
             valorTotalParcelasSAC += parcelaSAC;
           }
         }
-        
-        console.log({taxaJurosMensal});
-        console.log("prazo financiamento: " + data.prazoFinanciamento);
-        console.log({valorFinanciamento});
-        saldoDevedorSAC = calcularSaldoDevedorSAC(valorFinanciamento, data.prazoFinanciamento, taxaJurosMensal, data.prazoVendaMeses);
-        console.log("meses até a venda: " +  data.prazoVendaMeses);
-        console.log({saldoDevedorSAC});
+        saldoDevedorSAC = calcularSaldoDevedorSAC(valorFinanciamento, data.prazoFinanciamento, data.prazoVendaMeses);
       }
       else{
         // Calculo Price
-        console.log({valorFinanciamento});
-        console.log({taxaJurosMensal});
-        console.log("prazo financiamento: " + data.prazoFinanciamento);
         const parcelaFixaPrice = valorFinanciamento * 
         (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));
-        console.log({parcelaFixaPrice});
 
         for (let mes = 1; mes <= data.prazoFinanciamento; mes++) {
           parcelasPrice.push(parcelaFixaPrice); // Armazena todas as parcelas Price
@@ -133,8 +120,6 @@ export default function CalculosLeilaoExtrajudicial() {
             valorTotalParcelasPrice += parcelaFixaPrice;
           }
           saldoDevedorPrice = calcularSaldoDevedorPrice(valorFinanciamento, data.prazoFinanciamento, taxaJurosMensal, data.prazoVendaMeses);
-          console.log("meses até a venda: " +  data.prazoVendaMeses);
-          console.log({saldoDevedorPrice});
         }      
       }
     }
@@ -142,7 +127,7 @@ export default function CalculosLeilaoExtrajudicial() {
     // Calculo das despesas de aquisicao
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
-    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos;
+    const totalCustosParciais = valorComissaoLeiloeiro + valorITBI + data.registroImovel + data.gastosDesocupacao + data.valorReformas + data.valorOutrosGastos + valorEntradaFinanciamento;
 
     // Calculo custos ate a venda
     const totalParcFinanciamento = isFinanciado && tipoFinanciamento === "price" ? valorTotalParcelasPrice : 
@@ -150,28 +135,27 @@ export default function CalculosLeilaoExtrajudicial() {
 
     const totalIptu = data.prazoVendaMeses * data.iptuMensal;
     const totalCondominio = data.prazoVendaMeses * data.condominioMensal;
-    const totalCustosAteVenda = totalIptu + totalCondominio + totalParcFinanciamento;    
+    const totalCustosAteVenda = totalIptu + totalCondominio + totalParcFinanciamento; 
 
-    const totalInvestido = data.valorArrematacao + totalCustosParciais + totalCustosAteVenda;
-
-      console.log({totalInvestido});
     // Calculo das despesas com a venda
     const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;    
 
-    // Calculo do imposto de renda (15% sobre o lucro liquido)
-    const valorIR = isFinanciado ? data.valorVenda - totalInvestido * (data.ir / 100) :
-                  (data.valorVenda - totalInvestido) * (data.ir / 100);
+    const totalInvestido = !isFinanciado ? data.valorArrematacao + totalCustosParciais + totalCustosAteVenda : 
+      totalCustosParciais + totalCustosAteVenda;
 
-    // PAREI TENTAR FAZER O CALCULO DO LUCRO LIQUIDO PARA IMOVEL FINANCIADO                  
-    const valorRealVenda = data.valorVenda - valorComissaoCorretor - valorIR 
-          - (isFinanciado && tipoFinanciamento == "sac" ? saldoDevedorSAC : isFinanciado && tipoFinanciamento == "price" ? saldoDevedorPrice : 0);
-    console.log({valorRealVenda});
+    // Calculo do imposto de renda (15% sobre o lucro liquido)
+    const valorIR = (data.valorVenda - totalInvestido - valorComissaoCorretor 
+      - (isFinanciado && tipoFinanciamento === "price" ? saldoDevedorPrice : isFinanciado && tipoFinanciamento === "sac" ? saldoDevedorSAC : 0)) * (data.ir / 100);
 
     // Calculo do total investido
-    const totalCustosVenda = totalCustosParciais + valorComissaoCorretor + valorIR;  
-
+    const totalCustosVenda = valorComissaoCorretor + valorIR;
+    
+    console.log({totalInvestido});
+    console.log({totalCustosVenda});
     // Calculo do lucro liquido antes do imposto
-    const lucroLiquido = valorRealVenda - totalInvestido;
+    const lucroLiquido = data.valorVenda - totalInvestido - totalCustosVenda 
+    - (isFinanciado && tipoFinanciamento === "price" ? saldoDevedorPrice : isFinanciado && tipoFinanciamento === "sac" ? saldoDevedorSAC : 0);
+    console.log({lucroLiquido});
 
     function calcularSaldoDevedorPrice(valorFinanciado: number, prazoTotalMeses: number, taxaJurosMensal: number, parcelasPagas: number ): number
     {
@@ -184,24 +168,16 @@ export default function CalculosLeilaoExtrajudicial() {
       return saldoDevedor; 
     }
 
-    function calcularSaldoDevedorSAC(valorFinanciado: number, prazoTotalMeses: number, taxaJurosMensal: number, parcelasPagas: number): number {
+    function calcularSaldoDevedorSAC(valorFinanciado: number, prazoTotalMeses: number, parcelasPagas: number): number {
       // Amortização constante no sistema SAC
       const amortizacao = parseFloat((valorFinanciado / prazoTotalMeses).toFixed(2));
   
       // Saldo devedor inicial
-      let saldoDevedor = valorFinanciado;
+      let saldoDevedor = valorFinanciado - amortizacao;
   
       // Itera por cada parcela paga
-      for (let i = 0; i < parcelasPagas; i++) {
-          // Calcula o valor dos juros com base no saldo devedor atual
-          const jurosParcela = parseFloat((saldoDevedor * taxaJurosMensal).toFixed(2));
-          console.log({amortizacao});
-          console.log({jurosParcela});
-          console.log("Parcela: " + (amortizacao + jurosParcela));
-  
-          // Subtrai a amortização e os juros da parcela atual do saldo devedor
-          saldoDevedor -= (amortizacao + jurosParcela);
-          console.log({saldoDevedor});
+      for (let i = 0; i < parcelasPagas; i++) {  
+          saldoDevedor -= amortizacao;
       }
   
       return saldoDevedor;  
@@ -246,7 +222,6 @@ export default function CalculosLeilaoExtrajudicial() {
       lucroLiquido,
     });
   };
-  //console.log({resultados});  
 
   const limparResultados = () =>{
     setResultados(null);
