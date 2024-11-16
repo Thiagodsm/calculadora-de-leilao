@@ -13,7 +13,10 @@ import {
   differenceInHours,
   differenceInMinutes,
   differenceInSeconds,
+  isAfter,
+  isBefore,
 } from "date-fns";
+import { Eraser } from "lucide-react";
 
 const DateCalculator = () => {
   const [startDate, setStartDate] = useState<string>("");
@@ -28,7 +31,13 @@ const DateCalculator = () => {
       // Calculos utilizando date-fns
       const totalDays = differenceInDays(end, start);
       const totalBusinessDays = differenceInBusinessDays(end, start);
-      const totalWeekends = eachWeekendOfInterval({ start, end }).length;
+      const weekends = eachWeekendOfInterval({end, start});
+      const totalWeekends = 
+        weekends.filter(
+          (weekend) =>
+            isAfter(weekend, start) &&
+            isBefore(weekend, end)
+      ).length;
       const totalWeeks = differenceInWeeks(end, start);
       const totalMonths = differenceInMonths(end, start);
       const totalYears = differenceInYears(end, start);
@@ -51,6 +60,12 @@ const DateCalculator = () => {
     }
   };
 
+  const limparResultados = () =>{
+    setStartDate("");
+    setEndDate("");
+    setResults(null);
+  }
+
   return (
     <section id="calculadora">
       <Card>
@@ -61,32 +76,48 @@ const DateCalculator = () => {
           <CardDescription className="py-2 mb-4">
             Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira as datas de início e fim para fazer o cálculo.
           </CardDescription>
-          <div className="flex flex-col gap-4">
-            <Label htmlFor="start-date">Data inicial</Label>
-            <Input
-              type="date"
-              id="start-date"
-              className="dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
-              value={startDate}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setStartDate(e.target.value)
-              }
-              placeholder="Data inicial"
-            />
-            <Label htmlFor="end-date">Data final</Label>
-            <Input
-              type="date"
-              id="end-date"
-              className="dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
-              value={endDate}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEndDate(e.target.value)
-              }
-              placeholder="Data de final"
-            />
-            <Button onClick={handleCalculate}>Calcular</Button>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4 gap-2">
+            <div className="flex-1">
+              <Label htmlFor="start-date">Data inicial</Label>
+              <Input
+                type="datetime-local"
+                id="start-date"
+                className="  dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+                value={startDate}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setStartDate(e.target.value)
+                }
+                placeholder="Data inicial"
+              />
+            </div>
+            <div className="flex-1">
+              <Label htmlFor="end-date">Data final</Label>
+              <Input
+                type="datetime-local"
+                id="end-date"
+                className="dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+                value={endDate}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEndDate(e.target.value)
+                }
+                placeholder="Data de final"
+              />
+            </div>
+            <div className="ml-auto flex gap-2 h-[44px] py-4">
+              <Button onClick={handleCalculate}>Calcular</Button>
+              <Button
+                    variant="destructive"
+                    className="gap-1"
+                    onClick={limparResultados}
+                  >
+                    <Eraser className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only">Limpar</span>
+                  </Button>
+            </div>
+          </div>
+
             {results && (
-              <div className="mt-2 space-y-1">
+              <div className="mt-5 space-y-1">
                 <p>Total de dias: {results.totalDays}</p>
                 <p>Total de dias úteis: {results.totalBusinessDays}</p>
                 <p>Total de finais de semana: {results.totalWeekends}</p>
@@ -98,7 +129,6 @@ const DateCalculator = () => {
                 <p>Total em segundos: {results.totalSeconds}</p>
               </div>
             )}
-          </div>
         </CardContent>
         <CardFooter>
           {/* Footer do Card pode ser usado para adicionar informações adicionais */}
