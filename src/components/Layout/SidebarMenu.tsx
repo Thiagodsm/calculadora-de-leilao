@@ -50,7 +50,7 @@ export default function SidebarMenu() {
       label: "Relógio mundial",
       name: "Horario no mundo",
       icon: <Earth size={15} className="mr-2" />,
-      href: "/",
+      href: "/relogio-mundial",
     },
     {
       label: "Fases da lua",
