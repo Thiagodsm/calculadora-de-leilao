@@ -1,5 +1,5 @@
 import Providers from "./Provider";
-import { TooltipProvider } from "../components/ui/tooltip";
+import { TooltipProvider } from "../ui/tooltip";
 import SidebarMenu from "./SidebarMenu";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";

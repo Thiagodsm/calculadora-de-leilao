@@ -10,17 +10,17 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-  } from "../components/ui/form"
-  import { Input } from "../components/ui/input"
-  import { Button } from "../components/ui/button";
+  } from "../ui/form"
+  import { Input } from "../ui/input"
+  import { Button } from "../ui/button";
   
   import { zodResolver } from "@hookform/resolvers/zod";
   import { useForm } from "react-hook-form";
   import { z } from "zod";
-  import { formSchema } from "../schemas/formSchema";
+  import { formSchema } from "../../schemas/formSchema";
   import CurrencyInput from "react-currency-input-field";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Label } from "../ui/label";
 import { useState } from "react";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
@@ -145,7 +145,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                                     {...field} 
                                     value={field.value ?? ""}
                                     placeholder="Porcentagem de Entrada (%)" 
-                                    onChange={(e) => field.onChange(Number(e.target.value))}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(",", ".");
+                                        if (!isNaN(Number(value))) {
+                                            field.onChange(value);
+                                        }
+                                    }}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -164,7 +169,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                                     {...field} 
                                     value={field.value ?? ""}
                                     placeholder="Taxa de Juros Anual (%)" 
-                                    onChange={(e) => field.onChange(Number(e.target.value))}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(",", ".");
+                                        if (!isNaN(Number(value))) {
+                                            field.onChange(value);
+                                        }
+                                    }}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -217,7 +227,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             {...field} 
                             value={field.value ?? ""}
                             placeholder="Comissão do leiloeiro" 
-                            onChange={(e) => field.onChange(Number(e.target.value))}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(",", ".");
+                                if (!isNaN(Number(value))) {
+                                    field.onChange(value);
+                                }
+                            }}
                         />
                     </FormControl>
                     <FormMessage />
@@ -236,7 +251,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         {...field} 
                         value={field.value ?? ""}
                         placeholder="ITBI" 
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value.replace(",", ".");
+                            if (!isNaN(Number(value))) {
+                                field.onChange(value);
+                            }
+                        }}
                     />
                 </FormControl>
                 <FormDescription>

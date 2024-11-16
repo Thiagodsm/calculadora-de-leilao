@@ -1,5 +1,5 @@
 
-import { ThemeProvider } from '../components/ui/theme-provider';
+import { ThemeProvider } from '../ui/theme-provider';
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 
 export type ThemeProps = {

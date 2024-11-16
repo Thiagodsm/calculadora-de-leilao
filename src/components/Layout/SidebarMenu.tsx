@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus, Coins } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet"; 
-import { Input } from "./ui/input";
-import { Button } from "../components/ui/button"; 
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"; 
+import { Input } from "../ui/input";
+import { Button } from "../ui/button"; 
 import { DarkModeSwitch} from 'react-toggle-dark-mode';
-import { useTheme } from "./ui/theme-provider";
+import { useTheme } from "../ui/theme-provider";
 
 type Menu = {
   label: string
