@@ -52,60 +52,58 @@ const DateCalculator = () => {
   };
 
   return (
-    <section id="calculadora" className="py-4">
-      <div className="container mx-auto">
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl font-bold">Calculadora de Datas</h2>
-          </CardHeader>
-          <CardContent>
-            <CardDescription className="py-2 mb-4">
-              Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira as datas de início e fim para fazer o cálculo.
-            </CardDescription>
-            <div className="flex flex-col gap-4">
-              <Label htmlFor="start-date">Data inicial</Label>
-              <Input
-                type="date"
-                id="start-date"
-                className="dark:text-white dark:focus:ring-white"
-                value={startDate}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setStartDate(e.target.value)
-                }
-                placeholder="Data inicial"
-              />
-              <Label htmlFor="end-date">Data final</Label>
-              <Input
-                type="date"
-                id="end-date"
-                className="dark:text-white dark:focus:ring-white"
-                value={endDate}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setEndDate(e.target.value)
-                }
-                placeholder="Data de final"
-              />
-              <Button onClick={handleCalculate}>Calcular</Button>
-              {results && (
-                <div className="mt-2 space-y-1">
-                  <p>Total de dias: {results.totalDays}</p>
-                  <p>Total de dias úteis: {results.totalBusinessDays}</p>
-                  <p>Total de finais de semana: {results.totalWeekends}</p>
-                  <p>Total em semanas: {results.totalWeeks}</p>
-                  <p>Total em meses: {results.totalMonths}</p>
-                  <p>Total em anos: {results.totalYears}</p>
-                  <p>Total em horas: {results.totalHours}</p>
-                  <p>Total em minutos: {results.totalMinutes}</p>
-                  <p>Total em segundos: {results.totalSeconds}</p>
-                </div>
-              )}
-            </div>
-          </CardContent>
-          <CardFooter>
-            {/* Footer do Card pode ser usado para adicionar informações adicionais */}
-          </CardFooter>
-        </Card>
-      </div>
+    <section id="calculadora">
+      <Card>
+        <CardHeader>
+          <h2 className="text-xl font-bold">Calculadora de Datas</h2>
+        </CardHeader>
+        <CardContent>
+          <CardDescription className="py-2 mb-4">
+            Esta calculadora tem por objetivo simplificar sua vida na hora de fazer calculos com datas. Insira as datas de início e fim para fazer o cálculo.
+          </CardDescription>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="start-date">Data inicial</Label>
+            <Input
+              type="date"
+              id="start-date"
+              className="dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+              value={startDate}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setStartDate(e.target.value)
+              }
+              placeholder="Data inicial"
+            />
+            <Label htmlFor="end-date">Data final</Label>
+            <Input
+              type="date"
+              id="end-date"
+              className="dark:text-white dark:focus:ring-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+              value={endDate}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEndDate(e.target.value)
+              }
+              placeholder="Data de final"
+            />
+            <Button onClick={handleCalculate}>Calcular</Button>
+            {results && (
+              <div className="mt-2 space-y-1">
+                <p>Total de dias: {results.totalDays}</p>
+                <p>Total de dias úteis: {results.totalBusinessDays}</p>
+                <p>Total de finais de semana: {results.totalWeekends}</p>
+                <p>Total em semanas: {results.totalWeeks}</p>
+                <p>Total em meses: {results.totalMonths}</p>
+                <p>Total em anos: {results.totalYears}</p>
+                <p>Total em horas: {results.totalHours}</p>
+                <p>Total em minutos: {results.totalMinutes}</p>
+                <p>Total em segundos: {results.totalSeconds}</p>
+              </div>
+            )}
+          </div>
+        </CardContent>
+        <CardFooter>
+          {/* Footer do Card pode ser usado para adicionar informações adicionais */}
+        </CardFooter>
+      </Card>
     </section>
   );
 };

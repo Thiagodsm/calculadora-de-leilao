@@ -50,7 +50,7 @@ const HolidayList: React.FC = () => {
 
   return (
     <section id="holidays" className="py-10">
-      <div className="container mx-auto">
+      <div className="mx-auto">
 
         <h2 className="text-xl font-bold mb-4">
           Feriados de {new Date().getFullYear()} no Brasil
