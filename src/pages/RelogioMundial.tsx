@@ -36,7 +36,7 @@ export default function RelogioMundial() {
       <div>
         <Select onValueChange={(value) => setContinent(value)}>
           <SelectTrigger className="w-full">
-            <span>{continent || "Select Continent"}</span>
+            <span>{continent || "Selcione o Continente"}</span>
           </SelectTrigger>
           <SelectContent>
             {continents.map((c) => (
@@ -53,7 +53,7 @@ export default function RelogioMundial() {
         <div>
           <Select onValueChange={(value) => setCity(value)}>
             <SelectTrigger className="w-full">
-              <span>{city || "Select City"}</span>
+              <span>{city || "Selecione a Cidade"}</span>
             </SelectTrigger>
             <SelectContent>
               {cities[continent as keyof typeof cities]?.map((city: string) => (
