@@ -103,7 +103,7 @@ const DateCalculator = () => {
                 placeholder="Data de final"
               />
             </div>
-            <div className="ml-auto flex gap-2 h-[44px] py-4">
+            <div className="flex-1 flex gap-2 h-[44px] py-4">  
               <Button onClick={handleCalculate}>Calcular</Button>
               <Button
                     variant="destructive"

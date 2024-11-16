@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Select, SelectTrigger, SelectContent, SelectItem } from "../components/ui/select";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../components/ui/card";
 
+//  AJUSTAR RETORNOS, TESTAR PARA CONTINENTES SEM CIDADES, TENTAR MOSTRAR UMA IMAGEM REFERENTE AO CONTINENTE SELECIONADO
+
 const continents = [
   "Africa", "America", "Antarctica", "Arctic", "Asia", "Atlantic", "Australia", "Europe", "Etc",
 ];
