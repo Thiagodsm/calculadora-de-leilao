@@ -285,9 +285,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                                 if (value === undefined || value === "") {
                                     field.onChange(""); 
                                 } else {
-                                    // Remove pontos e substitui a vírgula por ponto
-                                    const numericValue = value.replace(/\./g, "").replace(",", ".");
-                                    field.onChange(parseFloat(numericValue));
+                                    field.onChange(value);
                                 }
                             }}
                         />
