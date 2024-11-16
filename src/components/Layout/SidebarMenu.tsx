@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus, Coins } from "lucide-react";
+import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus, Coins, House } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"; 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button"; 
@@ -16,6 +16,12 @@ type Menu = {
 
 export default function SidebarMenu() {
   const menus: Menu[] = [
+    {
+      label: "Início",
+      name: "Início",
+      icon: <House size={15} className="mr-2" />,
+      href: "/",
+    },
     {
         label: "Cálculos de Leilão Extrajudicial",
         name: "Calculadora para leilão extrajudicial",
