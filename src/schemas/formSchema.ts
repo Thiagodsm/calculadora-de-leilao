@@ -10,6 +10,7 @@ export const formSchema = z.object({
     .number({ invalid_type_error: 'Valor de venda é obrigatório.' })
     .min(0, 'Valor de venda deve ser maior que zero.'),
   comissaoLeiloeiro: z
+    .coerce
     .number(),
   itbi: z
     .coerce

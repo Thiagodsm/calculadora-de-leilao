@@ -1,7 +1,3 @@
-// PAREI TENTANDO PASSAR UM PARAMETRO A MAIS PARA O FORMULARIO PARA MOSTRAR OS CAMPOS PARA COMPRA FINANCIADA
-
-// e melhorando o codigo de modo geral. os metodos de calculos e separacao dos calculo a vista vs financiados
-
 import {
     Form,
     FormControl,
@@ -9,16 +5,16 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
-  } from "../ui/form"
-  import { Input } from "../ui/input"
-  import { Button } from "../ui/button";
+    FormMessage,    
+} from "../ui/form"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button";
   
-  import { zodResolver } from "@hookform/resolvers/zod";
-  import { useForm } from "react-hook-form";
-  import { z } from "zod";
-  import { formSchema } from "../../schemas/formSchema";
-  import CurrencyInput from "react-currency-input-field";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { formSchema } from "../../schemas/formSchema";
+import CurrencyInput from "react-currency-input-field";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useState } from "react";
@@ -79,8 +75,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -114,8 +110,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             prefix="R$ "
                             value={field.value || ""}
                             decimalsLimit={2}
-                            decimalSeparator=","
-                            groupSeparator="."
+                            decimalSeparator="."
+                            groupSeparator=","
                             disableGroupSeparators={false}
                             allowNegativeValue={false}
                             onValueChange={(value) => {
@@ -281,8 +277,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             prefix="R$ "
                             value={field.value || ""}
                             decimalsLimit={2}
-                            decimalSeparator=","
-                            groupSeparator="."
+                            decimalSeparator="."
+                            groupSeparator=","
                             disableGroupSeparators={false}
                             allowNegativeValue={false}
                             onValueChange={(value) => {
@@ -315,8 +311,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -350,8 +346,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -383,8 +379,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -434,8 +430,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -467,8 +463,8 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         prefix="R$ "
                         value={field.value || ""}
                         decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
+                        decimalSeparator="."
+                        groupSeparator=","
                         disableGroupSeparators={false}
                         allowNegativeValue={false}
                         onValueChange={(value) => {
@@ -497,7 +493,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         {...field} 
                         value={field.value ?? ""}
                         placeholder="Comissão da Imobiliária" 
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value.replace(",", ".");
+                            if (!isNaN(Number(value))) {
+                                field.onChange(value);
+                            }
+                        }}
                     />
                 </FormControl>
                 <FormMessage />
@@ -516,7 +517,12 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                         {...field} 
                         value={field.value ?? ""}
                         placeholder="Imposto de Renda" 
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value.replace(",", ".");
+                            if (!isNaN(Number(value))) {
+                                field.onChange(value);
+                            }
+                        }}
                     />
                 </FormControl>
                 <FormMessage />
