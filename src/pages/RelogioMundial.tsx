@@ -2,17 +2,19 @@ import { useState, useEffect } from "react";
 import { Select, SelectTrigger, SelectContent, SelectItem } from "../components/ui/select";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../components/ui/card";
 
+import { continents } from "../schemas/continents";
+import { cities } from '../schemas/cities';
+
 //  AJUSTAR RETORNOS, TESTAR PARA CONTINENTES SEM CIDADES, TENTAR MOSTRAR UMA IMAGEM REFERENTE AO CONTINENTE SELECIONADO
 
-const continents = [
-  "Africa", "America", "Antarctica", "Arctic", "Asia", "Atlantic", "Australia", "Europe", "Etc",
-];
-
-const cities: Record<string, string[]> = {
-  Africa: ["Abidjan", "Accra", "Addis_Ababa", "Algiers", "Cairo"],
-  America: ["New_York", "Los_Angeles", "Sao_Paulo", "Mexico_City", "Buenos_Aires"],
-  Asia: ["Tokyo", "Seoul", "Shanghai", "Mumbai", "Singapore"],
-  Europe: ["London", "Paris", "Berlin", "Madrid", "Rome"],
+const daysOfWeek: Record<string, string> = {
+  Monday: "Segunda-feira",
+  Tuesday: "Terça-feira",
+  Wednesday: "Quarta-feira",
+  Thursday: "Quinta-feira",
+  Friday: "Sexta-feira",
+  Saturday: "Sábado",
+  Sunday: "Domingo",
 };
 
 export default function RelogioMundial() {
@@ -32,7 +34,6 @@ export default function RelogioMundial() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Select Continents */}
       <div>
         <Select onValueChange={(value) => setContinent(value)}>
           <SelectTrigger className="w-full">
@@ -41,7 +42,7 @@ export default function RelogioMundial() {
           <SelectContent>
             {continents.map((c) => (
               <SelectItem key={c} value={c}>
-                {c}
+                {c.replace("_", " ")}
               </SelectItem>
             ))}
           </SelectContent>
@@ -71,7 +72,7 @@ export default function RelogioMundial() {
         <Card>
           <CardHeader>
             <CardTitle>Horário atual na cidade de: {city.replace("_", " ")}</CardTitle>
-            <CardDescription>Fuso Horário: {timeData.timeZone.replace("_", " ")}</CardDescription>
+            <CardDescription>Fuso Horário: {timeData.timeZone?.replace("_", " ")}</CardDescription>
           </CardHeader>
           <CardContent>
             <p>
@@ -81,7 +82,7 @@ export default function RelogioMundial() {
               <strong>Horário:</strong> {timeData.time}
             </p>
             <p>
-              <strong>Dia da semana:</strong> {timeData.dayOfWeek}
+              <strong>Dia da semana:</strong> {daysOfWeek[timeData.dayOfWeek] || timeData.dayOfWeek}
             </p>
             <p>
               <strong>Horário de Verão:</strong> {timeData.dstActive ? "Sim" : "Não"}

@@ -18,7 +18,7 @@ export default function SidebarMenu() {
   const menus: Menu[] = [
     {
       label: "Início",
-      name: "Início",
+      name: "Home",
       icon: <House size={15} className="mr-2" />,
       href: "/",
     },
@@ -96,7 +96,7 @@ export default function SidebarMenu() {
             <TooltipContent side="right">Início</TooltipContent>
           </Tooltip>
         
-          {menus.map((menu) => (
+          {menus.slice(1).map((menu) => (
             <Tooltip key={menu.name}>
               <TooltipTrigger asChild>
                 <Link
