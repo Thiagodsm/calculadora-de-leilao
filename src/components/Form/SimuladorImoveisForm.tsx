@@ -18,6 +18,7 @@ import CurrencyInput from "react-currency-input-field";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useState } from "react";
+import MoneyInput from "../MoneyInput";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
@@ -32,7 +33,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
     const form = useForm<CreateCalculaImoveisFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            valorArrematacao: 0,   
+            //valorArrematacao: 0,   
             valorVenda: 0,       
             porcEntradaFinanciamento: 5,
             taxaJurosAnual: 11,
@@ -67,26 +68,10 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Valor de Arrematação</FormLabel>
                 <FormControl>
-                    <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="valorArrematacao"
-                        name={field.name}
-                        placeholder="Valor de arrematação"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange(""); 
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
-                        />
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
+                    />
                 </FormControl>
                 <FormDescription>
                     Valor de arrematação do imóvel
@@ -102,25 +87,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                     <FormItem>
                     <FormLabel>Valor de Venda</FormLabel>
                     <FormControl >
-                        <CurrencyInput
-                            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                            id="valorVenda"
-                            name={field.name}
-                            placeholder="Valor de venda"
-                            prefix="R$ "
-                            value={field.value || ""}
-                            decimalsLimit={2}
-                            decimalSeparator="."
-                            groupSeparator=","
-                            disableGroupSeparators={false}
-                            allowNegativeValue={false}
-                            onValueChange={(value) => {
-                                if (value === undefined || value === "") {
-                                    field.onChange("");
-                                } else {
-                                    field.onChange(value);
-                                }
-                            }}
+                        <MoneyInput 
+                            value={field.value}
+                            onChange={field.onChange}
                         />
                     </FormControl>
                     <FormMessage />
@@ -137,16 +106,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             <FormItem>
                             <FormLabel>Porcentagem de Entrada (%)</FormLabel>
                             <FormControl>
-                                <Input 
-                                    {...field} 
-                                    value={field.value ?? ""}
-                                    placeholder="Porcentagem de Entrada (%)" 
-                                    onChange={(e) => {
-                                        const value = e.target.value.replace(",", ".");
-                                        if (!isNaN(Number(value))) {
-                                            field.onChange(value);
-                                        }
-                                    }}
+                                <MoneyInput 
+                                    value={field.value}
+                                    onChange={field.onChange}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -161,16 +123,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                             <FormItem>
                             <FormLabel>Taxa de Juros Anual (%)</FormLabel>
                             <FormControl>
-                                <Input 
-                                    {...field} 
-                                    value={field.value ?? ""}
-                                    placeholder="Taxa de Juros Anual (%)" 
-                                    onChange={(e) => {
-                                        const value = e.target.value.replace(",", ".");
-                                        if (!isNaN(Number(value))) {
-                                            field.onChange(value);
-                                        }
-                                    }}
+                                <MoneyInput 
+                                    value={field.value}
+                                    onChange={field.onChange}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -219,16 +174,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                     <FormItem>
                     <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
                     <FormControl>
-                        <Input 
-                            {...field} 
-                            value={field.value ?? ""}
-                            placeholder="Comissão do leiloeiro" 
-                            onChange={(e) => {
-                                const value = e.target.value.replace(",", ".");
-                                if (!isNaN(Number(value))) {
-                                    field.onChange(value);
-                                }
-                            }}
+                        <MoneyInput 
+                            value={field.value}
+                            onChange={field.onChange}
                         />
                     </FormControl>
                     <FormMessage />
@@ -243,16 +191,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>ITBI (%)</FormLabel>
                 <FormControl>
-                    <Input 
-                        {...field} 
-                        value={field.value ?? ""}
-                        placeholder="ITBI" 
-                        onChange={(e) => {
-                            const value = e.target.value.replace(",", ".");
-                            if (!isNaN(Number(value))) {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormDescription>
@@ -269,25 +210,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                     <FormItem>
                     <FormLabel>Valor do Registro do Imóvel</FormLabel>
                     <FormControl>
-                        <CurrencyInput
-                            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                            id="registroImovel"
-                            name={field.name}
-                            placeholder="Registro do imóvel"
-                            prefix="R$ "
-                            value={field.value || ""}
-                            decimalsLimit={2}
-                            decimalSeparator="."
-                            groupSeparator=","
-                            disableGroupSeparators={false}
-                            allowNegativeValue={false}
-                            onValueChange={(value) => {
-                                if (value === undefined || value === "") {
-                                    field.onChange(""); 
-                                } else {
-                                    field.onChange(value);
-                                }
-                            }}
+                        <MoneyInput 
+                            value={field.value}
+                            onChange={field.onChange}
                         />
                     </FormControl>
                     <FormMessage />
@@ -301,25 +226,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Gastos com Desocupação</FormLabel>
                 <FormControl>
-                    <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="gastosDesocupacao"
-                        name={field.name}
-                        placeholder="Gastos com a desocupação"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange("");
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormDescription>
@@ -336,25 +245,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Reformas</FormLabel>
                 <FormControl>
-                <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="valorReformas"
-                        name={field.name}
-                        placeholder="Reformas"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange("");
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />
@@ -369,25 +262,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Outros Gastos</FormLabel>
                 <FormControl>
-                    <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="valorOutrosGastos"
-                        name={field.name}
-                        placeholder="Outros gastos"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange("");
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />
@@ -420,25 +297,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>IPTU Mensal</FormLabel>
                 <FormControl>
-                    <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="iptuMensal"
-                        name={field.name}
-                        placeholder="IPTU mensal"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange("");
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />
@@ -453,25 +314,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Condomínio mensal</FormLabel>
                 <FormControl>
-                    <CurrencyInput
-                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                        id="iptuMensal"
-                        name={field.name}
-                        placeholder="Condomínio mensal"
-                        prefix="R$ "
-                        value={field.value || ""}
-                        decimalsLimit={2}
-                        decimalSeparator="."
-                        groupSeparator=","
-                        disableGroupSeparators={false}
-                        allowNegativeValue={false}
-                        onValueChange={(value) => {
-                            if (value === undefined || value === "") {
-                                field.onChange("");
-                            } else {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />
@@ -487,16 +332,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Comissão da Imobiliária (%)</FormLabel>
                 <FormControl>
-                    <Input 
-                        {...field} 
-                        value={field.value ?? ""}
-                        placeholder="Comissão da Imobiliária" 
-                        onChange={(e) => {
-                            const value = e.target.value.replace(",", ".");
-                            if (!isNaN(Number(value))) {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />
@@ -511,16 +349,9 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                 <FormItem>
                 <FormLabel>Imposto de Renda (%)</FormLabel>
                 <FormControl>
-                    <Input 
-                        {...field} 
-                        value={field.value ?? ""}
-                        placeholder="Imposto de Renda" 
-                        onChange={(e) => {
-                            const value = e.target.value.replace(",", ".");
-                            if (!isNaN(Number(value))) {
-                                field.onChange(value);
-                            }
-                        }}
+                    <MoneyInput 
+                        value={field.value}
+                        onChange={field.onChange}
                     />
                 </FormControl>
                 <FormMessage />

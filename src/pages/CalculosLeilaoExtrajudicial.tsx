@@ -77,6 +77,8 @@ export default function CalculosLeilaoExtrajudicial() {
     let saldoDevedorPrice = 0, saldoDevedorSAC = 0;
     let parcelasSAC: number[] = [], parcelasPrice: number[] = [];
 
+    console.log(data.valorArrematacao);
+
     if(isFinanciado)
     {
       // Calcula o valor de entrada e valor financiado
@@ -247,7 +249,7 @@ export default function CalculosLeilaoExtrajudicial() {
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.valorArrematacao / resultados.valorVenda)) * 100) : 0) : 0} aria-label="custos totais" />
+              <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ( Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) : 0) : 0} aria-label="custos totais" />
             </CardFooter>
           </Card>
 

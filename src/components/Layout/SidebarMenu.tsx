@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Home, Gavel, Briefcase, PanelLeft, Search, Earth, Utensils, MoonStar, ChartLine, CalendarPlus, Coins, House } from "lucide-react";
+import { Home, Gavel, PanelLeft, Search, House } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"; 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button"; 
@@ -28,48 +28,12 @@ export default function SidebarMenu() {
         icon: <Gavel size={15} className="mr-2" />,
         href: "/calculos-leilao-extrajudicial",
     },
-    {
+    /*{
       label: "Cálculos Trabalhistas",
       name: "Calculadora para processos trabalhistas",
       icon: <Briefcase size={15} className="mr-2" />,
       href: "/",
-    },
-    {
-        label: "Cálculos Financeiros",
-        name: "Calculadora financeira",
-        icon: <ChartLine size={15} className="mr-2" />,
-        href: "/",
-    },
-    {
-      label: "Cálculos com Datas",
-      name: "Calculadora para datas",
-      icon: <CalendarPlus size={15} className="mr-2" />,
-      href: "/calculos-datas",
-    },
-    {
-      label: "Cálculos de Calorias",
-      name: "Calculadora para quantidade de calorias",
-      icon: <Utensils size={15} className="mr-2" />,
-      href: "/",
-    },
-    {
-      label: "Relógio mundial",
-      name: "Horario no mundo",
-      icon: <Earth size={15} className="mr-2" />,
-      href: "/relogio-mundial",
-    },
-    {
-      label: "Fases da lua",
-      name: "Lua hoje",
-      icon: <MoonStar size={15} className="mr-2" />,
-      href: "/",
-    },
-    {
-      label: "Conversão de moedas",
-      name: "Converso de moedas",
-      icon: <Coins size={15} className="mr-2" />,
-      href: "/conversao-moedas",
-    },
+    },*/
 ];
 
   const {theme, setTheme} = useTheme();
@@ -142,6 +106,7 @@ export default function SidebarMenu() {
         <div className="relative ml-auto flex-1 md:grow-0">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
+            disabled
             type="search"
             placeholder="Pesquisar..."
             className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
