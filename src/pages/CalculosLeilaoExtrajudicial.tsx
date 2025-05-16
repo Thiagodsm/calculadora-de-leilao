@@ -264,7 +264,14 @@ export default function CalculosLeilaoExtrajudicial() {
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100) : 0) : 0} aria-label="porcentagem do lucro líquido" />
+              <Progress 
+                value={
+                  resultados && resultados.totalInvestido !== 0 
+                    ? Math.min((resultados.lucroLiquido / resultados.totalInvestido) * 100, 100) 
+                    : 0
+                } 
+                aria-label="porcentagem do lucro líquido" 
+              />
             </CardFooter>
           </Card>
         </div>
