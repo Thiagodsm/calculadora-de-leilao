@@ -15,13 +15,14 @@ import {
 import { Progress } from "../components/ui/progress";
 import { Button } from "../components/ui/button";
 
-import { SimuladorImoveisForm } from "../components/Form/SimuladorImoveisForm";
+import { SimuladorImoveisForm, SimuladorImoveisRef } from "../components/Form/SimuladorImoveisForm";
 
 import { useState } from "react";
 import { formSchema } from "../schemas/formSchema";
 import { z } from "zod";
 import { SimuladorImoveisCard } from "../components/SimuladorImoveisCard";
 import { File, Eraser } from "lucide-react";
+import { useRef } from "react";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
 
@@ -65,6 +66,7 @@ export default function CalculosLeilaoExtrajudicial() {
     lucroLiquido: number;
   }
 
+  const formRef = useRef<SimuladorImoveisRef>(null);
   const [resultados, setResultados] = useState<ResultadosSimulacaoType | null>(null);
   const [isFinanciado, setIsFinanciado] = useState(true); // true = financiado como tab padrao
 
@@ -72,12 +74,15 @@ export default function CalculosLeilaoExtrajudicial() {
     setIsFinanciado(value === "financiado");
   }
 
+  const limparResultados = () =>{
+    formRef.current?.resetForm();
+    setResultados(null);
+  }
+
   const handleFormSubmit = (data: CreateCalculaImoveisFormData, isFinanciado: boolean, tipoFinanciamento: string) => {
     let valorEntradaFinanciamento = 0, porcFinanciamento = 0, valorFinanciamento = 0, valorTotalParcelasPrice = 0, valorTotalParcelasSAC = 0;
     let saldoDevedorPrice = 0, saldoDevedorSAC = 0;
     let parcelasSAC: number[] = [], parcelasPrice: number[] = [];
-
-    console.log(data.valorArrematacao);
 
     if(isFinanciado)
     {
@@ -218,10 +223,6 @@ export default function CalculosLeilaoExtrajudicial() {
     });
   };
 
-  const limparResultados = () =>{
-    setResultados(null);
-  }
-
   return (
     <>
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -312,7 +313,7 @@ export default function CalculosLeilaoExtrajudicial() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <SimuladorImoveisForm onSubmit={handleFormSubmit} isFinanciado={true} />
+                  <SimuladorImoveisForm ref={formRef} onSubmit={handleFormSubmit} isFinanciado={true} />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -325,7 +326,7 @@ export default function CalculosLeilaoExtrajudicial() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <SimuladorImoveisForm onSubmit={handleFormSubmit} isFinanciado={false} />
+                  <SimuladorImoveisForm ref={formRef} onSubmit={handleFormSubmit} isFinanciado={false} />
                 </CardContent>
               </Card>
             </TabsContent>

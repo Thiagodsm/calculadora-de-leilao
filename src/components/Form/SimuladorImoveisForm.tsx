@@ -18,15 +18,21 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useState } from "react";
 import MoneyInput from "../MoneyInput";
+import { forwardRef, useImperativeHandle } from "react";
 
 type CreateCalculaImoveisFormData = z.infer<typeof formSchema>;
+
+export type SimuladorImoveisRef = {
+    resetForm: () => void;
+};
 
 interface SimuladorImoveisFormProps{
     onSubmit: (data: CreateCalculaImoveisFormData, isFinanciado: boolean, tipoFinanciamento: string) => void;
     isFinanciado: boolean;
 }
 
-export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImoveisFormProps) {
+export const SimuladorImoveisForm = forwardRef<SimuladorImoveisRef, SimuladorImoveisFormProps>(
+    ({ onSubmit, isFinanciado }, ref) => {
     const [tipoFinanciamento, setTipoFinanciamento] = useState("sac");
 
     const form = useForm<CreateCalculaImoveisFormData>({
@@ -35,7 +41,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
             //valorArrematacao: 0,   
             valorVenda: 0,       
             porcEntradaFinanciamento: 5,
-            taxaJurosAnual: 11,
+            taxaJurosAnual: 0,
             prazoFinanciamento: 420,  
             comissaoLeiloeiro: 5,
             itbi: 3,
@@ -43,7 +49,7 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
             comissaoImobiliaria: 6,
             ir: 15,
             gastosDesocupacao: 0,
-            valorReformas: 3500,
+            valorReformas: 3000,
             valorOutrosGastos: 0,
             prazoVendaMeses: 12,
             iptuMensal: 0,
@@ -52,7 +58,13 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
         //mode: 'onChange',
     });
 
-    // Funcao para envolver o onSubmit e viabilizar o envio de isFinanciado
+    useImperativeHandle(ref, () => ({
+        resetForm: () =>{
+            form.reset();
+            setTipoFinanciamento("sac");
+        }
+    }));
+
     const handleOnSubmit = (data: CreateCalculaImoveisFormData) =>{
         onSubmit(data, isFinanciado, tipoFinanciamento);
     }
@@ -163,7 +175,6 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
                     </div>
                 </>
             )}
-
 
             <h6 className="font-semibold mb-4">Custos para arrematar</h6>
             <FormField
@@ -363,3 +374,4 @@ export function SimuladorImoveisForm({ onSubmit, isFinanciado }: SimuladorImovei
         </Form>
     )
 }
+);
