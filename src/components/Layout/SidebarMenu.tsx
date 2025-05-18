@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Home, Gavel, PanelLeft, Search, House } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"; 
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"; 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button"; 
 import { DarkModeSwitch} from 'react-toggle-dark-mode';
@@ -44,7 +44,6 @@ export default function SidebarMenu() {
 
   return (
     <>
-      {/* Sidebar for large screens */}
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <Tooltip key="home">
@@ -77,17 +76,19 @@ export default function SidebarMenu() {
         </nav>
       </aside>
 
-      {/* Sheet for small screens */}
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
         <Sheet>
           <SheetTrigger asChild>
             <Button size="icon" variant="outline" className="sm:hidden">
               <PanelLeft className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="sm:max-w-xs">
+            <SheetHeader>
+              <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>Calculadoras</SheetDescription>
+            </SheetHeader>
             <nav className="grid gap-6 text-lg font-medium">
               {menus.map((menu) => (
                 <Link

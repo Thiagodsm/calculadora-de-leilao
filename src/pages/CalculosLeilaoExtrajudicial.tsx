@@ -226,11 +226,11 @@ export default function CalculosLeilaoExtrajudicial() {
   return (
     <>
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <Card className="sm:col-span-2">
             <CardHeader className="pb-3">
               <CardTitle>Cálculos de Leilão de Extrajudicial</CardTitle>
-              <CardDescription className="text-balance leading-relaxed">
+              <CardDescription className="leading-relaxed">
                 O leilão extrajudicial é um processo que permite vender imóveis que foram dados como garantia em empréstimos que não foram pagos. O leilão é mais rápido e barato do que um processo judicial e pode oferecer imóveis a preços mais baixos do que o valor de mercado.
               </CardDescription>
             </CardHeader>
@@ -276,7 +276,7 @@ export default function CalculosLeilaoExtrajudicial() {
             </CardFooter>
           </Card>
         </div>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2">
+        <div className="grid md:grid-cols-1 gap-4 lg:grid-cols-2">
           <Tabs defaultValue="financiado" onValueChange={handleTabChange}>
             <div className="flex items-center">
               <TabsList>

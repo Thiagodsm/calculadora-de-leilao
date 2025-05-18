@@ -15,6 +15,7 @@ import {
 } from "../components/ui/card";
 import { Separator } from "../components/ui/separator";
 import { Button } from "../components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/ui/tooltip";
 
 type ResultadosSimulacaoType = {
     valorArrematacao: number;
@@ -309,38 +310,64 @@ export function SimuladorImoveisCard({ resultados, isFinanciado }: SimuladorImov
                 <Separator className="my-4" />
                 <div className="mb-4 font-semibold">Resultados</div>
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-                    {/* Custos */}
-                    <dl className="flex flex-col">
-                        <div className="flex items-center gap-1">
-                            <Wallet className="h-5 w-5" />
-                            <span>Custos</span>
-                        </div>
-                        <dd className="font-semibold">
-                            {totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
-                        </dd>
-                    </dl>
 
-                    {/* Lucro Líquido */}
-                    <dl className="flex flex-col">
-                        <div className="flex items-center gap-1">
-                            <ChartNoAxesCombinedIcon className="h-4 w-4" />
-                            <span>Lucro Líquido</span>
-                        </div>
-                        <dd className="font-semibold">
-                            {lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
-                        </dd>
-                    </dl>
+                <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="flex flex-col cursor-help">
+                                    <div className="flex items-center gap-1">
+                                        <Wallet className="h-5 w-5" />
+                                        <span>Custos</span>
+                                    </div>
+                                    <span className="font-semibold">
+                                    {totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                                    </span>
+                                </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Custos totais considerando: valor de entrada, comissão do leiloeiro, ITBI, registro, desocupação, reformas, outros gastos, IPTU e condominio pagos até o momneto da venda.
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
 
-                    {/* % Lucro */}
-                    <dl className="flex flex-col">
-                        <div className="flex items-center gap-1">
-                            <PercentIcon className="h-4 w-4" />
-                            <span>Lucro Líquido</span>
-                        </div>
-                        <dd className="font-semibold">
-                            {( totalInvestido !== 0 ? ((lucroLiquido / totalInvestido) * 100).toFixed(2) : 0)}%
-                        </dd>
-                    </dl>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="flex flex-col cursor-help">
+                                    <div className="flex items-center gap-1">
+                                        <ChartNoAxesCombinedIcon className="h-4 w-4" />
+                                        <span>Lucro Líquido</span>
+                                    </div>
+                                    <span className="font-semibold">
+                                        {lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                                    </span>
+                                </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Lucro líquido considerando: valor de venda menos custos total + saldo devedor (em caso de compra financiada), já descontado - comissão da imobiliária e IR
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <div className="flex flex-col cursor-help">
+                                    <div className="flex items-center gap-1">
+                                        <PercentIcon className="h-4 w-4" />
+                                        <span>Lucro Líquido</span>
+                                    </div>
+                                    <span className="font-semibold">
+                                        {( totalInvestido !== 0 ? ((lucroLiquido / totalInvestido) * 100).toFixed(2) : 0)}%
+                                    </span>
+                                </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Porcentagem de lucro líquido 
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </div>
             </CardContent>
             <CardFooter className="space-x-2">
