@@ -84,12 +84,12 @@ export default function SidebarMenu() {
               <PanelLeft className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="sm:max-w-xs">
+          <SheetContent side="left" className="w-[360px] max-w-full flex flex-col justify-content">
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
-              <SheetDescription>Calculadoras</SheetDescription>
+              <SheetDescription>Opções</SheetDescription>
             </SheetHeader>
-            <nav className="grid gap-6 text-lg font-medium">
+            <nav className="grid gap-6 text-sm md:text-lg font-medium mt-2">
               {menus.map((menu) => (
                 <Link
                   key={menu.name}

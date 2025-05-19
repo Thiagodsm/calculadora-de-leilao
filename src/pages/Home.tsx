@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import { ThemeContext } from "../components/Layout/Provider";
 import TitlePage from "../components/Layout/TitlePage";
+import CarouselReferencias from "../components/CarouselReferencias";
 
 export default function Home() {
 
@@ -9,7 +10,8 @@ export default function Home() {
 
   return (
     <>
-      <TitlePage title="Início" description="Calculajá - cálculos diversos agrupados em um só lugar." />
+      <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+        <TitlePage title="Início" description="Calculajá - cálculos diversos agrupados em um só lugar." />
         <Card className="mt-5 border-dashed">
           <CardContent>
             <center>
@@ -27,6 +29,12 @@ export default function Home() {
           </CardHeader>
 
         </Card>
+
+        <section>
+          <h2 className="text-2xl font-bold my-2 text-center">Referências Utilizadas</h2>
+          <CarouselReferencias />
+        </section>
+      </div>
     </>
   )
 }
