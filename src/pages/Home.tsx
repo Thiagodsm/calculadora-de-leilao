@@ -31,7 +31,7 @@ export default function Home() {
         </Card>
 
         <section>
-          <h2 className="text-2xl font-bold my-2 text-center">Referências Utilizadas</h2>
+          <h2 className="text-2xl font-bold my-2 text-center">Referências</h2>
           <CarouselReferencias />
         </section>
       </div>
