@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Home, Gavel, PanelLeft, Search, House } from "lucide-react";
+import { Home, Gavel, PanelLeft, Search, House, Bitcoin } from "lucide-react";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"; 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button"; 
@@ -28,12 +28,12 @@ export default function SidebarMenu() {
         icon: <Gavel size={15} className="mr-2" />,
         href: "/calculos-leilao-extrajudicial",
     },
-    /*{
-      label: "Cálculos Trabalhistas",
-      name: "Calculadora para processos trabalhistas",
-      icon: <Briefcase size={15} className="mr-2" />,
-      href: "/",
-    },*/
+    {
+      label: "Simulador",
+      name: "Simulador",
+      icon: <Bitcoin size={15} className="mr-2" />,
+      href: "/simulator",
+    },
 ];
 
   const {theme, setTheme} = useTheme();

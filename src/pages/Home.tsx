@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
-import { ThemeContext } from "../components/Layout/Provider";
-import TitlePage from "../components/Layout/TitlePage";
+import { ThemeContext } from "../components/layout/Provider";
+import TitlePage from "../components/layout/TitlePage";
 import CarouselReferencias from "../components/CarouselReferencias";
 
 export default function Home() {

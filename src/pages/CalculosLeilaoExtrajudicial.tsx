@@ -15,7 +15,7 @@ import {
 import { Progress } from "../components/ui/progress";
 import { Button } from "../components/ui/button";
 
-import { SimuladorImoveisForm, SimuladorImoveisRef } from "../components/Form/SimuladorImoveisForm";
+import { SimuladorImoveisForm, SimuladorImoveisRef } from "../components/form/SimuladorImoveisForm";
 
 import { useState } from "react";
 import { formSchema } from "../schemas/formSchema";
@@ -94,7 +94,8 @@ export default function CalculosLeilaoExtrajudicial() {
       // Calcula do financiamento com base da taxa de juros anual
       const taxaJurosMensal = parseFloat((data.taxaJurosAnual / 12 / 100).toFixed(5));
 
-      if(tipoFinanciamento === "sac"){
+      if(tipoFinanciamento === "sac")
+      {
         // Calculo SAC
         const amortizacaoSAC = valorFinanciamento / data.prazoFinanciamento;
         let saldoDevedor = valorFinanciamento;
@@ -113,7 +114,8 @@ export default function CalculosLeilaoExtrajudicial() {
         }
         saldoDevedorSAC = calcularSaldoDevedorSAC(valorFinanciamento, data.prazoFinanciamento, data.prazoVendaMeses);
       }
-      else{
+      else
+      {
         // Calculo Price
         const parcelaFixaPrice = valorFinanciamento * 
         (taxaJurosMensal / (1 - Math.pow(1 + taxaJurosMensal, -data.prazoFinanciamento)));

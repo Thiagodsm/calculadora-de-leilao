@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainLayout from "./components/Layout/MainLayout";
+import MainLayout from "./components/layout/MainLayout";
 import Home from "./pages/Home";
 import CalculosLeilaoExtrajudicial from "./pages/CalculosLeilaoExtrajudicial";
-import CalculosTrabalhistas from "./pages/CalculosTrabalhistas";
+import { SimulatorPage } from "./features/simulator/SimulatorPage";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/calculos-leilao-extrajudicial" element={<CalculosLeilaoExtrajudicial />} />
-          <Route path="/calculos-trabalhistas" element={<CalculosTrabalhistas />} />
+          <Route path="/simulator" element={<SimulatorPage />} />
         </Route>
       </Routes>
     </Router>
