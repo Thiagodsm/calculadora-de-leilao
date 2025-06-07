@@ -83,54 +83,54 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
       </CardHeader>
       <CardContent className="p-6 text-sm">
         <div className="grid gap-3">
-                    <div className="font-semibold">Demonstrativo dos custos</div>
-                    <ul className="grid gap-3">
-                        <ResultItem label="Valor de arrematação" value={valorArrematacao} isCurrency={true}/>
-                        <ResultItem label="Valor de venda" value={valorVenda} isCurrency={true}/>
-                    </ul>
-                    {isFinanced && (
-                        <>
-                          <Separator className="my-2" />
-                          <div className="font-semibold">Custos do financiamento</div>
-                          <ul className="grid gap-3">
-                            <ResultItem label="Porcentagem de entrada" value={porcEntradaFinanciamento} isCurrency={false} sufix="%"/>
-                            <ResultItem label="Valor da entrada" value={valorEntradaFinanciamento} isCurrency={true}/>
-                            <ResultItem label="Porcentagem financiada" value={porcFinanciamento} isCurrency={false} sufix="%"/>
-                            <ResultItem label="Valor financiado" value={valorFinanciamento} isCurrency={true}/>
-                            <ResultItem label="Prazo Financiamento" value={prazoFinanciamento} isCurrency={false} sufix="meses"/>
-                            <ResultItem label="Taxa de Juros Anual" value={taxaJurosAnual} isCurrency={false} sufix="%"/>
-                            <ResultItem label="Taxa de Juros Mensal" value={formatPrecision(taxaJurosMensal, 2)} isCurrency={false} sufix="%"/>
-                          </ul>
-                        </>
-                      )
-                    }
+            <div className="font-semibold">Demonstrativo dos custos</div>
+            <ul className="grid gap-3">
+                <ResultItem label="Valor de arrematação" value={valorArrematacao} isCurrency={true}/>
+                <ResultItem label="Valor de venda" value={valorVenda} isCurrency={true}/>
+            </ul>
+            {isFinanced && (
+                <>
                     <Separator className="my-2" />
-                    <div className="font-semibold">Custos para arrematar</div>
+                    <div className="font-semibold">Custos do financiamento</div>
                     <ul className="grid gap-3">
-                      <ResultItem label="Comissão do leiloeiro" value={comissaoLeiloeiro} isCurrency={false} sufix="%"/>
-                      <ResultItem label="Valor da comissão" value={valorComissaoLeiloeiro} isCurrency={true}/>
-                      <ResultItem label="ITBI" value={itbi} isCurrency={false} sufix="%"/>
-                      <ResultItem label="Valor do ITBI" value={valorITBI} isCurrency={true}/>
-                      <ResultItem label="Registro do imóvel" value={registroImovel} isCurrency={true}/>
-                      <ResultItem label="Valor da Desocupação" value={valorDesocupacao} isCurrency={true}/>
-                      <ResultItem label="Valor Reformas" value={valorReformas} isCurrency={true}/>
-                      <ResultItem label="Outros gastos" value={valorOutrosGastos} isCurrency={true}/>
-                      <ResultItem label="Total" value={totalCustosParciais} isCurrency={true}/>
+                    <ResultItem label="Porcentagem de entrada" value={porcEntradaFinanciamento} isCurrency={false} sufix="%"/>
+                    <ResultItem label="Valor da entrada" value={valorEntradaFinanciamento} isCurrency={true}/>
+                    <ResultItem label="Porcentagem financiada" value={porcFinanciamento} isCurrency={false} sufix="%"/>
+                    <ResultItem label="Valor financiado" value={valorFinanciamento} isCurrency={true}/>
+                    <ResultItem label="Prazo Financiamento" value={prazoFinanciamento} isCurrency={false} sufix="meses"/>
+                    <ResultItem label="Taxa de Juros Anual" value={taxaJurosAnual} isCurrency={false} sufix="%"/>
+                    <ResultItem label="Taxa de Juros Mensal" value={formatPrecision(taxaJurosMensal, 2)} isCurrency={false} sufix="%"/>
                     </ul>
-                    <Separator className="my-2" />
-                    <div className="font-semibold">Custos até a venda</div>
-                    <ul className="grid gap-3">
-                      <ResultItem label="Prazo de venda" value={prazoVenda} isCurrency={false} sufix="meses"/>
-                      <ResultItem label="IPTU mensal" value={iptuMensal} isCurrency={true}/>
-                      <ResultItem label="Total IPTU" value={totalIptu} isCurrency={true}/>
-                      <ResultItem label="Condominio mensal" value={condominioMensal} isCurrency={true}/>
-                      <ResultItem label="Total condominio" value={totalCondominio} isCurrency={true}/>
-                        {   tipoFinanciamento === "SAC" ? <ResultItem label="Total Parcelas SAC" value={totalPagoParcelas} isCurrency={true}/> : 
-                            tipoFinanciamento === "PRICE" ? <ResultItem label="Total Parcelas Price" value={totalPagoParcelas} isCurrency={true}/> :
-                            ""                            
-                        } 
-                      <ResultItem label="Total até a venda" value={totalCustosAteVenda} isCurrency={true}/>
-                    </ul>
+                </>
+                )
+            }
+            <Separator className="my-2" />
+            <div className="font-semibold">Custos para arrematar</div>
+            <ul className="grid gap-3">
+                <ResultItem label="Comissão do leiloeiro" value={comissaoLeiloeiro} isCurrency={false} sufix="%"/>
+                <ResultItem label="Valor da comissão" value={valorComissaoLeiloeiro} isCurrency={true}/>
+                <ResultItem label="ITBI" value={itbi} isCurrency={false} sufix="%"/>
+                <ResultItem label="Valor do ITBI" value={valorITBI} isCurrency={true}/>
+                <ResultItem label="Registro do imóvel" value={registroImovel} isCurrency={true}/>
+                <ResultItem label="Valor da Desocupação" value={valorDesocupacao} isCurrency={true}/>
+                <ResultItem label="Valor Reformas" value={valorReformas} isCurrency={true}/>
+                <ResultItem label="Outros gastos" value={valorOutrosGastos} isCurrency={true}/>
+                <ResultItem label="Total" value={totalCustosParciais} isCurrency={true}/>
+            </ul>
+            <Separator className="my-2" />
+            <div className="font-semibold">Custos até a venda</div>
+            <ul className="grid gap-3">
+                <ResultItem label="Prazo de venda" value={prazoVenda} isCurrency={false} sufix="meses"/>
+                <ResultItem label="IPTU mensal" value={iptuMensal} isCurrency={true}/>
+                <ResultItem label="Total IPTU" value={totalIptu} isCurrency={true}/>
+                <ResultItem label="Condominio mensal" value={condominioMensal} isCurrency={true}/>
+                <ResultItem label="Total condominio" value={totalCondominio} isCurrency={true}/>
+                {   tipoFinanciamento === "SAC" && isFinanced ? <ResultItem label="Total Parcelas SAC" value={totalPagoParcelas} isCurrency={true}/> : 
+                    tipoFinanciamento === "PRICE" && isFinanced ? <ResultItem label="Total Parcelas Price" value={totalPagoParcelas} isCurrency={true}/> :
+                    ""                            
+                } 
+                <ResultItem label="Total até a venda" value={totalCustosAteVenda} isCurrency={true}/>
+            </ul>
                 </div>
                 <Separator className="my-4" />
                 <div className="grid gap-3">
@@ -166,22 +166,22 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
 
                 <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <div className="flex flex-col cursor-help">
-                                    <div className="flex items-center gap-1">
-                                        <Wallet className="h-5 w-5" />
-                                        <span>Custos</span>
-                                    </div>
-                                    <span className="font-semibold">
-                                        {formatCurrency(totalInvestido)}
-                                    </span>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div className="flex flex-col cursor-help">
+                                <div className="flex items-center gap-1">
+                                    <Wallet className="h-5 w-5" />
+                                    <span>Custos</span>
                                 </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                Custos totais considerando: valor de entrada, comissão do leiloeiro, ITBI, registro, desocupação, reformas, outros gastos, IPTU e condominio pagos até o momneto da venda.
-                            </TooltipContent>
-                        </Tooltip>
+                                <span className="font-semibold">
+                                    {formatCurrency(totalInvestido)}
+                                </span>
+                            </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            Custos totais considerando: valor de entrada, comissão do leiloeiro, ITBI, registro, desocupação, reformas, outros gastos, IPTU e condominio pagos até o momneto da venda.
+                        </TooltipContent>
+                    </Tooltip>
                     </TooltipProvider>
 
                     <TooltipProvider>
@@ -221,7 +221,6 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-
                 </div>
       </CardContent>
     </Card>
