@@ -22,12 +22,6 @@ export default function SidebarMenu() {
       icon: <House size={15} className="mr-2" />,
       href: "/",
     },
-    /*{
-        label: "Cálculos de Leilão Extrajudicial",
-        name: "Calculadora para leilão extrajudicial",
-        icon: <Gavel size={15} className="mr-2" />,
-        href: "/calculos-leilao-extrajudicial",
-    }*/
     {
       label: "Simulador",
       name: "Simulador",
