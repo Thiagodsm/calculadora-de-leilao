@@ -9,6 +9,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent }
 import { Button } from "../../components/ui/button";
 import { Progress } from "../../components/ui/progress";
 import { initialSimulatorResult } from "./constants/initialSimulatorResults";
+import { formatCurrency } from "./utils/formatters";
 
 
 export const SimulatorPage = () =>
@@ -44,38 +45,43 @@ export const SimulatorPage = () =>
 
                 <Card>
                     <CardHeader className="pb-2">
-                    <CardDescription>Custos totais</CardDescription>
-                    <CardTitle className="text-4xl">{resultados ? resultados.totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}): "R$ 0,00"}</CardTitle>
+                        <CardDescription>Custos totais</CardDescription>
+                        <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.totalInvestido): "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                    <div className="text-xs text-muted-foreground">
-                        Custos da arrematação até a venda, com lucro bruto de: {resultados ? ( resultados.valorVenda !== 0 ? ((1-(resultados.valorArrematacao / resultados.valorVenda)) * 100).toFixed(2) : 0) : "0"}%
-                    </div>
+                        <div className="text-xs text-muted-foreground">
+                            Custos da arrematação até a venda, com lucro bruto de: {resultados && resultados.valorVenda !== 0 ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) : 0}%
+                        </div>
                     </CardContent>
                     <CardFooter>
-                    <Progress value={resultados ? ( resultados.valorVenda !== 0 ? ( Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) : 0) : 0} aria-label="custos totais" />
+                        <Progress value={
+                            resultados && resultados.valorVenda !== 0
+                            ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) 
+                            : 0
+                            }
+                            aria-label="custos totais" />
                     </CardFooter>
                 </Card>
 
                 <Card>
                     <CardHeader className="pb-2">
-                    <CardDescription>Lucro líquido</CardDescription>
-                    <CardTitle className="text-4xl">{resultados ? resultados.lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : "R$ 0,00"}</CardTitle>
+                        <CardDescription>Lucro líquido</CardDescription>
+                        <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.lucroLiquido) : "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                    <div className="text-xs text-muted-foreground">
-                        {resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2) : 0) : "0"}% de lucro líquido com a venda do imóvel
-                    </div>
+                        <div className="text-xs text-muted-foreground">
+                            {resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2) : 0) : "0"}% de lucro líquido com a venda do imóvel
+                        </div>
                     </CardContent>
                     <CardFooter>
-                    <Progress 
-                        value={
-                        resultados && resultados.totalInvestido !== 0 
-                            ? Math.min((resultados.lucroLiquido / resultados.totalInvestido) * 100, 100) 
-                            : 0
-                        } 
-                        aria-label="porcentagem do lucro líquido" 
-                    />
+                        <Progress 
+                            value={
+                            resultados && resultados.totalInvestido !== 0 
+                                ? Math.min((resultados.lucroLiquido / resultados.totalInvestido) * 100, 100) 
+                                : 0
+                            } 
+                            aria-label="porcentagem do lucro líquido" 
+                        />
                     </CardFooter>
                 </Card>
 
