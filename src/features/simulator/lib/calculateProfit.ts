@@ -46,7 +46,6 @@ export function calculateProfits({ isFinanced, tipoFinanciamento, ...data }: Pro
                 .filter((p) => p.numero <= data.prazoVenda)
                 .reduce((sum, p) => sum + p.valor, 0);
     }
-    console.log("total em parcelas: ", totalPagoParcelas)
 
     const valorComissaoLeiloeiro = (data.valorArrematacao * data.comissaoLeiloeiro) / 100;
     const valorITBI = (data.valorArrematacao * data.itbi) / 100;
@@ -61,15 +60,10 @@ export function calculateProfits({ isFinanced, tipoFinanciamento, ...data }: Pro
                                 data.valorReformas + 
                                 data.valorOutrosGastos;
 
-    console.log("iptu: ", totalIptu)                                    
-    console.log("condominio: ", totalCondominio);
-    console.log("total parcelas: ", totalPagoParcelas);                                    
     const totalCustosAteVenda = totalIptu + totalCondominio + totalPagoParcelas;
-    console.log("custos ate a venda: ", totalCustosAteVenda)
     const valorComissaoCorretor = (data.valorVenda * data.comissaoImobiliaria) / 100;
 
     let totalInvestido = 0;
-    console.log('eh financiado: ', isFinanced);
     if (isFinanced)
         totalInvestido = totalCustosParciais + totalCustosAteVenda
     else
