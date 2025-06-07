@@ -8,3 +8,10 @@ export function formatCurrency(value: number) : string
         }
     );
 }
+
+export function formatPrecision(valor: number, precision: number, sufix?: string) : string
+{
+    if (sufix)
+        return valor.toFixed(precision) + sufix;
+    return valor.toFixed(precision);
+}

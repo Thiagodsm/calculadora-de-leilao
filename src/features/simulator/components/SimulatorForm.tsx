@@ -42,21 +42,22 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
         const form = useForm<SchemaFormData>({
             resolver: zodResolver(formSchema),
             defaultValues: {
-                valorVenda: 0,
+                valorArrematacao: 72000,
+                valorVenda: 120000,
                 porcEntradaFinanciamento: 5,
-                taxaJurosAnual: 0,
+                taxaJurosAnual: 11,
                 prazoFinanciamento: 420,
-                comissaoLeiloeiro: 5,
+                comissaoLeiloeiro: 0,
                 itbi: 3,
                 registroImovel: 3471.96,
                 comissaoImobiliaria: 6,
                 ir: 15,
                 gastosDesocupacao: 0,
-                valorReformas: 3000,
+                valorReformas: 3500,
                 valorOutrosGastos: 0,
                 prazoVenda: 12,
                 iptuMensal: 0,
-                condominioMensal: 0,
+                condominioMensal: 250,
             },
             //mode: 'onChange'
         });
@@ -78,7 +79,6 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                 tipoFinanciamento: financingType,
                 ...data,
             });
-            console.log("Resultado da simulacao: ", results);
             onSubmit(results);
         };
 

@@ -3,6 +3,7 @@ import MainLayout from "./components/layout/MainLayout";
 import Home from "./pages/Home";
 import CalculosLeilaoExtrajudicial from "./pages/CalculosLeilaoExtrajudicial";
 import { SimulatorPage } from "./features/simulator/SimulatorPage";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/calculos-leilao-extrajudicial" element={<CalculosLeilaoExtrajudicial />} />
           <Route path="/simulator" element={<SimulatorPage />} />
+          <Route path="/about" element={<About />} />
         </Route>
       </Routes>
     </Router>

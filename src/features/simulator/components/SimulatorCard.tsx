@@ -6,6 +6,7 @@ import { Separator } from "../../../components/ui/separator";
 import { Copy, ReceiptText } from "lucide-react";
 import { SimulatorResult } from "../types"
 import { ResultItem } from "./ResultItem";
+import { formatCurrency, formatPrecision } from "../utils/formatters";
 
 type SimulatorCardProps = {
   result: SimulatorResult
@@ -40,16 +41,15 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
     totalIptu,
     condominioMensal, 
     totalCondominio,
-    valorTotalParcelasSAC,
-    valorTotalParcelasPrice,
     totalCustosAteVenda,
     valorComissaoCorretor,
     ir,
     totalCustosVenda,
-    saldoDevedorSAC,
-    saldoDevedorPrice,
     totalInvestido,
     lucroLiquido,
+    tipoFinanciamento,
+    totalPagoParcelas,
+    saldoDevedor
 
   } = result;
 
@@ -99,7 +99,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                             <ResultItem label="Valor financiado" value={valorFinanciamento} isCurrency={true}/>
                             <ResultItem label="Prazo Financiamento" value={prazoFinanciamento} isCurrency={false} sufix="meses"/>
                             <ResultItem label="Taxa de Juros Anual" value={taxaJurosAnual} isCurrency={false} sufix="%"/>
-                            <ResultItem label="Taxa de Juros Mensal" value={taxaJurosMensal} isCurrency={false} sufix="%"/>
+                            <ResultItem label="Taxa de Juros Mensal" value={formatPrecision(taxaJurosMensal, 2)} isCurrency={false} sufix="%"/>
                           </ul>
                         </>
                       )
@@ -125,9 +125,18 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                       <ResultItem label="Total IPTU" value={totalIptu} isCurrency={true}/>
                       <ResultItem label="Condominio mensal" value={condominioMensal} isCurrency={true}/>
                       <ResultItem label="Total condominio" value={totalCondominio} isCurrency={true}/>
-                      {valorTotalParcelasSAC > 0 && <ResultItem label="Total Parcelas SAC" value={valorTotalParcelasSAC} isCurrency={true}/>}
-                      {valorTotalParcelasPrice > 0 && <ResultItem label="Total Parcelas Price" value={valorTotalParcelasPrice} isCurrency={true}/>} 
-                      <ResultItem label="Total" value={totalCustosAteVenda} isCurrency={true}/>
+                        {   tipoFinanciamento === "SAC" ? <ResultItem label="Total Parcelas SAC" value={totalPagoParcelas} isCurrency={true}/> : 
+                            tipoFinanciamento === "PRICE" ? <ResultItem label="Total Parcelas Price" value={totalPagoParcelas} isCurrency={true}/> :
+                            ""                            
+                        } 
+                      <ResultItem label="Total até a venda" value={totalCustosAteVenda} isCurrency={true}/>
+                    </ul>
+                </div>
+                <Separator className="my-4" />
+                <div className="grid gap-3">
+                    <div className="font-semibold">Custos totais (montante investido)</div>
+                    <ul className="grid gap-3">
+                        <ResultItem label="Comissão do corretor" value={totalInvestido} isCurrency={true}/>
                     </ul>
                 </div>
                 <Separator className="my-4" />
@@ -145,12 +154,9 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                     <>
                     <Separator className="my-4" />
                     <div className="grid gap-3">
-                        <div>Saldo Devedor do Financiamento</div>
+                        <div className="font-semibold">Saldo Devedor do Financiamento</div>
                         <ul className="grid gap-3">
-                            <li className="flex items-center justify-between font-semibold">
-                                <span className="text-muted-foreground">Total ({ saldoDevedorPrice !== 0 ? "Price" : "SAC" }) - pago com a venda</span>
-                                <span>{(saldoDevedorPrice !== 0 ? saldoDevedorPrice : saldoDevedorSAC).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
-                            </li>
+                            <ResultItem  label={`Total (${tipoFinanciamento === "PRICE" ? "Price" : "SAC"}) - pago com a venda`} value={saldoDevedor} isCurrency={true}/>
                         </ul>
                     </div>
                     </>
@@ -168,7 +174,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                                         <span>Custos</span>
                                     </div>
                                     <span className="font-semibold">
-                                    {totalInvestido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                                        {formatCurrency(totalInvestido)}
                                     </span>
                                 </div>
                             </TooltipTrigger>
@@ -187,7 +193,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                                         <span>Lucro Líquido</span>
                                     </div>
                                     <span className="font-semibold">
-                                        {lucroLiquido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                                        {formatCurrency(lucroLiquido)}
                                     </span>
                                 </div>
                             </TooltipTrigger>
@@ -206,7 +212,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                                         <span>Lucro Líquido</span>
                                     </div>
                                     <span className="font-semibold">
-                                        {( totalInvestido !== 0 ? ((lucroLiquido / totalInvestido) * 100).toFixed(2) : 0)}%
+                                        {formatPrecision((lucroLiquido / totalInvestido) * 100, 2, "%")}
                                     </span>
                                 </div>
                             </TooltipTrigger>

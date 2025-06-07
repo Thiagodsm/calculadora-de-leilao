@@ -21,10 +21,6 @@ export type SimulatorResult = {
   taxaJurosAnual: number;
   taxaJurosMensal: number;
   prazoFinanciamento: number;
-  valorTotalParcelasPrice: number;
-  valorTotalParcelasSAC: number;
-  saldoDevedorPrice: number;
-  saldoDevedorSAC: number;
   comissaoLeiloeiro: number;
   valorComissaoLeiloeiro: number;
   itbi: number;
@@ -48,4 +44,7 @@ export type SimulatorResult = {
   totalInvestido: number;
   lucroLiquido: number;
   parcelas?: Parcela[];
+  tipoFinanciamento: TipoFinanciamento,
+  totalPagoParcelas: number;
+  saldoDevedor: number;
 };
