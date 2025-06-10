@@ -2,10 +2,10 @@ import { z } from 'zod';
 import { formSchema } from '../schemas/formSchemas';
 import { Parcela, SimulatorResult, TipoFinanciamento } from '../types';
 
-import { calculatePriceFinancing } from './calculatePrice.ts';
-import { calculateSacFinancing } from './calculateSac.ts';
-import { calculatePriceDebts } from './calculatePriceDebts.ts';
-import { calculateSacDebts } from './calculateSacDebts.ts';
+import { calculatePriceFinancing } from './calculatePrice';
+import { calculateSacFinancing } from './calculateSac';
+import { calculatePriceDebts } from './calculatePriceDebts';
+import { calculateSacDebts } from './calculateSacDebts';
 
 export type SimulatorFormData = z.infer<typeof formSchema>;
 
