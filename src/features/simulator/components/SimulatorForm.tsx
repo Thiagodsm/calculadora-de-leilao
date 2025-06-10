@@ -20,7 +20,7 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SimulatorResult, TipoFinanciamento } from "../types";
-import { calculateProfits } from "../lib/calculateProfit";
+import { calculateProfits } from "../domain/calculateProfit";
 
 type SchemaFormData = z.infer<typeof formSchema>;
 

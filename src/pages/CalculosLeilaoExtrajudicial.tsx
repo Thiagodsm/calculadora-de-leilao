@@ -15,7 +15,7 @@ import {
 import { Progress } from "../components/ui/progress";
 import { Button } from "../components/ui/button";
 
-import { SimuladorImoveisForm, SimuladorImoveisRef } from "../components/form/SimuladorImoveisForm";
+import { SimuladorImoveisForm, SimuladorImoveisRef } from "../components/Form/SimuladorImoveisForm";
 
 import { useState } from "react";
 import { formSchema } from "../schemas/formSchema";
