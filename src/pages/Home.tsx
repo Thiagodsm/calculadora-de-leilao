@@ -1,14 +1,11 @@
-import { useContext } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
-import { ThemeContext } from "../components/layout/Provider";
 import TitlePage from "../components/layout/TitlePage";
 import CarouselReferencias from "../components/CarouselReferencias";
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
+import { CardHomeDescription } from "../components/CardHomeDescription";
 
 export default function Home() {
-
-  const theme = useContext(ThemeContext);
 
   return (
     <>
@@ -37,29 +34,31 @@ export default function Home() {
 
         {/* Destaques */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Cálculo do lucro líquido</CardTitle>
-              <CardDescription>Receita da venda - (Custos + IR + Taxas)</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Simule o retorno de um imóvel considerando arrematação, reformas, impostos e comissão.
-              </p>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Imposto de Renda</CardTitle>
-              <CardDescription>Com base na Lei 7.713/88 e regras da Receita Federal</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                O sistema calcula o IR sobre ganho de capital considerando despesas dedutíveis.
-              </p>
-            </CardContent>
-          </Card>
+          <CardHomeDescription 
+            title="Cálculo do lucro líquido" 
+            description="Receita da venda - (Custos + IR + Taxas)" 
+            text="Simule o retorno de um imóvel considerando arrematação, reformas, impostos e comissão."
+          />
+
+          <CardHomeDescription 
+            title="Imposto de Renda" 
+            description="Receita da venda - (Custos + IR + Taxas)" 
+            text="O sistema calcula o IR sobre ganho de capital considerando despesas dedutíveis."
+          />
+
+          <CardHomeDescription 
+            title="Saldo devedor e parcelas pagas (compra financiada)" 
+            description="Calcula os valor a ser pago em parcelas considerando sistemas SAC ou Price" 
+            text="Com base nos parametros passados o sistema calcula o valor gastos com as parcelas e saldo devedor a ser quitado na venda."
+          />
+
+          <CardHomeDescription 
+            title="Valores gastos até pós arrematação até a venda do imóvel" 
+            description="loren ipsum" 
+            text="loren ipsum"
+          />
+
         </div>
 
         {/* Referências */}
