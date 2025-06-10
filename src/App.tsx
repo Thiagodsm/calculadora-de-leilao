@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainLayout from "./components/layout/MainLayout";
+import MainLayout from "./components/Layout/MainLayout";
 import Home from "./pages/Home";
 import CalculosLeilaoExtrajudicial from "./pages/CalculosLeilaoExtrajudicial";
 import { SimulatorPage } from "./features/simulator/SimulatorPage";

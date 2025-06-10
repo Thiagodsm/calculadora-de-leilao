@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
-import TitlePage from "../components/layout/TitlePage";
+import TitlePage from "../components/Layout/TitlePage";
 import CarouselReferencias from "../components/CarouselReferencias";
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
