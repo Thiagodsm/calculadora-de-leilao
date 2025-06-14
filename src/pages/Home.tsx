@@ -9,15 +9,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+      <div className="grid w-full auto-rows-max items-start gap-4 px-4 md:gap-8 lg:col-span-2">
         <TitlePage title="Calculajá - Cálculos para imóveis de leilão" description="Simule custos, lucros e impostos na compra e venda de imóveis arrematados em leilão extrajudicial." />
         <Card className="boder-dashed">
           <CardContent className="text-center">
-            <img
-              src="/cat-developer2.gif"
-              alt="Demonstação do cálculo"
-              className="mx-auto mt-5 max-w-md sm:max-w-lg md:max-w-2xl rounded-lg shadow"
-            />
+            
           </CardContent>
           <CardHeader className="text-center">
             <CardTitle className="text-xl">Pronto para começar?</CardTitle>
@@ -32,7 +28,7 @@ export default function Home() {
           </CardHeader>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full max-w-full">
 
           <CardHomeDescription 
             title="Cálculo do lucro líquido" 
