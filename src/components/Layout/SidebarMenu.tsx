@@ -77,48 +77,48 @@ export default function SidebarMenu() {
       </aside>
 
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-      <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="sm:hidden">
-              <PanelLeft className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[360px] max-w-full flex flex-col justify-content">
-            <SheetHeader>
-              <SheetTitle>Menu</SheetTitle>
-              <SheetDescription>Opções</SheetDescription>
-            </SheetHeader>
-            <nav className="grid gap-6 text-sm md:text-lg font-medium mt-2">
-              {menus.map((menu) => (
-                <Link
-                  key={menu.name}
-                  to={menu.href}
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  {menu.icon}
-                  {menu.label}
-                </Link>
-              ))}
-            </nav>
-          </SheetContent>
-        </Sheet>
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button size="icon" variant="outline" className="sm:hidden">
+                <PanelLeft className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[360px] max-w-full flex flex-col justify-content">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+                <SheetDescription>Opções</SheetDescription>
+              </SheetHeader>
+              <nav className="grid gap-6 text-sm md:text-lg font-medium mt-2">
+                {menus.map((menu) => (
+                  <Link
+                    key={menu.name}
+                    to={menu.href}
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    {menu.icon}
+                    {menu.label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
 
-        <div className="relative ml-auto flex-1 md:grow-0">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            disabled
-            type="search"
-            placeholder="Pesquisar..."
-            className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
-          />
-        </div>
-        <DarkModeSwitch
-                  className='mr-2 w-7 h-7 sm:block'
-                  checked={theme === 'dark'}
-                  onChange={onDarkModeToggle}
-                  size={20} />
-      </header>
+          <div className="relative ml-auto flex-1 md:grow-0">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              disabled
+              type="search"
+              placeholder="Pesquisar..."
+              className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+            />
+          </div>
+          <DarkModeSwitch
+                    className='mr-2 w-7 h-7 sm:block'
+                    checked={theme === 'dark'}
+                    onChange={onDarkModeToggle}
+                    size={20} />
+        </header>
       </div>
     </>
   );

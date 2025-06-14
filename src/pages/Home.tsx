@@ -32,7 +32,6 @@ export default function Home() {
           </CardHeader>
         </Card>
 
-        {/* Destaques */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
           <CardHomeDescription 
@@ -61,7 +60,6 @@ export default function Home() {
 
         </div>
 
-        {/* Referências */}
         <section>
           <h2 className="text-2xl font-bold my-4 text-center">Referências</h2>
           <CarouselReferencias />
