@@ -10,7 +10,7 @@ interface CardHomeDescriptionProps
 export const CardHomeDescription = ({title, description, text}: CardHomeDescriptionProps) =>
 {
     return (
-            <Card>
+            <Card className="w-full max-w-full">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>

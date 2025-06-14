@@ -10,7 +10,7 @@ export default function MainLayout() {
   return (
     <Providers>
       <TooltipProvider>
-        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+        <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-hidden">
           <SidebarMenu />
           
           <div className="flex flex-col flex-grow sm:gap-4 sm:pl-14">
