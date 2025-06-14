@@ -13,7 +13,11 @@ export default function Home() {
         <TitlePage title="Calculajá - Cálculos para imóveis de leilão" description="Simule custos, lucros e impostos na compra e venda de imóveis arrematados em leilão extrajudicial." />
         <Card className="boder-dashed">
           <CardContent className="text-center">
-            
+            <img
+              src="/cat-developer2.gif"
+              alt="Demonstação do cálculo"
+              className="mx-auto mt-5 w-full max-w-md sm:max-w-lg md:max-w-2xl rounded-lg shadow"
+            />
           </CardContent>
           <CardHeader className="text-center">
             <CardTitle className="text-xl">Pronto para começar?</CardTitle>
