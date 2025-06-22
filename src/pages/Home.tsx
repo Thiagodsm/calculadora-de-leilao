@@ -60,11 +60,6 @@ export default function Home() {
 
         </div>
 
-        <section>
-          <h2 className="text-2xl font-bold my-4 text-center">Referências</h2>
-          <CarouselReferencias />
-        </section>
-
       </div>
     </>
   )
