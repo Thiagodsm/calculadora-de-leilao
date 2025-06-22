@@ -50,7 +50,7 @@ export const SimulatorPage = () =>
                     </CardHeader>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
-                            Custos da arrematação até a venda, com lucro bruto de: {resultados && resultados.valorVenda !== 0 ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) : 0}%
+                            Custos da arrematação até a venda, com lucro bruto de: {resultados && resultados.valorVenda !== 0 ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100).toFixed(2) : 0}%
                         </div>
                     </CardContent>
                     <CardFooter>
