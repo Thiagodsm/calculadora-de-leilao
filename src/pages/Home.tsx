@@ -56,9 +56,7 @@ export default function Home() {
             description="loren ipsum" 
             text="loren ipsum"
           />
-
         </div>
-
       </div>
     </>
   )
