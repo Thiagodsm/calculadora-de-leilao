@@ -14,7 +14,7 @@ export default function SidebarPage() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="flex flex-col flex-1">
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4">
           <SidebarTrigger />
           <DarkModeSwitch
@@ -25,7 +25,7 @@ export default function SidebarPage() {
           />
         </header>
 
-        <div className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4 overflow-auto">
           <Outlet />
         </div>
       </SidebarInset>

@@ -8,12 +8,12 @@ export default function MainLayout() {
   return (
     <Providers>
       <TooltipProvider>
-        <div className="flex min-h-screen w-full flex-col overflow-hidden">
-          <div className="flex-grow flex flex-col">
-            <SidebarPage />
+          <div className="flex min-h-screen w-full flex-col">
+            <div className="flex flex-1 flex-col">
+              <SidebarPage />
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
       </TooltipProvider>
     </Providers>
   );
