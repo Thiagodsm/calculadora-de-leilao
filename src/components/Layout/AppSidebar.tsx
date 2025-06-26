@@ -42,7 +42,7 @@ const menus: Menu[] =[
 
 export function AppSidebar({ ...props }) {
   return (
-    <Sidebar {...props} className="bg-background text-foreground">
+    <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
