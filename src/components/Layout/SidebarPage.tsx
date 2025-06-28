@@ -2,7 +2,8 @@ import { AppSidebar } from "./AppSidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "../ui/theme-provider";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import logo from '../../../public/team_engineering.svg'
 
 export default function SidebarPage() {
   const { theme, setTheme } = useTheme();
@@ -17,6 +18,14 @@ export default function SidebarPage() {
       <SidebarInset className="flex flex-col flex-1">
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4">
           <SidebarTrigger />
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src={logo}
+              alt="Logo"
+              className="h-8 w-auto max-w-[120px] object-contain"
+            />
+            <span className="font-semibold text-lg hidden sm:inline">Calculajá</span>
+          </Link>
           <DarkModeSwitch
             className="w-7 h-7"
             checked={theme === "dark"}
