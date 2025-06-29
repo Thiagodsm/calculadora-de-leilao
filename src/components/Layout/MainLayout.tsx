@@ -8,7 +8,7 @@ export default function MainLayout() {
     <Providers>
       <TooltipProvider>
           <div className="flex min-h-screen w-full flex-col">
-              <SidebarPage />
+            <SidebarPage />
           </div>
       </TooltipProvider>
     </Providers>

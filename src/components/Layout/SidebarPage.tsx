@@ -20,7 +20,7 @@ export default function SidebarPage() {
           <SidebarTrigger className="" />
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src={theme === "dark" ? '../../../public/open-source.svg': '../../../public/open-source-filled.svg'}
+              src={theme === "dark" ? '/open-source.svg': '/open-source-filled.svg'}
               alt="Logo"
               className="h-10 w-auto max-w-[120px] object-contain"
             />
