@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "../ui/sidebar";
-import { GalleryVerticalEnd } from "lucide-react";
+import { Handshake } from "lucide-react";
 import { Gavel, House, Contact} from "lucide-react";
 
 type Menu = {
@@ -49,11 +49,11 @@ export function AppSidebar({ ...props }) {
             <SidebarMenuButton size="lg" asChild>
               <Link to="/">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex size-8 items-center justify-center">
-                  <GalleryVerticalEnd className="size-4" />
+                  <Handshake className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Calculajá</span>
-                  <span className="text-xs">v1.0.0</span>
+                  <span className="font-medium">Calaculadora de leilão</span>
+                  <span className="text-xs">versão 1.0</span>
                 </div>
               </Link>
             </SidebarMenuButton>
