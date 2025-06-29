@@ -24,7 +24,7 @@ export default function SidebarPage() {
               alt="Logo"
               className="h-10 w-auto max-w-[120px] object-contain"
             />
-            <span className="font-mono font-bold text-lg hidden sm:inline md:text-xl">T.SM</span>
+            <span className="font-mono font-bold text-lg sm:inline md:text-xl">T.SM</span>
           </Link>
           <DarkModeSwitch
             className="w-7 h-7"
