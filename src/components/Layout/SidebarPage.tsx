@@ -3,7 +3,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "../ui/theme-provider";
 import { Link, Outlet } from "react-router-dom";
-import logo from '../../../public/team_engineering.svg'
+import Footer from "./Footer";
 
 export default function SidebarPage() {
   const { theme, setTheme } = useTheme();
@@ -17,14 +17,14 @@ export default function SidebarPage() {
       <AppSidebar />
       <SidebarInset className="flex flex-col flex-1">
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4">
-          <SidebarTrigger />
+          <SidebarTrigger className="" />
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src={logo}
+              src={theme === "dark" ? '../../../public/open-source.svg': '../../../public/open-source-filled.svg'}
               alt="Logo"
-              className="h-8 w-auto max-w-[120px] object-contain"
+              className="h-10 w-auto max-w-[120px] object-contain"
             />
-            <span className="font-semibold text-lg hidden sm:inline">Calculajá</span>
+            <span className="font-mono font-bold text-lg hidden sm:inline md:text-xl">T.SM</span>
           </Link>
           <DarkModeSwitch
             className="w-7 h-7"
@@ -34,8 +34,11 @@ export default function SidebarPage() {
           />
         </header>
 
-        <div className="flex flex-1 flex-col gap-4 p-4 overflow-auto">
-          <Outlet />
+        <div>
+          <div className="flex flex-1 flex-col gap-4 p-4 overflow-auto">
+            <Outlet />
+          </div>
+          <Footer />
         </div>
       </SidebarInset>
     </SidebarProvider>
