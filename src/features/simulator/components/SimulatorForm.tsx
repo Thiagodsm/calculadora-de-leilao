@@ -59,7 +59,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                 iptuMensal: 0,
                 condominioMensal: 250,
             },
-            //mode: 'onChange'
+            mode: 'onChange'
         });
 
         useImperativeHandle(
