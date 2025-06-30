@@ -34,13 +34,12 @@ export default function SidebarPage() {
             size={20}
           />
         </header>
-
-        <div>
-          <div className="flex flex-1 flex-col gap-4 p-4 overflow-auto">
-            <Outlet />
+          <div className="flex flex-col flex-1">
+            <main className="flex-1 p-4 overflow-auto">
+              <Outlet />
+            </main>
+            <Footer />
           </div>
-          <Footer />
-        </div>
       </SidebarInset>
     </SidebarProvider>
   );
