@@ -17,7 +17,8 @@ export default function SidebarPage() {
       <AppSidebar />
       <SidebarInset className="flex flex-col flex-1">
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4">
-          <SidebarTrigger className="" />
+          <SidebarTrigger />
+          
           <Link to="/" className="flex items-center gap-2">
             <img 
               src={theme === "dark" ? '/open-source.svg': '/open-source-filled.svg'}
