@@ -48,8 +48,8 @@ export default function Home() {
 
           <CardHomeDescription 
             title="Valores gastos até pós arrematação até a venda do imóvel" 
-            description="loren ipsum" 
-            text="loren ipsum"
+            description="IPTU + Condominio + Total em parcelas" 
+            text="Resumo dos custos totais incorridos desde a arrematação até a venda do imóvel, incluindo taxas, reformas, impostos e demais despesas operacionais."
           />
         </div>
       </div>
