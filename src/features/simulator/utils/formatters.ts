@@ -11,7 +11,9 @@ export function formatCurrency(value: number) : string
 
 export function formatPrecision(valor: number, precision: number, sufix?: string) : string
 {
-    if (sufix)
+    if (sufix && !Number.isNaN(valor))
         return valor.toFixed(precision) + sufix;
+    if(Number.isNaN(valor))
+        return "-";
     return valor.toFixed(precision);
 }

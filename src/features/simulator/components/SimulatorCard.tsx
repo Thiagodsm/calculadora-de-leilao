@@ -50,7 +50,6 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
     tipoFinanciamento,
     totalPagoParcelas,
     saldoDevedor
-
   } = result;
 
   const isFinanced = tipoSimulacao === "financiado";
