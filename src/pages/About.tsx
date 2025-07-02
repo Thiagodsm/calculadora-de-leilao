@@ -9,7 +9,7 @@ export default function About() {
         />
 
         <div className="text-muted-foreground text-base leading-relaxed">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Thiago Moreira</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Thiago da Silva Moreira</h1>
           <p>
             Sou desenvolvedor back-end com experiência em .NET, C#, automações e APIs RESTful.
             Gosto de criar soluções práticas que realmente resolvem problemas do dia a dia.
