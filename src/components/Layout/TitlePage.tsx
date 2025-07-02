@@ -6,8 +6,8 @@ type Props = {
 export default function TitlePage({ title, description }: Props) {
     return (
         <>
-            <h1 className="text-xl font-bold">{title}</h1>
-            <p className="mt-2 text-sm text-gray-500">{description}</p>
+            <h1 className="text-3xl font-bold">{title}</h1>
+            <p className="text-muted-foreground">{description}</p>
         </>
     )
 }

@@ -35,7 +35,7 @@ export const SimulatorPage = () =>
                     <CardHeader className="pb-3">
                         <CardTitle>Cálculos de Leilão de Extrajudicial</CardTitle>
                         <CardDescription className="leading-relaxed">
-                            O leilão extrajudicial é um processo que permite vender imóveis que foram dados como garantia em empréstimos que não foram pagos. O leilão é mais rápido e barato do que um processo judicial e pode oferecer imóveis a preços mais baixos do que o valor de mercado.
+                            O leilão extrajudicial é um processo que permite vender imóveis que foram dados como garantia em empréstimos que <strong>não foram pagos</strong>. O leilão é mais rápido e barato do que um processo judicial e pode oferecer imóveis a preços mais baixos do que o valor de mercado.
                         </CardDescription>
                     </CardHeader>
                     <CardFooter>

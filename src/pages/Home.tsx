@@ -9,16 +9,18 @@ export default function Home() {
   return (
     <>
       <div className="grid w-full auto-rows-max items-start gap-4 px-4 md:gap-8 lg:col-span-2">
-        <TitlePage title="Calculajá - Cálculos para imóveis de leilão" description="Simule custos, lucros e impostos na compra e venda de imóveis arrematados em leilão extrajudicial." />
+        <TitlePage 
+          title="Calculadora Leilão Extrajudicial" 
+          description="Calcule de forma fácil os custos, impostos e o lucro líquido ao comprar e vender imóveis em leilão." />
         <Card className="boder-dashed">
           <CardContent className="text-center">
           </CardContent>
-          <CardHeader className="text-center">
-            <CardTitle className="text-xl">Pronto para começar?</CardTitle>
-            <CardDescription>
-              Acesse o simulador para calcular o lucro líquido da venda de um imóvel de leilão.
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">Pronto para começar?</CardTitle>
+            <CardDescription className="text-md text-justify">
+              <strong>O leilão extrajudicial é uma forma de venda de imóveis realizada fora do processo judicial</strong>. Ele ocorre quando o proprietário não paga um financiamento ou empréstimo em que o imóvel foi dado como garantia (alienação fiduciária). Nesses casos, a instituição credora pode retomar o bem e vendê-lo em leilão público para recuperar a dívida. Esse tipo de leilão costuma ser mais rápido, menos burocrático e com custos reduzidos — o que pode representar uma boa oportunidade para comprar imóveis por valores abaixo do mercado.
             </CardDescription>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-center">
               <Link to="/simulator">
                 <Button variant="default">Ir para o simulador</Button>
               </Link>
