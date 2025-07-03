@@ -11,16 +11,17 @@ export default function About() {
         <div className="text-muted-foreground text-base leading-relaxed">
           <h1 className="text-2xl font-bold text-foreground mb-2">Thiago da Silva Moreira</h1>
           <p>
-            Sou desenvolvedor back-end com experiência em .NET, C#, automações e APIs RESTful.
-            Gosto de criar soluções práticas que realmente resolvem problemas do dia a dia.
-            Apesar de trabalhar mais com o lado do servidor, não hesitei em aprender front-end
-            e lançar este projeto para ajudar outras pessoas.
+            Desenvolvedor full statck com experiência em .NET, C#, automações e APIs RESTful.
+            Gosto de criar soluções práticas que resolvem problemas do nosso dia a dia.
+            Com o intuito de ajudar pessoas que tem duvidas com relação a como calcular 
+            os valores envolvidos na compra e venda de imóveis de leilão, decidi estudar mais sobre Reactjs e Typescript 
+            para desenvolver essa calculadora de leilão.
           </p>
         </div>
       </div>
 
       <div className="space-y-4 text-base text-muted-foreground leading-relaxed">
-        <h2 className="text-xl font-semibold text-foreground">Por que criei a calculadora?</h2>
+        <h2 className="text-xl font-semibold text-foreground">Por decidi desenvolver a calculadora?</h2>
 
         <p>
           Muitas pessoas sonham em conquistar um imóvel próprio, e os leilões extrajudiciais
