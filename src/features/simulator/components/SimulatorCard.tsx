@@ -135,7 +135,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                 <div className="grid gap-3">
                     <div className="font-semibold">Custos totais (montante investido)</div>
                     <ul className="grid gap-3">
-                        <ResultItem label="Comissão do corretor" value={totalInvestido} isCurrency={true}/>
+                        <ResultItem label="Total" value={totalInvestido} isCurrency={true}/>
                     </ul>
                 </div>
                 <Separator className="my-4" />
