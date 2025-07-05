@@ -1,3 +1,5 @@
+import PixSupportSection from "../components/PixSupportSection";
+
 export default function About() {
   return (
     <section className="max-w-4xl mx-auto px-4 py-8 space-y-10">
@@ -55,6 +57,10 @@ export default function About() {
           Se essa calculadora puder te ajudar a tomar uma decisão mais consciente, todo o esforço já terá valido a pena.
         </p>
 
+      </div>
+
+      <div>
+        <PixSupportSection />
       </div>
     </section>
   );
