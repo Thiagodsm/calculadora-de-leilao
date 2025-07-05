@@ -58,9 +58,9 @@ export const SimulatorPage = () =>
                     </CardContent>
                     <CardFooter>
                         <Progress value={
-                            resultados && resultados.valorVenda !== 0
-                            ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) 
-                            : 0
+                                resultados && resultados.valorVenda !== 0
+                                ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100) 
+                                : 0
                             }
                             aria-label="custos totais" />
                     </CardFooter>
@@ -74,10 +74,11 @@ export const SimulatorPage = () =>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
                             {resultados
-                            ? resultados.totalInvestido !== 0
-                            ? `${((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2)}% de retorno líquido estimado com a venda do imóvel`
-                            : "0% de retorno líquido estimado com a venda"
-                            : "0% de retorno líquido estimado com a venda"}
+                                ? resultados.totalInvestido !== 0
+                                ? `${((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2)}% de retorno líquido estimado com a venda do imóvel`
+                                : "0% de retorno líquido estimado com a venda"
+                                : "0% de retorno líquido estimado com a venda"
+                            }
                         </div>
                     </CardContent>
                     <CardFooter>
