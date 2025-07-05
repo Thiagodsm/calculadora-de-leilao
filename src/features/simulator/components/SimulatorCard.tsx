@@ -66,7 +66,6 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                   className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
               >
                   <Copy className="h-3 w-3" />
-                  <span className="sr-only">Copy Order ID</span>
               </Button>
           </CardTitle>
           <CardDescription>Custos totais com a compra do imóvel</CardDescription>

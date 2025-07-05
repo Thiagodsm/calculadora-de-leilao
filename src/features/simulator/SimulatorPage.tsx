@@ -11,7 +11,6 @@ import { Progress } from "../../components/ui/progress";
 import { initialSimulatorResult } from "./constants/initialSimulatorResults";
 import { formatCurrency } from "./utils/formatters";
 
-
 export const SimulatorPage = () =>
 {
     const [tipoSimulacao, setTipoSimulacao] = useState<TipoSimulacao>("financiado");
@@ -30,27 +29,31 @@ export const SimulatorPage = () =>
     
     return(
         <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card className="sm:col-span-2">
                     <CardHeader className="pb-3">
-                        <CardTitle>Cálculos de Leilão de Extrajudicial</CardTitle>
+                        <CardTitle>Simulador de Leilão Extrajudicial</CardTitle>
                         <CardDescription className="leading-relaxed">
-                            O leilão extrajudicial é um processo que permite vender imóveis que foram dados como garantia em empréstimos que <strong>não foram pagos</strong>. O leilão é mais rápido e barato do que um processo judicial e pode oferecer imóveis a preços mais baixos do que o valor de mercado.
+                            Preencha os dados do imóvel para calcular automaticamente os custos da arrematação, estimar o lucro líquido e avaliar a viabilidade do investimento em leilões extrajudiciais.
                         </CardDescription>
                     </CardHeader>
                     <CardFooter>
-                        <Button>Faça sua simulação</Button>
+                        <Button className="md:mt-3">Faça sua simulação</Button>
                     </CardFooter>
                 </Card>
 
                 <Card>
                     <CardHeader className="pb-2">
-                        <CardDescription>Custos totais</CardDescription>
+                        <CardDescription>Investimento Total</CardDescription>
                         <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.totalInvestido): "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
-                            Custos da arrematação até a venda, com lucro bruto de: {resultados && resultados.valorVenda !== 0 ? (Math.min((1-(resultados.valorArrematacao / resultados.valorVenda)), 1) * 100).toFixed(2) : 0}%
+                            Soma dos custos da arrematação até a venda. Lucro bruto estimado:{" "}
+                            {resultados && resultados.valorVenda !== 0
+                                ? (Math.min((1 - resultados.valorArrematacao / resultados.valorVenda), 1) * 100).toFixed(2)
+                                : 0}
+                            %
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -65,12 +68,16 @@ export const SimulatorPage = () =>
 
                 <Card>
                     <CardHeader className="pb-2">
-                        <CardDescription>Lucro líquido</CardDescription>
+                        <CardDescription>Lucro líquido Estimado</CardDescription>
                         <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.lucroLiquido) : "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
-                            {resultados ? ( resultados.totalInvestido !== 0 ? ((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2) : 0) : "0"}% de lucro líquido com a venda do imóvel
+                            {resultados
+                            ? resultados.totalInvestido !== 0
+                            ? `${((resultados.lucroLiquido / resultados.totalInvestido) * 100).toFixed(2)}% de retorno líquido estimado com a venda do imóvel`
+                            : "0% de retorno líquido estimado com a venda"
+                            : "0% de retorno líquido estimado com a venda"}
                         </div>
                     </CardContent>
                     <CardFooter>
