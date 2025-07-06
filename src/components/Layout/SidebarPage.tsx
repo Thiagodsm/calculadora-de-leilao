@@ -4,9 +4,16 @@ import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "../ui/theme-provider";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "./Footer";
+import { useEffect, useState } from "react";
 
 export default function SidebarPage() {
   const { theme, setTheme } = useTheme();
+
+  const[mounted, setMounted] = useState(false);
+
+  useEffect(() =>{
+    setMounted(true);
+  }, []);
 
   const onDarkModeToggle = (e: boolean) => {
     setTheme(e ? "dark" : "light");
@@ -27,12 +34,12 @@ export default function SidebarPage() {
             />
             <span className="font-mono font-bold text-lg sm:inline md:text-xl">T.SM</span>
           </Link>
-          <DarkModeSwitch
+          {mounted && (<DarkModeSwitch
             className="w-7 h-7"
             checked={theme === "dark"}
             onChange={onDarkModeToggle}
             size={20}
-          />
+          />)}
         </header>
           <div className="flex flex-col flex-1">
             <main className="flex-1 p-4 overflow-auto">
