@@ -19,7 +19,8 @@ export default function PixSupportSection()
             <p className="text-sm text-muted-foreground">Curtiu o projeto? Me ajude a manter a calculadora no ar com um cafezinho ☕</p>
 
             <div className="flex justify-center gap-2">
-                <Button variant="default" onClick={handleCopy}>
+                <Button 
+                    variant="default" onClick={handleCopy}>
                     <CoffeeIcon className="mr-2 h-4 w-4" />
                     {copied ? "Chave copiada!" : "Copiar chave Pix"}
                 </Button>
