@@ -42,12 +42,22 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
         const form = useForm<SchemaFormData>({
             resolver: zodResolver(formSchema),
             defaultValues: {
+                valorArrematacao: 187000,
+                valorVenda: 292000,
                 porcEntradaFinanciamento: 5,
+                taxaJurosAnual: 7.25,
                 prazoFinanciamento: 420,
+                comissaoLeiloeiro: 0,
                 itbi: 3,
-                comissaoImobiliaria: 6,
+                registroImovel: 2458.3,
+                comissaoImobiliaria: 0,
                 ir: 15,
+                gastosDesocupacao: 0,
+                valorReformas: 1400,
+                valorOutrosGastos: 3600,
                 prazoVenda: 12,
+                iptuMensal: 206.48,
+                condominioMensal: 0,
             },
             mode: 'onChange'
         });
