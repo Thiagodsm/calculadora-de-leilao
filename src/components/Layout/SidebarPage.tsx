@@ -29,7 +29,7 @@ export default function SidebarPage() {
           </Link>
           <DarkModeSwitch
             className="w-7 h-7"
-            checked={theme === "light"}
+            checked={theme === "dark"}
             onChange={onDarkModeToggle}
             size={20}
           />
