@@ -52,7 +52,7 @@ export function AppSidebar({ ...props }) {
                   <Handshake className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Calaculadora de leilão</span>
+                  <span className="font-medium">Calaculadora de Leilão</span>
                   <span className="text-xs">versão 1.0</span>
                 </div>
               </Link>
