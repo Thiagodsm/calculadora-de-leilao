@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { CoffeeIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export default function PixSupportSection() 
 {
@@ -10,6 +11,7 @@ export default function PixSupportSection()
     const handleCopy = () => {
         navigator.clipboard.writeText(pixKey);
         setCopied(true);
+        toast.success("Pix copiado com sucesso!");
         setTimeout(() => setCopied(false), 2000)
     };
 
