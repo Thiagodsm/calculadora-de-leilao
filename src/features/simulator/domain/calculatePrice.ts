@@ -6,7 +6,7 @@ export type SimulatorFormData = z.infer<typeof formSchema>;
 
 export function calculatePriceFinancing(data: SimulatorFormData): Parcela[]
 {
-    const valorFinanciado = data.valorVenda * (1 - data.porcEntradaFinanciamento / 100);
+    const valorFinanciado = data.valorArrematacao * (1 - data.porcEntradaFinanciamento / 100);
     const taxaMensal = data.taxaJurosAnual / 100 / 12;
     const prazo = data.prazoFinanciamento;
 
