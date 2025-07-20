@@ -30,13 +30,13 @@ const menus: Menu[] =[
       label: "Simulador",
       name: "Simulador",
       icon: <Gavel size={15} className="mr-2" />,
-      href: "/simulator",
+      href: "/simulador",
     },
     {
       label: "Sobre",
       name: "About",
       icon: <Contact size={15} className="mr-2" />,
-      href: "/about",
+      href: "/sobre",
     },
 ]
 
