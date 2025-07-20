@@ -45,7 +45,7 @@ export const SimulatorPage = () =>
                 <Card>
                     <CardHeader className="pb-2">
                         <CardDescription>Investimento Total</CardDescription>
-                        <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.totalInvestido): "R$ 0,00"}</CardTitle>
+                        <CardTitle className="text-4xl break-words truncate">{resultados ? formatCurrency(resultados.totalInvestido): "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
@@ -69,7 +69,7 @@ export const SimulatorPage = () =>
                 <Card>
                     <CardHeader className="pb-2">
                         <CardDescription>Lucro líquido Estimado</CardDescription>
-                        <CardTitle className="text-4xl">{resultados ? formatCurrency(resultados.lucroLiquido) : "R$ 0,00"}</CardTitle>
+                        <CardTitle className="text-4xl break-words truncate">{resultados ? formatCurrency(resultados.lucroLiquido) : "R$ 0,00"}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-xs text-muted-foreground">
