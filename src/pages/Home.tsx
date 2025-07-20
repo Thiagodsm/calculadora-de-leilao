@@ -21,7 +21,7 @@ export default function Home() {
               <strong>O leilão extrajudicial é uma forma de venda de imóveis realizada fora do processo judicial</strong>. Ele ocorre quando o proprietário não paga um financiamento ou empréstimo em que o imóvel foi dado como garantia (alienação fiduciária). Nesses casos, a instituição credora pode retomar o bem e vendê-lo em leilão público para recuperar a dívida. Esse tipo de leilão costuma ser mais rápido, menos burocrático e com custos reduzidos — o que pode representar uma boa oportunidade para comprar imóveis por valores abaixo do mercado.
             </CardDescription>
             <div className="mt-4 flex justify-center">
-              <Link to="/simulator">
+              <Link to="/simulador">
                 <Button variant="default">Ir para o simulador</Button>
               </Link>
             </div>
