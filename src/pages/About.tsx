@@ -24,7 +24,7 @@ export default function About() {
       </div>
 
       <div className="space-y-4 text-base text-muted-foreground leading-relaxed text-justify">
-        <h2 className="text-xl font-semibold text-foreground">Por decidi desenvolver a calculadora?</h2>
+        <h2 className="text-xl font-semibold text-foreground">Por que decidi desenvolver a calculadora?</h2>
 
         <p>
           Tenho observado um crescente interesse em imóveis de leilão, impulsionado por influenciadores e criadores de conteúdo. 
