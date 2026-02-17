@@ -182,3 +182,12 @@ src/
    ```bash
    git checkout -b feature/nova-funcionalidade
    ```
+3. Faça commit das alterações:
+    ```bash
+   git commit -m "feat: nova funcionalidade"
+   ```
+4. Envie para seu fork:
+ ```bash
+   git push origin feature/nova-funcionalidade
+   ```
+5. Abra um Pull Request
