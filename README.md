@@ -4,13 +4,12 @@
 
 A ferramenta foi criada para investidores imobiliários avaliarem a viabilidade financeira de imóveis arrematados em leilão, considerando financiamento, impostos, taxas, despesas operacionais e custos de venda.
 
----
+
 
 ## 🌐 Acesse a Aplicação
 
 👉 https://calculadoradeleilao.com/
 
----
 
 ## 🚀 Funcionalidades
 
@@ -163,7 +162,7 @@ src/
 ├── lib/                   # Helpers e utilidades globais
 ├── pages/                 # Páginas da aplicação (routes)
 └── schemas/               # Schemas globais de validação
-
+```
 
 
 ## 🎯 Roadmap
