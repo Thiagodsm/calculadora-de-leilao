@@ -146,17 +146,17 @@ npm run preview
 ```bash
 src/
 ├── components/
-│   ├── Layout/          # Componentes de layout (Header, Sidebar, Footer, etc.)
+│   ├── Layout/           # Componentes de layout (Header, Sidebar, Footer, etc.)
 │   └── ui/               # Componentes reutilizáveis (ShadCN UI)
 │
 ├── features/
 │   └── simulator/        # Módulo principal da Calculadora de Leilão
-│       ├── components/    # Componentes específicos do simulador
-│       ├── constants/     # Constantes de negócio (taxas, defaults, labels)
-│       ├── domain/         # Regras de negócio (SAC, Price, cálculos financeiros)
-│       ├── schemas/        # Schemas de validação (Zod / React Hook Form)
-│       ├── types/           # Tipagens TypeScript
-│       └── utils/           # Funções auxiliares do simulador
+│       ├── components/   # Componentes específicos do simulador
+│       ├── constants/    # Constantes de negócio (taxas, defaults, labels)
+│       ├── domain/       # Regras de negócio (SAC, Price, cálculos financeiros)
+│       ├── schemas/      # Schemas de validação (Zod / React Hook Form)
+│       ├── types/        # Tipagens TypeScript
+│       └── utils/        # Funções auxiliares do simulador
 │
 ├── hooks/                 # Hooks customizados (React)
 ├── lib/                   # Helpers e utilidades globais
