@@ -187,7 +187,7 @@ src/
    git commit -m "feat: nova funcionalidade"
    ```
 4. Envie para seu fork:
- ```bash
-   git push origin feature/nova-funcionalidade
+    ```bash
+      git push origin feature/nova-funcionalidade
    ```
 5. Abra um Pull Request
