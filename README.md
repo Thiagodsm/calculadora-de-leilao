@@ -158,10 +158,10 @@ src/
 │       ├── types/        # Tipagens TypeScript
 │       └── utils/        # Funções auxiliares do simulador
 │
-├── hooks/                 # Hooks customizados (React)
-├── lib/                   # Helpers e utilidades globais
-├── pages/                 # Páginas da aplicação (routes)
-└── schemas/               # Schemas globais de validação
+├── hooks/                # Hooks customizados (React)
+├── lib/                  # Helpers e utilidades globais
+├── pages/                # Páginas da aplicação (routes)
+└── schemas/              # Schemas globais de validação
 ```
 
 
