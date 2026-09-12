@@ -21,19 +21,19 @@ const COLORS = [
 ];
 
 const renderCustomLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
+  cx = 0,
+  cy = 0,
+  midAngle = 0,
+  innerRadius = 0,
+  outerRadius = 0,
+  percent = 0,
 }: {
-  cx: number;
-  cy: number;
-  midAngle: number;
-  innerRadius: number;
-  outerRadius: number;
-  percent: number;
+  cx?: number;
+  cy?: number;
+  midAngle?: number;
+  innerRadius?: number;
+  outerRadius?: number;
+  percent?: number;
 }) => {
   if (percent < 0.04) return null;
   const RADIAN = Math.PI / 180;
@@ -55,8 +55,9 @@ const renderCustomLabel = ({
   );
 };
 
-const renderLegendText = (value: string, entry: { payload?: { value: number; percent?: number } }) => {
-  const pct = entry.payload?.percent !== undefined
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderLegendText = (value: string, entry: any) => {
+  const pct = entry?.payload?.percent !== undefined
     ? ` (${(entry.payload.percent * 100).toFixed(1)}%)`
     : "";
   return (
