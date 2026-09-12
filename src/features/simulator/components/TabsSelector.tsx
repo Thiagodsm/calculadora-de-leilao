@@ -1,6 +1,6 @@
 import { TabsList, TabsTrigger, Tabs } from "../../../components/ui/tabs";
 import { Button } from "../../../components/ui/button";
-import { Eraser, File } from "lucide-react";
+import { Eraser } from "lucide-react";
 import { TipoSimulacao } from "../types";
 
 interface TabsSelectorProps {
@@ -22,22 +22,13 @@ export const TabsSelector = ({ tipoSimulacao, onChange, onClear }: TabsSelectorP
 
       <div className="ml-auto flex items-center gap-2">
         <Button
-          variant="destructive"
+          variant="outline"
           size="sm"
           className="h-7 gap-1 text-sm"
           onClick={onClear}
         >
           <Eraser className="h-3.5 w-3.5" />
           <span className="sr-only sm:not-sr-only">Limpar</span>
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className="h-7 gap-1 text-sm"
-          disabled
-        >
-          <File className="h-3.5 w-3.5" />
-          <span className="sr-only sm:not-sr-only">Exportar</span>
         </Button>
       </div>
     </div>

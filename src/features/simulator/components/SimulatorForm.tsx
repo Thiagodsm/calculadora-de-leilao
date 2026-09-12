@@ -5,8 +5,14 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,    
+    FormMessage,
 } from "../../../components/ui/form";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "../../../components/ui/accordion";
 import MoneyInput from "../../../components/MoneyInput";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
@@ -24,9 +30,12 @@ type SchemaFormData = z.infer<typeof formSchema>;
 
 export type SimuladorFormRef = {
     resetForm: () => void;
+    setValorArrematacao: (value: number) => void;
+    getValues: () => SchemaFormData;
+    submitForm: () => void;
 };
 
-interface SimulatorFormProps 
+interface SimulatorFormProps
 {
     onSubmit: (result: SimulatorResult) => void;
     isFinanced: boolean;
@@ -60,16 +69,6 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
             mode: 'onChange'
         });
 
-        useImperativeHandle(
-            ref, 
-            () =>({
-                resetForm: () => {
-                    form.reset();
-                    setFinancingType("SAC");
-                }
-            })
-        );
-
         const handleOnSubmit = (data: SchemaFormData) =>
         {
             const results = calculateProfits({
@@ -80,256 +79,290 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
             onSubmit(results);
         };
 
+        useImperativeHandle(
+            ref,
+            () =>({
+                resetForm: () => {
+                    form.reset();
+                    setFinancingType("SAC");
+                },
+                setValorArrematacao: (value: number) => {
+                    form.setValue('valorArrematacao', value);
+                },
+                getValues: () => form.getValues(),
+                submitForm: () => {
+                    form.handleSubmit(handleOnSubmit)();
+                },
+            })
+        );
+
         return (
             <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-4">
-                <FormField
-                control={form.control}
-                name="valorArrematacao"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Valor de Arrematação</FormLabel>
-                    <FormControl>
-                        <MoneyInput value={field.value} onChange={field.onChange} />
-                    </FormControl>
-                    <FormDescription>Valor de arrematação do imóvel</FormDescription>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-                <FormField
-                    control={form.control}
-                    name="valorVenda"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Valor de Venda</FormLabel>
-                        <FormControl >
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                {isFinanced && (
-                    <>
-                        <h6 className="font-semibold mb-4">Valores do Financiamento</h6>
-                        <FormField
+            <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-2">
+                <Accordion type="multiple" defaultValue={["imovel", ...(isFinanced ? ["financiamento"] : [])]}>
+
+                    <AccordionItem value="imovel">
+                        <AccordionTrigger className="text-sm font-semibold">Imóvel</AccordionTrigger>
+                        <AccordionContent className="space-y-4 pt-2">
+                            <FormField
                             control={form.control}
-                            name="porcEntradaFinanciamento"
+                            name="valorArrematacao"
                             render={({ field }) => (
                                 <FormItem>
-                                <FormLabel>Porcentagem de Entrada (%)</FormLabel>
+                                <FormLabel>Valor de Arrematação</FormLabel>
                                 <FormControl>
                                     <MoneyInput value={field.value} onChange={field.onChange} />
                                 </FormControl>
+                                <FormDescription>Valor de arrematação do imóvel</FormDescription>
                                 <FormMessage />
                                 </FormItem>
                             )}
-                        />
-
-                        <FormField
-                            control={form.control}
-                            name="taxaJurosAnual"
-                            render={({ field }) => (
-                                <FormItem>
-                                <FormLabel>Taxa de Juros Anual (%)</FormLabel>
-                                <FormControl>
-                                    <MoneyInput value={field.value} onChange={field.onChange} />
-                                </FormControl>
-                                <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        <FormField
-                            control={form.control}
-                            name="prazoFinanciamento"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Prazo de Financiamento (meses)</FormLabel>
+                            />
+                            <FormField
+                                control={form.control}
+                                name="valorVenda"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Valor de Venda</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="number" placeholder="Prazo de Financiamento (meses)" />
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
                                     </FormControl>
                                     <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <div>
-                            <Label>Forma de Financiamento</Label>
-                            <RadioGroup 
-                                className="mt-2" 
-                                value={financingType}
-                                onValueChange={(value) => setFinancingType(value as TipoFinanciamento)}
-                            >
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="PRICE" id="price">Price</RadioGroupItem>
-                                    <Label htmlFor="price">Price</Label>
+                                    </FormItem>
+                                )}
+                            />
+                        </AccordionContent>
+                    </AccordionItem>
 
-                                    <RadioGroupItem value="SAC" id="sac">SAC</RadioGroupItem>
-                                    <Label htmlFor="sac">SAC</Label>
+                    {isFinanced && (
+                        <AccordionItem value="financiamento">
+                            <AccordionTrigger className="text-sm font-semibold">Financiamento</AccordionTrigger>
+                            <AccordionContent className="space-y-4 pt-2">
+                                <FormField
+                                    control={form.control}
+                                    name="porcEntradaFinanciamento"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                        <FormLabel>Porcentagem de Entrada (%)</FormLabel>
+                                        <FormControl>
+                                            <MoneyInput value={field.value} onChange={field.onChange} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="taxaJurosAnual"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                        <FormLabel>Taxa de Juros Anual (%)</FormLabel>
+                                        <FormControl>
+                                            <MoneyInput value={field.value} onChange={field.onChange} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="prazoFinanciamento"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Prazo de Financiamento (meses)</FormLabel>
+                                            <FormControl>
+                                                <Input {...field} type="number" placeholder="Prazo de Financiamento (meses)" />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div>
+                                    <Label>Forma de Financiamento</Label>
+                                    <RadioGroup
+                                        className="mt-2"
+                                        value={financingType}
+                                        onValueChange={(value) => setFinancingType(value as TipoFinanciamento)}
+                                    >
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="PRICE" id="price">Price</RadioGroupItem>
+                                            <Label htmlFor="price">Price</Label>
+                                            <RadioGroupItem value="SAC" id="sac">SAC</RadioGroupItem>
+                                            <Label htmlFor="sac">SAC</Label>
+                                        </div>
+                                    </RadioGroup>
                                 </div>
-                            </RadioGroup>
-                        </div>
-                    </>
-                )}
+                            </AccordionContent>
+                        </AccordionItem>
+                    )}
 
-                <h6 className="font-semibold mb-4">Custos para arrematar</h6>
-                <FormField
-                    control={form.control}
-                    name="comissaoLeiloeiro"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                    <AccordionItem value="aquisicao">
+                        <AccordionTrigger className="text-sm font-semibold">Custos de Aquisição</AccordionTrigger>
+                        <AccordionContent className="space-y-4 pt-2">
+                            <FormField
+                                control={form.control}
+                                name="comissaoLeiloeiro"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="itbi"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>ITBI (%)</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormDescription>Imposto sobre a Transmissão de Bens Imóveis</FormDescription>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="registroImovel"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Registro do Imóvel</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="gastosDesocupacao"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Gastos com Desocupação</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormDescription>Advogado ou acordo para desocupar o imóvel</FormDescription>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="valorReformas"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Reformas</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="valorOutrosGastos"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Outros Gastos</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormDescription>Dívidas do imóvel, penhora, IPTU antigo, etc.</FormDescription>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </AccordionContent>
+                    </AccordionItem>
 
-                <FormField
-                    control={form.control}
-                    name="itbi"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>ITBI (%)</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormDescription>Imposto sobre a Transmissão de Bens Imóveis - incide sobre a transferência de bens imóveis.</FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="registroImovel"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Valor do Registro do Imóvel</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="gastosDesocupacao"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Gastos com Desocupação</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormDescription>Valores gastos com advogado ou atual morador para desocupar o imóvel</FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="valorReformas"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Reformas</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                    <AccordionItem value="manutencao">
+                        <AccordionTrigger className="text-sm font-semibold">Custos de Manutenção</AccordionTrigger>
+                        <AccordionContent className="space-y-4 pt-2">
+                            <FormField
+                                control={form.control}
+                                name="prazoVenda"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Prazo de venda (meses)</FormLabel>
+                                    <FormControl>
+                                        <Input {...field} type="number" placeholder="Prazo de Venda" />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="iptuMensal"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>IPTU Mensal</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="condominioMensal"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Condomínio Mensal</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </AccordionContent>
+                    </AccordionItem>
 
-                <FormField
-                    control={form.control}
-                    name="valorOutrosGastos"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Outros Gastos</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        <FormDescription>Custos com dividas do imóvel, penhora, IPTU antigo entre outros.</FormDescription>
-                        </FormItem>
-                    )}
-                />
+                    <AccordionItem value="venda">
+                        <AccordionTrigger className="text-sm font-semibold">Custos de Venda</AccordionTrigger>
+                        <AccordionContent className="space-y-4 pt-2">
+                            <FormField
+                                control={form.control}
+                                name="comissaoImobiliaria"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Comissão da Imobiliária (%)</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="ir"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Imposto de Renda (%)</FormLabel>
+                                    <FormControl>
+                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </AccordionContent>
+                    </AccordionItem>
 
-                <h6 className="font-semibold mb-4">Custos até a venda</h6>
-                <FormField
-                    control={form.control}
-                    name="prazoVenda"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Prazo de venda (meses)</FormLabel>
-                        <FormControl>
-                            <Input {...field} type="number" placeholder="Prazo de Venda" />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                </Accordion>
 
-                <FormField
-                    control={form.control}
-                    name="iptuMensal"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>IPTU Mensal</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="condominioMensal"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Condomínio mensal</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <h6 className="font-semibold mb-4">Custos de venda</h6>
-                <FormField
-                    control={form.control}
-                    name="comissaoImobiliaria"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Comissão da Imobiliária (%)</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="ir"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Imposto de Renda (%)</FormLabel>
-                        <FormControl>
-                            <MoneyInput value={field.value} onChange={field.onChange} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Calcular</Button>
+                <Button type="submit" className="w-full mt-4">Calcular Rentabilidade</Button>
             </form>
             </Form>
         );

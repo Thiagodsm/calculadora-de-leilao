@@ -9,7 +9,7 @@ import { calculateSacDebts } from './calculateSacDebts';
 
 export type SimulatorFormData = z.infer<typeof formSchema>;
 
-interface ProfitCalculationInput extends SimulatorFormData
+export interface ProfitCalculationInput extends SimulatorFormData
 {
     isFinanced: boolean;
     tipoFinanciamento: TipoFinanciamento;
@@ -75,6 +75,17 @@ export function calculateProfits({ isFinanced, tipoFinanciamento, ...data }: Pro
 
     const lucroLiquido = data.valorVenda - totalInvestido - totalCustosVenda - saldoDevedor;
 
+  // capitalProprio = cash personally invested (down payment + all acquisition costs).
+  // Excludes the bank's portion (valorFinanciamento), showing the leverage effect on ROE.
+  const capitalProprio = isFinanced
+    ? totalCustosParciais
+    : totalInvestido;
+
+  const roi = totalInvestido !== 0 ? (lucroLiquido / totalInvestido) * 100 : 0;
+  const roe = isFinanced && capitalProprio !== 0
+    ? (lucroLiquido / capitalProprio) * 100
+    : null;
+
   return {
     valorArrematacao: data.valorArrematacao,
     valorVenda: data.valorVenda,
@@ -110,6 +121,10 @@ export function calculateProfits({ isFinanced, tipoFinanciamento, ...data }: Pro
     tipoSimulacao: isFinanced ? "financiado" : "avista",
     tipoFinanciamento: tipoFinanciamento,
     totalPagoParcelas: totalPagoParcelas,
-    saldoDevedor: saldoDevedor
+    saldoDevedor: saldoDevedor,
+    parcelas,
+    roi,
+    roe,
+    capitalProprio,
   };
 }

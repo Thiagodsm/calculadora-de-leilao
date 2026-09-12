@@ -13,17 +13,19 @@ export function calculateSacFinancing(data: SimulatorFormData): Parcela[]
     const amortizacao = valorFinanciado / prazo;
     let parcelas: Parcela[] = [];
 
-    for (let i = 0; i < prazo; i++) 
+    for (let i = 0; i < prazo; i++)
     {
-        const saldoDevedor = valorFinanciado - amortizacao * i;
-        const juros = saldoDevedor * taxaMensal;
+        const saldoAntes = valorFinanciado - amortizacao * i;
+        const juros = saldoAntes * taxaMensal;
         const valorParcela = amortizacao + juros;
+        const saldoDevedor = saldoAntes - amortizacao;
 
         parcelas.push({
             numero: i + 1,
             amortizacao,
             juros,
             valor: Number(valorParcela.toFixed(2)),
+            saldoDevedor: Number(Math.max(saldoDevedor, 0).toFixed(2)),
         });
     }
 

@@ -18,7 +18,7 @@ export function calculatePriceFinancing(data: SimulatorFormData): Parcela[]
 
     let saldoDevedor = valorFinanciado;
 
-    for (let i = 0; i < prazo; i++) 
+    for (let i = 0; i < prazo; i++)
     {
         const juros = saldoDevedor * taxaMensal;
         const amortizacao = valorParcela - juros;
@@ -29,6 +29,7 @@ export function calculatePriceFinancing(data: SimulatorFormData): Parcela[]
             amortizacao,
             juros,
             valor: valorParcela,
+            saldoDevedor: Number(Math.max(saldoDevedor, 0).toFixed(2)),
         });
     }
 

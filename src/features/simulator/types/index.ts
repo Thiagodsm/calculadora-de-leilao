@@ -47,4 +47,7 @@ export type SimulatorResult = {
   tipoFinanciamento: TipoFinanciamento,
   totalPagoParcelas: number;
   saldoDevedor: number;
+  roi: number;
+  roe: number | null;
+  capitalProprio: number;
 };

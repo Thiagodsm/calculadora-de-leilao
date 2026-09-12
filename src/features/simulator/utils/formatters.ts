@@ -17,3 +17,18 @@ export function formatPrecision(valor: number, precision: number, sufix?: string
         return "-";
     return valor.toFixed(precision);
 }
+
+export function formatPercent(value: number, decimals = 2): string
+{
+    return value.toLocaleString("pt-BR", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+    }) + "%";
+}
+
+export function formatProfitClass(value: number): string
+{
+    if (value > 0) return "text-emerald-600 dark:text-emerald-400";
+    if (value < 0) return "text-destructive";
+    return "text-muted-foreground";
+}

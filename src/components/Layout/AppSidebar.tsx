@@ -7,7 +7,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "../ui/sidebar";
 import { Handshake } from "lucide-react";
 import { Gavel, House, Contact} from "lucide-react";
@@ -78,7 +77,6 @@ export function AppSidebar({ ...props }) {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarRail />
     </Sidebar>
   )
 }

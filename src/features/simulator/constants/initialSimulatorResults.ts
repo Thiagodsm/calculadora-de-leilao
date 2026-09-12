@@ -35,5 +35,8 @@ export const initialSimulatorResult: SimulatorResult = {
   lucroLiquido: 0,
   tipoFinanciamento: "SAC",
   totalPagoParcelas: 0,
-  saldoDevedor: 0
+  saldoDevedor: 0,
+  roi: 0,
+  roe: null,
+  capitalProprio: 0,
 };
