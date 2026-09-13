@@ -50,7 +50,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
             resolver: zodResolver(formSchema),
             defaultValues: {
                 valorArrematacao: 187000,
-                valorVenda: 292000,
+                valorVenda: 240000,
                 porcEntradaFinanciamento: 5,
                 taxaJurosAnual: 10.47,
                 prazoFinanciamento: 420,
