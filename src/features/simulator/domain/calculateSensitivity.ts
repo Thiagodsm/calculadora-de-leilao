@@ -1,7 +1,7 @@
 import { calculateProfits, ProfitCalculationInput } from "./calculateProfit";
 import { SensitivityMatrix, SensitivityRow, SensitivityCell } from "../types/analytics";
 
-const DEFAULT_TIME_ROWS = [6, 12, 18, 24];
+const DEFAULT_TIME_ROWS = [3, 6, 12, 18, 24];
 const DEFAULT_DISCOUNT_COLS = [0, 5, 10, 15];
 
 export function calculateSensitivity(

@@ -245,9 +245,14 @@ export const SimulatorPage = () =>
                                 <Card>
                                     <CardHeader className="pb-2">
                                         <CardTitle className="text-sm font-semibold">Análise de Sensibilidade</CardTitle>
-                                        <CardDescription className="text-xs">
-                                            Lucro líquido por prazo de venda × desconto no preço de venda
+                                        <CardDescription className="text-xs leading-relaxed">
+                                            Simula como o lucro e o ROI variam conforme o <strong>prazo para vender</strong> o imóvel (linhas) e um possível <strong>desconto no preço de venda</strong> em relação ao valor informado (colunas). Use para entender o pior e o melhor cenário antes de dar o lance.
                                         </CardDescription>
+                                        <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                                            <span><span className="inline-block w-2.5 h-2.5 rounded-sm bg-primary/20 ring-2 ring-primary mr-1 align-middle" />Cenário base (seus dados)</span>
+                                            <span><span className="inline-block w-2.5 h-2.5 rounded-sm bg-destructive/10 mr-1 align-middle" />Prejuízo</span>
+                                            <span className="text-muted-foreground/70">Linha marcada = seu cenário personalizado</span>
+                                        </div>
                                     </CardHeader>
                                     <CardContent>
                                         <SensitivityMatrix matrix={sensitivity} />
