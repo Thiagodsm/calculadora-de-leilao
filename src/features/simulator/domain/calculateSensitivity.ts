@@ -10,9 +10,10 @@ export function calculateSensitivity(
   discountCols: number[] = DEFAULT_DISCOUNT_COLS
 ): SensitivityMatrix
 {
-  const allTimes = timeRows.includes(baseInputs.prazoVenda)
+  const prazoVenda = Number(baseInputs.prazoVenda);
+  const allTimes = timeRows.includes(prazoVenda)
     ? [...timeRows]
-    : [...timeRows, baseInputs.prazoVenda].sort((a, b) => a - b);
+    : [...timeRows, prazoVenda].sort((a, b) => a - b);
 
   const rows: SensitivityRow[] = allTimes.map((time) => {
     const isUserScenario = !DEFAULT_TIME_ROWS.includes(time);
@@ -25,7 +26,7 @@ export function calculateSensitivity(
         valorVenda: adjustedVenda,
       };
       const result = calculateProfits(clonedInputs);
-      const isBaseCase = time === baseInputs.prazoVenda && discount === 0;
+      const isBaseCase = time === prazoVenda && discount === 0;
 
       return {
         lucroLiquido: result.lucroLiquido,
