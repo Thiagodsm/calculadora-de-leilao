@@ -11,6 +11,7 @@ export function calculateSensitivity(
 ): SensitivityMatrix
 {
   const prazoVenda = Number(baseInputs.prazoVenda);
+  const prazoFinanciamento = Number(baseInputs.prazoFinanciamento);
   const allTimes = timeRows.includes(prazoVenda)
     ? [...timeRows]
     : [...timeRows, prazoVenda].sort((a, b) => a - b);
@@ -23,6 +24,7 @@ export function calculateSensitivity(
       const clonedInputs: ProfitCalculationInput = {
         ...baseInputs,
         prazoVenda: time,
+        prazoFinanciamento,
         valorVenda: adjustedVenda,
       };
       const result = calculateProfits(clonedInputs);
