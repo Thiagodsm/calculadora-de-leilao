@@ -1,3 +1,5 @@
+import avatarMale from "../../../assets/avatar-male.svg";
+import avatarFemale from "../../../assets/avatar-female.svg";
 import type { CasoSucesso } from "../types";
 
 export const casosDeSuccesso: CasoSucesso[] = [
@@ -6,6 +8,8 @@ export const casosDeSuccesso: CasoSucesso[] = [
       nome: "Matias dos Santos",
       perfil: "Investidor iniciante em Praia Grande-SP",
     },
+    avatarSrc: avatarMale,
+    avatarFallback: "MS",
     imovel: {
       tipo: "Casa",
       localidade: "Praia Grande-SP",
@@ -35,6 +39,8 @@ export const casosDeSuccesso: CasoSucesso[] = [
       nome: "Laís Vieira",
       perfil: "Investidora em Guarujá-SP",
     },
+    avatarSrc: avatarFemale,
+    avatarFallback: "LV",
     imovel: {
       tipo: "Apartamento",
       localidade: "Guarujá-SP",

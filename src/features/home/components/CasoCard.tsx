@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Separator } from "../../../components/ui/separator";
-import { User, MapPin, Home } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "../../../components/ui/avatar";
+import { MapPin, Home } from "lucide-react";
 import { formatCurrency } from "../../simulator/utils/formatters";
 import type { CasoSucesso } from "../types";
 
@@ -25,9 +26,12 @@ export default function CasoCard({ caso }: Props) {
       {/* Investidor */}
       <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-            <User className="size-5 text-primary" />
-          </div>
+          <Avatar className="size-10 shrink-0">
+            <AvatarImage src={caso.avatarSrc} alt={caso.investidor.nome} />
+            <AvatarFallback className="bg-primary/10 text-primary text-xs font-semibold">
+              {caso.avatarFallback}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <p className="font-semibold text-sm">{caso.investidor.nome}</p>
             <p className="text-xs text-muted-foreground">{caso.investidor.perfil}</p>

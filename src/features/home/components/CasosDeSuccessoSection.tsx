@@ -1,4 +1,6 @@
 import CasoCard from "./CasoCard";
+import TestimonialsCarousel from "./TestimonialsCarousel";
+import { Separator } from "../../../components/ui/separator";
 import type { CasoSucesso } from "../types";
 
 type Props = {
@@ -21,6 +23,14 @@ export default function CasosDeSuccessoSection({ casos }: Props) {
             <CasoCard key={caso.investidor.nome} caso={caso} />
           ))}
         </div>
+
+        <Separator className="my-10" />
+
+        <div className="text-center mb-6">
+          <h3 className="text-xl font-semibold mb-2">O que dizem os investidores</h3>
+          <p className="text-muted-foreground text-sm">Depoimentos de quem já usou a calculadora</p>
+        </div>
+        <TestimonialsCarousel casos={casos} />
       </div>
     </section>
   );

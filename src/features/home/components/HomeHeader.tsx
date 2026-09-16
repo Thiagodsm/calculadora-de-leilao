@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Modalidades Caixa", href: "#modalidades" },
   { label: "Como Funciona", href: "#como-funciona" },
   { label: "Casos de Sucesso", href: "#casos-sucesso" },
+  { label: "Blog", href: "/blog", isRouter: true },
   { label: "Planos", href: "#", disabled: true },
 ];
 
@@ -41,6 +42,14 @@ export default function HomeHeader() {
               >
                 {link.label}
               </span>
+            ) : link.isRouter ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </Link>
             ) : (
               <a
                 key={link.label}
@@ -99,6 +108,15 @@ export default function HomeHeader() {
               >
                 {link.label}
               </span>
+            ) : link.isRouter ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
             ) : (
               <a
                 key={link.label}

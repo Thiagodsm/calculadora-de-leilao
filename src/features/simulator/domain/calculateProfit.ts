@@ -5,7 +5,6 @@ import { Parcela, SimulatorResult, TipoFinanciamento } from '../types';
 import { calculatePriceFinancing } from './calculatePrice';
 import { calculateSacFinancing } from './calculateSac';
 import { calculatePriceDebts } from './calculatePriceDebts';
-import { calculateSacDebts } from './calculateSacDebts';
 
 export type SimulatorFormData = z.infer<typeof formSchema>;
 
@@ -34,7 +33,9 @@ export function calculateProfits({ isFinanced, tipoFinanciamento, ...data }: Pro
         if (tipoFinanciamento === "SAC")
         {
             parcelas = calculateSacFinancing(data);
-            saldoDevedor = calculateSacDebts(valorFinanciamento, data.prazoFinanciamento, data.prazoVenda);
+            saldoDevedor = data.prazoVenda > 0 && data.prazoVenda <= parcelas.length
+                ? (parcelas[data.prazoVenda - 1].saldoDevedor ?? 0)
+                : 0;
         }
         else if (tipoFinanciamento === "PRICE")
         {

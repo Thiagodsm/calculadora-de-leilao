@@ -207,7 +207,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                                 <div className="flex flex-col cursor-help">
                                     <div className="flex items-center gap-1">
                                         <PercentIcon className="h-4 w-4" />
-                                        <span>Lucro Líquido</span>
+                                        <span>ROI</span>
                                     </div>
                                     <span className="font-semibold">
                                         {formatPrecision((lucroLiquido / totalInvestido) * 100, 2, "%")}
@@ -215,7 +215,7 @@ export const SimulatorCard = ({result}: SimulatorCardProps) =>
                                 </div>
                             </TooltipTrigger>
                             <TooltipContent>
-                                Porcentagem de lucro líquido 
+                                Retorno sobre o total investido (ROI)
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>

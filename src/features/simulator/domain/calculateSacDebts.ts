@@ -3,10 +3,10 @@ export function calculateSacDebts(valorFinanciado: number, prazoTotalMeses: numb
     // Amortização constante no sistema SAC
     const amortizacao = parseFloat((valorFinanciado / prazoTotalMeses).toFixed(2));
 
-    let saldoDevedor = valorFinanciado - amortizacao;
+    let saldoDevedor = valorFinanciado;
 
     // Itera por cada parcela paga
-    for (let i = 0; i < parcelasPagas; i++) {  
+    for (let i = 0; i < parcelasPagas; i++) {
         saldoDevedor -= amortizacao;
     }
 

@@ -41,6 +41,8 @@ export type CasoSucesso = {
     roe?: number;
   };
   depoimento: string;
+  avatarSrc?: string;
+  avatarFallback: string;
 };
 
 export type RecursoAvancado = {

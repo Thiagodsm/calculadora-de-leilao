@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import PageMeta from "../seo/components/PageMeta";
 
 import { TipoSimulacao, SimulatorResult } from "./types";
 import { SensitivityMatrix as SensitivityMatrixType, ExportPayload } from "./types/analytics";
@@ -111,6 +112,12 @@ export const SimulatorPage = () =>
 
     return (
         <div className="grid auto-rows-max items-start gap-4 md:gap-6 lg:col-span-2">
+            <PageMeta
+                title="Simulador de Leilão Imobiliário – Cálculo Completo | T.SM"
+                description="Ferramenta gratuita para calcular o lucro líquido de imóveis arrematados em leilão. Suporta SAC, PRICE, financiamento e à vista."
+                keywords={["simulador leilão imobiliário", "calcular lucro leilão", "SAC PRICE financiamento leilão"]}
+                ogImage="/og-image.svg"
+            />
 
             {/* Header */}
             <Card>

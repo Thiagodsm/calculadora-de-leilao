@@ -3,7 +3,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "../ui/theme-provider";
 import { Link, Outlet } from "react-router-dom";
-import Footer from "./Footer";
+import SharedFooter from "./SharedFooter";
 
 export default function SidebarPage() {
   const { theme, setTheme } = useTheme();
@@ -38,7 +38,7 @@ export default function SidebarPage() {
             <main className="flex-1 p-4 overflow-auto">
               <Outlet />
             </main>
-            <Footer />
+            <SharedFooter />
           </div>
       </SidebarInset>
     </SidebarProvider>
