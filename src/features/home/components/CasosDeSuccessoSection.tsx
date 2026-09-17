@@ -1,6 +1,9 @@
 import CasoCard from "./CasoCard";
 import TestimonialsCarousel from "./TestimonialsCarousel";
 import { Separator } from "../../../components/ui/separator";
+import { Button } from "../../../components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import type { CasoSucesso } from "../types";
 
 type Props = {
@@ -31,6 +34,15 @@ export default function CasosDeSuccessoSection({ casos }: Props) {
           <p className="text-muted-foreground text-sm">Depoimentos de quem já usou a calculadora</p>
         </div>
         <TestimonialsCarousel casos={casos} />
+
+        <div className="mt-10 text-center">
+          <Button size="lg" asChild className="font-semibold px-8">
+            <Link to="/simulador">
+              Simule o seu próximo leilão
+              <ArrowRight className="ml-2 size-5" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

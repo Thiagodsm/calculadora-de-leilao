@@ -1,5 +1,8 @@
 import type React from "react";
 import { Card, CardContent, CardHeader } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import * as Icons from "lucide-react";
 import type { RecursoAvancado } from "../types";
 
@@ -37,6 +40,19 @@ export default function RecursosAvancadosSection({ recursos }: Props) {
               </Card>
             );
           })}
+        </div>
+
+        <div className="mt-14 text-center space-y-4">
+          <h3 className="text-xl font-semibold">Pronto para calcular? É gratuito.</h3>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+            Sem cadastro, sem limites. Simule quantas operações quiser agora mesmo.
+          </p>
+          <Button size="lg" asChild className="font-semibold px-10">
+            <Link to="/simulador">
+              Acessar a Calculadora
+              <ArrowRight className="ml-2 size-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
