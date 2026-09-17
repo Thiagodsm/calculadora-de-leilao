@@ -8,89 +8,93 @@ html {
 
 @layer base {
 :root {
-  --background: 0 0% 98%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --background: 0 0% 100%;
+  --foreground: 211 25% 8%;
+  --card: 0 0% 97%;
+  --card-foreground: 211 25% 8%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 243 75% 59%;
+  --popover-foreground: 211 25% 8%;
+  --primary: 204 88% 53%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 347 77% 50%;
+  --secondary: 211 25% 8%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 240 1% 90%;
+  --muted-foreground: 211 25% 8%;
+  --accent: 212 52% 93%;
+  --accent-foreground: 204 88% 53%;
+  --destructive: 356 91% 54%;
   --destructive-foreground: 0 0% 100%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 243 75% 59%;
-  --chart-1: 243 75% 59%;
-  --chart-2: 160 84% 39%;
-  --chart-3: 42 92% 56%;
-  --chart-4: 200 88% 53%;
-  --chart-5: 347 77% 50%;
+  --border: 201 31% 91%;
+  --input: 200 22% 97%;
+  --ring: 204 88% 53%;
+  --chart-1: 204 88% 53%;
+  --chart-2: 160 100% 36%;
+  --chart-3: 42 93% 56%;
+  --chart-4: 147 79% 42%;
+  --chart-5: 341 75% 51%;
   --chart-6: 262 83% 58%;
   --chart-7: 32 95% 44%;
   --chart-8: 142 76% 36%;
   --chart-9: 199 89% 48%;
   --chart-10: 316 72% 46%;
   --chart-11: 173 80% 40%;
-  --sidebar: 240 4.8% 95.9%;
-  --sidebar-background: 240 4.8% 95.9%;
-  --sidebar-foreground: 240 10% 3.9%;
-  --sidebar-primary: 243 75% 59%;
+  --sidebar: 0 0% 97%;
+  --sidebar-background: 0 0% 97%;
+  --sidebar-foreground: 211 25% 8%;
+  --sidebar-primary: 204 88% 53%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 240 5.9% 90%;
-  --sidebar-ring: 243 75% 59%;
-  --radius: 0.5rem;
+  --sidebar-accent: 212 52% 93%;
+  --sidebar-accent-foreground: 204 88% 53%;
+  --sidebar-border: 201 31% 91%;
+  --sidebar-ring: 204 88% 53%;
+  --radius: 1.3rem;
+  --font-sans: "Open Sans", sans-serif;
+  --font-mono: Menlo, monospace;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 5.5%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 243 75% 67%;
+  --background: 0 0% 0%;
+  --foreground: 200 7% 91%;
+  --card: 228 10% 10%;
+  --card-foreground: 0 0% 85%;
+  --popover: 0 0% 0%;
+  --popover-foreground: 200 7% 91%;
+  --primary: 204 88% 53%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 347 77% 55%;
+  --secondary: 200 13% 95%;
+  --secondary-foreground: 211 25% 8%;
+  --muted: 0 0% 9%;
+  --muted-foreground: 200 3% 46%;
+  --accent: 206 70% 8%;
+  --accent-foreground: 204 88% 53%;
+  --destructive: 356 91% 54%;
   --destructive-foreground: 0 0% 100%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 243 75% 67%;
-  --chart-1: 243 75% 67%;
-  --chart-2: 160 84% 45%;
-  --chart-3: 42 92% 60%;
-  --chart-4: 200 88% 60%;
-  --chart-5: 347 77% 60%;
+  --border: 210 5% 15%;
+  --input: 204 28% 18%;
+  --ring: 204 88% 53%;
+  --chart-1: 204 88% 53%;
+  --chart-2: 160 100% 36%;
+  --chart-3: 42 93% 56%;
+  --chart-4: 147 79% 42%;
+  --chart-5: 341 75% 51%;
   --chart-6: 262 83% 65%;
   --chart-7: 32 95% 55%;
   --chart-8: 142 76% 45%;
   --chart-9: 199 89% 55%;
   --chart-10: 316 72% 55%;
   --chart-11: 173 80% 48%;
-  --sidebar: 240 5.9% 10%;
-  --sidebar-background: 240 10% 3.9%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 243 75% 67%;
+  --sidebar: 228 10% 10%;
+  --sidebar-background: 228 10% 10%;
+  --sidebar-foreground: 0 0% 85%;
+  --sidebar-primary: 204 88% 53%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 3.7% 15.9%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 243 75% 67%;
-  --radius: 0.5rem;
+  --sidebar-accent: 206 70% 8%;
+  --sidebar-accent-foreground: 204 88% 53%;
+  --sidebar-border: 205 16% 26%;
+  --sidebar-ring: 204 88% 53%;
+  --radius: 1.3rem;
+  --font-sans: "Open Sans", sans-serif;
+  --font-mono: Menlo, monospace;
 }
 }
 
@@ -100,6 +104,7 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
   }
   input:not([type="checkbox"]):not([type="radio"]),
   textarea,
