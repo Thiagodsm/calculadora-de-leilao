@@ -19,7 +19,7 @@ html {
   --secondary: 211 25% 8%;
   --secondary-foreground: 0 0% 100%;
   --muted: 240 1% 90%;
-  --muted-foreground: 211 25% 8%;
+  --muted-foreground: 211 10% 45%;
   --accent: 212 52% 93%;
   --accent-foreground: 204 88% 53%;
   --destructive: 356 91% 54%;
@@ -64,7 +64,7 @@ html {
   --secondary: 200 13% 95%;
   --secondary-foreground: 211 25% 8%;
   --muted: 0 0% 9%;
-  --muted-foreground: 200 3% 46%;
+  --muted-foreground: 200 8% 65%;
   --accent: 206 70% 8%;
   --accent-foreground: 204 88% 53%;
   --destructive: 356 91% 54%;
