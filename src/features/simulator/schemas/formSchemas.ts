@@ -56,8 +56,8 @@ export const formSchema = z.object({
     .lte(10000000, "Máximo de 8 dígitos numéricos"),
   ir: z
     .coerce
-    .number({ invalid_type_error: 'IR é obrigatório.' })
-    .min(1, 'IR deve ser maior que zero.')
+    .number({ invalid_type_error: 'IR deve ser um número.' })
+    .min(0)
     .lte(100, "Máximo de 3 dígitos numéricos"),
   porcEntradaFinanciamento: z
     .coerce
