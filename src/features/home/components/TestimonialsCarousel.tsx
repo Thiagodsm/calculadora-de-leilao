@@ -29,8 +29,8 @@ export default function TestimonialsCarousel({ casos }: TestimonialsCarouselProp
           <CarouselItem key={caso.investidor.nome}>
             <Card className="border-0 shadow-none bg-muted/30">
               <CardContent className="flex flex-col items-center text-center gap-4 px-6 py-8 sm:px-10">
-                <Avatar className="size-16">
-                  <AvatarImage src={caso.avatarSrc} alt={caso.investidor.nome} />
+                <Avatar className="size-24 ring-4 ring-primary/20 shadow-lg">
+                  <AvatarImage src={caso.avatarSrc} alt={caso.investidor.nome} className="object-cover" />
                   <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
                     {caso.avatarFallback}
                   </AvatarFallback>
