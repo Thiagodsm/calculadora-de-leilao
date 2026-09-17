@@ -32,7 +32,7 @@ export default function HomeHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) =>
             link.disabled ? (
               <span
@@ -64,7 +64,7 @@ export default function HomeHeader() {
 
         {/* Direita: CTAs + dark mode toggle */}
         <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             <Button variant="ghost" asChild>
               <Link to="/simulador">Entrar</Link>
             </Button>
@@ -82,7 +82,7 @@ export default function HomeHeader() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-muted-foreground hover:text-foreground"
+            className="lg:hidden text-muted-foreground hover:text-foreground"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           >
@@ -94,7 +94,7 @@ export default function HomeHeader() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "md:hidden overflow-hidden transition-all duration-200",
+          "lg:hidden overflow-hidden transition-all duration-200",
           menuOpen ? "max-h-96" : "max-h-0"
         )}
       >
