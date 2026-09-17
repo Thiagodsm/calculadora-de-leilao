@@ -7,33 +7,48 @@ interface MoneyInputProps {
 }
 
 export default function MoneyInput({ value, onChange, ...props }: MoneyInputProps) {
-  const format = (value: number) => {
-    return (value ?? 0).toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-  };
+  const format = (v: number) =>
+    (v ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  const [inputValue, setInputValue] = useState(() => format(value ?? 0));
+  const [display, setDisplay] = useState(() => format(value ?? 0));
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
-    setInputValue(format(value));
-  }, [value]);
+    if (!focused) setDisplay(format(value));
+  }, [value, focused]);
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFocused(true);
+    const raw = value === 0 ? "" : String(value).replace(".", ",");
+    setDisplay(raw);
+    setTimeout(() => e.target.select(), 0);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const digits = e.target.value.replace(/\D/g, "");
-    const numeric = digits ? parseInt(digits, 10) / 100 : 0;
-    setInputValue(format(numeric));
-    onChange(numeric);
+    const raw = e.target.value.replace(/[^0-9,]/g, "");
+    const parts = raw.split(",");
+    const cleaned = parts.length > 2 ? parts[0] + "," + parts.slice(1).join("") : raw;
+    setDisplay(cleaned);
+    const parsed = parseFloat(cleaned.replace(",", ".")) || 0;
+    onChange(parsed);
+  };
+
+  const handleBlur = () => {
+    setFocused(false);
+    const parsed = parseFloat(display.replace(",", ".")) || 0;
+    setDisplay(format(parsed));
+    onChange(parsed);
   };
 
   return (
     <Input
       {...props}
-      inputMode="numeric"
-      value={inputValue}
+      inputMode="decimal"
+      value={display}
       onChange={handleChange}
-      placeholder="R$ 0,00"
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      placeholder="0,00"
     />
   );
 }
