@@ -14,6 +14,7 @@ import {
     AccordionTrigger,
 } from "../../../components/ui/accordion";
 import MoneyInput from "../../../components/MoneyInput";
+import PercentInput from "../../../components/PercentInput";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
@@ -145,7 +146,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                         <FormItem>
                                         <FormLabel>Porcentagem de Entrada (%)</FormLabel>
                                         <FormControl>
-                                            <MoneyInput value={field.value} onChange={field.onChange} />
+                                            <PercentInput value={field.value} onChange={field.onChange} />
                                         </FormControl>
                                         <FormMessage />
                                         </FormItem>
@@ -158,7 +159,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                         <FormItem>
                                         <FormLabel>Taxa de Juros Anual (%)</FormLabel>
                                         <FormControl>
-                                            <MoneyInput value={field.value} onChange={field.onChange} />
+                                            <PercentInput value={field.value} onChange={field.onChange} />
                                         </FormControl>
                                         <FormMessage />
                                         </FormItem>
@@ -206,7 +207,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                     <FormItem>
                                     <FormLabel>Comissão do Leiloeiro (%)</FormLabel>
                                     <FormControl>
-                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                        <PercentInput value={field.value} onChange={field.onChange} />
                                     </FormControl>
                                     <FormMessage />
                                     </FormItem>
@@ -219,7 +220,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                     <FormItem>
                                     <FormLabel>ITBI (%)</FormLabel>
                                     <FormControl>
-                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                        <PercentInput value={field.value} onChange={field.onChange} />
                                     </FormControl>
                                     <FormDescription>Imposto sobre a Transmissão de Bens Imóveis</FormDescription>
                                     <FormMessage />
@@ -338,7 +339,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                     <FormItem>
                                     <FormLabel>Comissão da Imobiliária (%)</FormLabel>
                                     <FormControl>
-                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                        <PercentInput value={field.value} onChange={field.onChange} />
                                     </FormControl>
                                     <FormMessage />
                                     </FormItem>
@@ -351,7 +352,7 @@ export const SimuladorForm = forwardRef<SimuladorFormRef, SimulatorFormProps>(
                                     <FormItem>
                                     <FormLabel>Imposto de Renda (%)</FormLabel>
                                     <FormControl>
-                                        <MoneyInput value={field.value} onChange={field.onChange} />
+                                        <PercentInput value={field.value} onChange={field.onChange} />
                                     </FormControl>
                                     <FormMessage />
                                     </FormItem>
