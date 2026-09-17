@@ -1,8 +1,11 @@
 import type { ArticlePost } from "../types";
+import blogLucro from "../../../assets/blog-lucro.avif";
+import blogItbi from "../../../assets/blog-itbi.jpg";
 
 export const posts: ArticlePost[] = [
   {
     slug: "como-calcular-lucro-leilao-imobiliario",
+    coverImage: blogLucro,
     title: "Como Calcular o Lucro Real de um Imóvel em Leilão Extrajudicial",
     summary:
       "Aprenda passo a passo como calcular o lucro líquido de um imóvel arrematado em leilão da Caixa, considerando todos os custos ocultos.",
@@ -123,6 +126,7 @@ export const posts: ArticlePost[] = [
   },
   {
     slug: "o-que-e-itbi-em-leilao-caixa",
+    coverImage: blogItbi,
     title: "O que é ITBI no Leilão da Caixa e Como Ele Afeta o Lucro",
     summary:
       "Entenda o que é o ITBI, como ele é calculado em leilões da Caixa, a variação por município e o impacto real no lucro da operação.",
