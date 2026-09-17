@@ -131,15 +131,15 @@ export const SimulatorPage = () =>
                     {hasResult && (
                         <div className="flex flex-wrap gap-2 pt-2">
                             <Badge
-                                variant="secondary"
+                                variant="outline"
                                 className={cn("text-sm font-bold px-3 py-1", formatProfitClass(resultados.lucroLiquido))}
                             >
                                 Lucro: {formatCurrency(resultados.lucroLiquido)}
                             </Badge>
-                            <Badge variant="secondary" className={cn("text-sm font-semibold px-3 py-1", formatProfitClass(resultados.roi))}>
+                            <Badge variant="outline" className={cn("text-sm font-semibold px-3 py-1", formatProfitClass(resultados.roi))}>
                                 ROI: {formatPercent(resultados.roi)}
                             </Badge>
-                            <Badge variant="secondary" className="text-sm px-3 py-1 text-muted-foreground">
+                            <Badge variant="outline" className="text-sm px-3 py-1 text-muted-foreground">
                                 Investido: {formatCurrency(resultados.totalInvestido)}
                             </Badge>
                         </div>
@@ -154,7 +154,7 @@ export const SimulatorPage = () =>
                             <AccordionContent>
                                 <div className="grid gap-3 sm:grid-cols-2 pt-2">
                                     {HOW_IT_WORKS.map((item) => (
-                                        <div key={item.title} className="rounded-md bg-muted/60 p-3">
+                                        <div key={item.title} className="rounded-md bg-muted p-3">
                                             <p className="text-sm font-semibold mb-1">{item.title}</p>
                                             <p className="text-xs text-muted-foreground leading-relaxed">{item.text}</p>
                                         </div>
