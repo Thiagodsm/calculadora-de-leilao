@@ -13,15 +13,16 @@ import { adsenseConfig } from "./config/adsense";
 function App() {
   return (
     <Providers>
-      {adsenseConfig.enabled && (
-        <Helmet>
+      <Helmet>
+        <meta name="google-adsense-account" content="ca-pub-4367506788753041" />
+        {adsenseConfig.enabled && (
           <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.clientId}`}
             crossOrigin="anonymous"
           />
-        </Helmet>
-      )}
+        )}
+      </Helmet>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
