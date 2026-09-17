@@ -25,10 +25,10 @@ export default function CasoCard({ caso }: Props) {
     <Card className="flex flex-col h-full">
       {/* Investidor */}
       <CardHeader className="pb-3">
-        <div className="flex items-center gap-3">
-          <Avatar className="size-14 shrink-0 ring-2 ring-primary/30 shadow-md">
-            <AvatarImage src={caso.avatarSrc} alt={caso.investidor.nome} className="object-cover" />
-            <AvatarFallback className="bg-primary/10 text-primary text-xs font-semibold">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <Avatar className="size-20 ring-2 ring-primary/30 shadow-md">
+            <AvatarImage src={caso.avatarSrc} alt={caso.investidor.nome} className="object-cover object-top" />
+            <AvatarFallback className="bg-primary/10 text-primary text-sm font-semibold">
               {caso.avatarFallback}
             </AvatarFallback>
           </Avatar>
