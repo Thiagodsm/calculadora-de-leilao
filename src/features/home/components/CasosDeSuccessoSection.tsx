@@ -35,7 +35,8 @@ export default function CasosDeSuccessoSection({ casos }: Props) {
         </div>
         <TestimonialsCarousel casos={casos} />
 
-        <div className="mt-10 text-center">
+        <div className="mt-10 rounded-xl bg-primary/5 border border-primary/20 px-6 py-8 text-center space-y-4">
+          <p className="font-semibold text-base">Sua operação pode ser a próxima história de sucesso.</p>
           <Button size="lg" asChild className="font-semibold px-8">
             <Link to="/simulador">
               Simule o seu próximo leilão

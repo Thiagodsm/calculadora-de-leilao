@@ -42,12 +42,12 @@ export default function RecursosAvancadosSection({ recursos }: Props) {
           })}
         </div>
 
-        <div className="mt-14 text-center space-y-4">
-          <h3 className="text-xl font-semibold">Pronto para calcular? É gratuito.</h3>
-          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+        <div className="mt-14 rounded-xl bg-primary px-8 py-10 text-center space-y-4">
+          <h3 className="text-xl font-semibold text-primary-foreground">Pronto para calcular? É gratuito.</h3>
+          <p className="text-primary-foreground/80 text-sm max-w-md mx-auto">
             Sem cadastro, sem limites. Simule quantas operações quiser agora mesmo.
           </p>
-          <Button size="lg" asChild className="font-semibold px-10">
+          <Button size="lg" variant="secondary" asChild className="font-semibold px-10">
             <Link to="/simulador">
               Acessar a Calculadora
               <ArrowRight className="ml-2 size-5" />
