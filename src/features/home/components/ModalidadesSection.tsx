@@ -7,7 +7,7 @@ type Props = {
 
 export default function ModalidadesSection({ modalidades }: Props) {
   return (
-    <section id="modalidades" className="pt-10 pb-16 px-4 md:px-6 bg-background">
+    <section id="modalidades" className="pt-6 pb-16 px-4 md:px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <div className="mb-10 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-3">Modalidades de Leilão da Caixa</h2>

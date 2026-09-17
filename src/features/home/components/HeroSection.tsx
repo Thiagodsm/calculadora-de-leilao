@@ -8,7 +8,7 @@ export default function HeroSection() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
 
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6 py-20 flex flex-col items-start gap-8">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-20 pb-10 flex flex-col items-start gap-8">
         {/* Badge */}
         <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5">
           <TrendingUp className="size-4 text-primary" aria-hidden="true" />
