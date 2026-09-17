@@ -1,5 +1,5 @@
 import avatarMale from "../../../assets/leonardo.jpg";
-import avatarFemale from "../../../assets/lais.png";
+import avatarFemale from "../../../assets/raissa.png";
 import type { CasoSucesso } from "../types";
 
 export const casosDeSuccesso: CasoSucesso[] = [
@@ -36,11 +36,11 @@ export const casosDeSuccesso: CasoSucesso[] = [
   },
   {
     investidor: {
-      nome: "Laís Vieira",
-      perfil: "Investidora em Guarujá-SP",
+      nome: "Raissa Soares",
+      perfil: "Investidora em Santos-SP",
     },
     avatarSrc: avatarFemale,
-    avatarFallback: "LV",
+    avatarFallback: "RS",
     imovel: {
       tipo: "Apartamento",
       localidade: "Guarujá-SP",
