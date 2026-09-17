@@ -1,5 +1,5 @@
-import avatarMale from "../../../assets/matias.avif";
-import avatarFemale from "../../../assets/lais.avif";
+import avatarMale from "../../../assets/matias.png";
+import avatarFemale from "../../../assets/lais.png";
 import type { CasoSucesso } from "../types";
 
 export const casosDeSuccesso: CasoSucesso[] = [
