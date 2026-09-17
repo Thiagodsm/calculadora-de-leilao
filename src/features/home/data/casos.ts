@@ -5,7 +5,7 @@ import type { CasoSucesso } from "../types";
 export const casosDeSuccesso: CasoSucesso[] = [
   {
     investidor: {
-      nome: "Leonardo Martino",
+      nome: "Leonardo Matino Madeira",
       perfil: "Investidor iniciante em Campinas-SP",
     },
     avatarSrc: avatarMale,
