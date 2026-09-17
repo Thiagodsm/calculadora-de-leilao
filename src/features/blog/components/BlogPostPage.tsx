@@ -2,8 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
 import { Separator } from "../../../components/ui/separator";
 import PageMeta from "../../seo/components/PageMeta";
-import AdSlot from "../../../components/ads/AdSlot";
-import { adsenseSlots } from "../../../config/adsense";
 import { posts } from "../data/posts";
 
 export default function BlogPostPage() {
@@ -76,8 +74,6 @@ export default function BlogPostPage() {
       />
 
       <Separator className="my-8" />
-
-      <AdSlot slotId={adsenseSlots.blog} format="rectangle" className="my-6" />
 
       <div className="rounded-lg bg-primary/5 border border-primary/20 p-6 text-center space-y-3">
         <h2 className="text-lg font-semibold">Calcule o Lucro do Seu Leilão</h2>

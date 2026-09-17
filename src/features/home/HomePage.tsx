@@ -6,8 +6,6 @@ import ComoFuncionaSection from "./components/ComoFuncionaSection";
 import CasosDeSuccessoSection from "./components/CasosDeSuccessoSection";
 import RecursosAvancadosSection from "./components/RecursosAvancadosSection";
 import SharedFooter from "../../components/Layout/SharedFooter";
-import AdSlot from "../../components/ads/AdSlot";
-import { adsenseSlots } from "../../config/adsense";
 import { modalidades } from "./data/modalidades";
 import { passos } from "./data/passos";
 import { casosDeSuccesso } from "./data/casos";
@@ -37,9 +35,7 @@ export default function HomePage() {
       <HomeHeader />
       <main className="flex-1">
         <HeroSection />
-        <AdSlot slotId={adsenseSlots.home1} format="horizontal" className="my-2" />
         <ModalidadesSection modalidades={modalidades} />
-        <AdSlot slotId={adsenseSlots.home2} format="auto" className="my-2" />
         <ComoFuncionaSection passos={passos} />
         <CasosDeSuccessoSection casos={casosDeSuccesso} />
         <RecursosAvancadosSection recursos={recursosAvancados} />
