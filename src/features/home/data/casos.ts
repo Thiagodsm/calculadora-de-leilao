@@ -1,15 +1,15 @@
-import avatarMale from "../../../assets/matias.png";
+import avatarMale from "../../../assets/leonardo.jpg";
 import avatarFemale from "../../../assets/lais.png";
 import type { CasoSucesso } from "../types";
 
 export const casosDeSuccesso: CasoSucesso[] = [
   {
     investidor: {
-      nome: "Matias dos Santos",
-      perfil: "Investidor iniciante em Praia Grande-SP",
+      nome: "Leonardo Martino",
+      perfil: "Investidor iniciante em Campinas-SP",
     },
     avatarSrc: avatarMale,
-    avatarFallback: "MS",
+    avatarFallback: "LM",
     imovel: {
       tipo: "Casa",
       localidade: "Praia Grande-SP",
