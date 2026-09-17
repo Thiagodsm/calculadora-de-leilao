@@ -65,12 +65,8 @@ export default function HomeHeader() {
         {/* Direita: CTAs + dark mode toggle */}
         <div className="flex items-center gap-3">
           <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <Button variant="ghost" asChild>
-              <Link to="/simulador">Entrar</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/simulador">Criar Conta Grátis</Link>
-            </Button>
+            <Button variant="ghost" disabled>Entrar</Button>
+            <Button disabled>Criar Conta Grátis</Button>
           </div>
 
           <DarkModeSwitch
@@ -129,12 +125,8 @@ export default function HomeHeader() {
             )
           )}
           <div className="flex flex-col gap-2 pt-2 border-t">
-            <Button variant="ghost" asChild className="w-full justify-start">
-              <Link to="/simulador" onClick={() => setMenuOpen(false)}>Entrar</Link>
-            </Button>
-            <Button asChild className="w-full">
-              <Link to="/simulador" onClick={() => setMenuOpen(false)}>Criar Conta Grátis</Link>
-            </Button>
+            <Button variant="ghost" disabled className="w-full justify-start">Entrar</Button>
+            <Button disabled className="w-full">Criar Conta Grátis</Button>
           </div>
         </nav>
       </div>
